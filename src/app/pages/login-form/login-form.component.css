@@ -1,0 +1,12 @@
+.login-container {
+  height: 100vh;
+}
+h2 {
+  width: 100%;
+}
+mat-card-header {
+  text-align: center;
+}
+.mat-card-header-text {
+  margin: 0px !important;
+}
