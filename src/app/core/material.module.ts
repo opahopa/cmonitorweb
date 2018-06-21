@@ -1,7 +1,7 @@
 import {
   MatButtonModule,
   MatCardModule,
-  MatCheckboxModule, MatFormFieldModule,
+  MatCheckboxModule, MatChipsModule, MatFormFieldModule,
   MatIconModule, MatInputModule,
   MatListModule,
   MatPaginatorModule, MatProgressSpinnerModule, MatSidenavModule,
@@ -9,7 +9,6 @@ import {
   MatTableModule, MatToolbarModule
 } from '@angular/material';
 import {NgModule} from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutModule} from '@angular/cdk/layout';
 
 @NgModule({
@@ -17,7 +16,6 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
-    BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -29,13 +27,13 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule
   ],
   exports: [
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
-    BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -46,7 +44,8 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule
   ],
 })
 export class MaterialModules { }

@@ -32,7 +32,7 @@ export class LoginFormComponent implements OnInit {
     });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/panel';
   }
 
   getErrorMessage() {
@@ -48,7 +48,7 @@ export class LoginFormComponent implements OnInit {
       return;
     }
 
-    this.authService.login(this.f.username.value, this.f.password.value)
+    this.authService.login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
         data => {

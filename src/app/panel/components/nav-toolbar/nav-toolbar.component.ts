@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {AuthService} from '../../../services/auth/auth-service.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-nav-toolbar',
@@ -15,10 +17,11 @@ export class NavToolbarComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private router: Router) {}
 
-  logout(): void{
-    return;
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
 }

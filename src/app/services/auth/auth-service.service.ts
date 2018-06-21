@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {UserServiceProvider} from '../../providers/user-service.service';
+import {UserServiceProvider} from '../user-service.provider';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,10 @@ export class AuthService {
     }
   }
 
+  /* return obj {email, token} */
+  getUser(): string {
+    return JSON.parse(localStorage.getItem('currentUser'));
+  }
 
   refreshToken() {
     return;
@@ -31,8 +35,8 @@ export class AuthService {
     localStorage.removeItem('currentUser');
   }
 
-  logout() {
-    this.cleanup_jwt();
-    return null;
+  logout(): void {
+    this.cleanup_localstorage();
+    document.cookie = 'X-Authorization=""';
   }
 }

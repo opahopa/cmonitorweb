@@ -7,6 +7,6 @@ export interface IAppConfig {
 }
 
 export const AppConfig: IAppConfig = {
-  apiEndpoint: 'http://localhost:8000/v1/',
+  apiEndpoint: 'http://localhost:8000/',
   // apiEndpoint: "http://plimpa.com/api/",
 };
