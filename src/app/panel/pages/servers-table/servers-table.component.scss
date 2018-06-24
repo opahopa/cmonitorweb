@@ -1,0 +1,62 @@
+@import 'variables';
+
+table {
+  width: 100%;
+}
+
+mat-row.example-detail-row {
+  min-height: 0;
+}
+
+mat-row.example-element-row:not(.example-expanded-row):hover {
+  background: #f5f5f5;
+}
+
+mat-row.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  //min-width: 80px;
+  //border: 2px solid black;
+  //padding: 8px;
+  //font-weight: lighter;
+  //margin: 8px 0;
+  //height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+mat-header-cell {
+  display: flex;
+  justify-content: center;
+}
+mat-cell {
+  display: flex;
+  justify-content: center;
+  margin-right: 12px;
+}
+.online-icon {
+  color: $success-green;
+}

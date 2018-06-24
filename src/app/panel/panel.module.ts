@@ -10,6 +10,9 @@ import {WsStatusComponent} from './pages/servers-table/ws-status/ws-status.compo
 import {MaterialModules} from '../core/material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {ReactiveFormsModule} from '@angular/forms';
+import {ServicesStatusPipe} from '../pipes/services-status.pipe';
+import { ServerDetailsComponent } from './pages/servers-table/server-details/server-details.component';
+import { ServiceStateModalComponent } from './pages/servers-table/service-state-modal/service-state-modal.component';
 
 @NgModule({
   imports: [
@@ -24,7 +27,13 @@ import {ReactiveFormsModule} from '@angular/forms';
     ClientConfigComponent,
     ServersTableComponent,
     MessagesComponent,
-    WsStatusComponent
+    WsStatusComponent,
+    ServicesStatusPipe,
+    ServerDetailsComponent,
+    ServiceStateModalComponent
+  ],
+  entryComponents: [
+    ServiceStateModalComponent
   ]
 })
 export class PanelModule {}

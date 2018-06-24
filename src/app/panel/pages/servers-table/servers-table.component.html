@@ -1,20 +1,46 @@
 <div class="mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+  <mat-table #table [dataSource]="dataSource"
+             multiTemplateDataRows
+             matSort
+             aria-label="Elements">
 
-    <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+    <ng-container matColumnDef="hostname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Hostname</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.hostname}}</mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Online</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-icon *ngIf="row.active" class="online-icon">lens</mat-icon>
+        <mat-icon *ngIf="!row.active" color="warn">error</mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="services-all-status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Services</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-icon *ngIf="row.services | servicesStatus" color="accent">check_circle</mat-icon>
+        <mat-icon *ngIf="!(row.services | servicesStatus)" color="warn">error</mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <mat-cell *matCellDef="let row" [attr.colspan]="displayedColumns.length">
+        <div [@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'">
+          <app-server-details [services]="row.services"></app-server-details>
+        </div>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let element; columns: displayedColumns;"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = element">
+    </mat-row>
+    <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
   </mat-table>
 
   <mat-paginator #paginator

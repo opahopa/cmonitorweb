@@ -38,13 +38,18 @@ export class MonitorService implements OnDestroy {
           this.router.navigate(['/login']);
           break;
         case 1011:
-          alert('Internal error (1011). Contact administrator');
+          alert('Internal error (1011). Please try again after 5 minutes. Contact administrator if repeated');
       }
     });
     this.wsService.watchEvent(WSEvent.MESSAGE).subscribe((data) => {
       console.log(data);
       const msg: Message = <Message>JSON.parse(data.data);
-      this.parseMessage(msg)
+      this.parseMessage(msg);
+    });
+    this.wsService.onMessage().subscribe((data) => {
+      console.log(data);
+      const msg: Message = <Message>JSON.parse(data.data);
+      this.parseMessage(msg);
     });
   }
 
@@ -53,14 +58,21 @@ export class MonitorService implements OnDestroy {
       case MessageTypes.CONTROL:
         break;
       case MessageTypes.REPORT:
-        this._parseMessageCommand(msg);
+        this._parseMessageReport(msg);
         break;
     }
   }
-  _parseMessageCommand(msg: Message) {
+  _parseMessageReport(msg: Message) {
+    console.log(`Received: ${msg.command}`);
     switch (msg.command) {
       case MessageCommands.STATUS_ALL:
         this.serversService.addServer(new Server({hostname: msg.hostname, active: true, services: msg.body}));
+        break;
+      case MessageCommands.STATUS_CLI_DISCONNECT:
+        this.serversService.removeServer(msg.hostname);
+        break;
+      case MessageCommands.STATUS_CLI_UPDATE:
+        this.serversService.updateServer(new Server({hostname: msg.hostname, active: true, services: msg.body}));
         break;
     }
   }

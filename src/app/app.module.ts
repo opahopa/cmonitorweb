@@ -13,12 +13,13 @@ import {AuthGuard} from './core/auth.guard';
 import {JwtInterceptor} from './core/jwt.interceptor';
 import {APP_CONFIG, AppConfig} from './app.config';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ServicesStatusPipe } from './pipes/services-status.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    LoginFormComponent
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,

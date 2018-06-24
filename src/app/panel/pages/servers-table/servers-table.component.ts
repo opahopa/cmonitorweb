@@ -3,24 +3,42 @@ import { MatPaginator, MatSort } from '@angular/material';
 import { ServersTableDataSource } from './servers-table-datasource';
 import {MonitorService} from '../../services/monitor/monitor.service';
 import {ServersService} from '../../services/servers.service';
+import {ServicesStatusPipe} from '../../../pipes/services-status.pipe';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Server} from '../../models/server';
+
 
 @Component({
   selector: 'app-servers-table',
   templateUrl: './servers-table.component.html',
-  styleUrls: ['./servers-table.component.css']
+  styleUrls: ['./servers-table.component.scss'],
+  providers: [
+    ServicesStatusPipe
+  ],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
+      state('expanded', style({height: '*', width: '100%'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class ServersTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: ServersTableDataSource;
+  expandedElement: Server;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['hostname', 'status', 'services-all-status'];
 
   constructor(public monitorService: MonitorService, private serversService: ServersService) { }
 
   ngOnInit() {
-    this.dataSource = new ServersTableDataSource(this.paginator, this.sort);
     this.monitorService.connect();
+    this.dataSource = new ServersTableDataSource(this.paginator, this.sort, this.serversService);
+    this.serversService.serversChanges.subscribe(() => {
+      this.dataSource = new ServersTableDataSource(this.paginator, this.sort, this.serversService);
+    });
   }
 }

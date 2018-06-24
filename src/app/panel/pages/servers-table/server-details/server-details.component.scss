@@ -1,0 +1,25 @@
+@import 'variables';
+
+.server-services {
+  width: 100%;
+
+  .service{
+    text-align: center;
+    margin: 5px;
+  }
+
+  .icon-status-active {
+    color: $success-green;
+  }
+
+  .service-card-content {
+    margin-bottom: 0px;
+  }
+  .mat-card-actions {
+    padding-top: 5px;
+  }
+  .mat-card-header {
+    display: flex;
+    justify-content: center;
+  }
+}

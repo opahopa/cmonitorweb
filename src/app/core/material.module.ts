@@ -1,12 +1,12 @@
 import {
   MatButtonModule,
   MatCardModule,
-  MatCheckboxModule, MatChipsModule, MatFormFieldModule,
+  MatCheckboxModule, MatChipsModule, MatDialogModule, MatFormFieldModule,
   MatIconModule, MatInputModule,
   MatListModule,
   MatPaginatorModule, MatProgressSpinnerModule, MatSidenavModule,
   MatSortModule,
-  MatTableModule, MatToolbarModule
+  MatTableModule, MatTabsModule, MatToolbarModule
 } from '@angular/material';
 import {NgModule} from '@angular/core';
 import {LayoutModule} from '@angular/cdk/layout';
@@ -28,7 +28,9 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule,
+    MatTabsModule
   ],
   exports: [
     MatButtonModule,
@@ -45,7 +47,9 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule,
+    MatTabsModule
   ],
 })
 export class MaterialModules { }

@@ -10,7 +10,6 @@ import {Message} from '../../models/message';
   providedIn: 'root'
 })
 export class WebsocketService  implements OnDestroy {
-  action = Action;
   socket: WebSocket;
 
   constructor(@Inject(APP_CONFIG) private config: IAppConfig, private authService: AuthService) { }
@@ -18,7 +17,7 @@ export class WebsocketService  implements OnDestroy {
   initConnection(): void {
     document.cookie = 'X-Authorization=' + this.authService.getUser()['token'] + '; path=/';
     this.socket = new WebSocket(
-      this.config.apiEndpoint.replace(/^https?:\/\//i, `ws://`) + `ws/monitor/${this.authService.getUser()['email']}/`);
+      this.config.apiEndpoint.replace(/^https?:\/\//i, 'ws://') + `ws/monitor/${this.authService.getUser()['email']}/`);
     this.watchEvent(WSEvent.ERROR).subscribe(data => {
       console.log(data);
     });
@@ -33,8 +32,13 @@ export class WebsocketService  implements OnDestroy {
     });
   }
 
-  send(data): void {
-    this.socket.send(data);
+  onMessage(): Observable<any> {
+    return new Observable(observer => {
+      this.socket.onmessage = function (event) {
+        observer.next(event);
+        observer.complete();
+      };
+    });
   }
 
   sendMessage(msg: Message): void {

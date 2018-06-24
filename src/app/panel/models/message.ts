@@ -9,7 +9,10 @@ export enum MessageStatus {
   ERROR = 'ERROR'
 }
 export enum MessageCommands {
-  STATUS_ALL = 'STATUS_ALL'
+  STATUS_ALL = 'STATUS_ALL',
+  STATUS_CLI_DISCONNECT = 'STATUS_CLI_DISCONNECT',
+  STATUS_CLI_UPDATE = 'STATUS_CLI_UPDATE'
+
 }
 
 

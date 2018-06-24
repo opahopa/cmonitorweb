@@ -1,0 +1,35 @@
+@import 'variables';
+
+.mat-dialog-title {
+  margin-bottom: 0px;
+}
+h4 {
+  margin: 0 0 20px !important;
+  display: block;
+  margin-bottom: 0px !important;
+}
+
+.flex-spacer {
+  flex: 1;
+}
+
+.icon-status-active {
+  color: $success-green;
+}
+
+textarea {
+  height: 58vh;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+  padding: 0px;
+}
+mat-dialog-content {
+  max-height: 72vh;
+}
+
+.log-field {
+  width: 100%;
+}

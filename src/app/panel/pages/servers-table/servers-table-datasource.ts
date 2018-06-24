@@ -1,7 +1,9 @@
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
+import {Observable, of as observableOf, merge, of} from 'rxjs';
+import {Server} from '../../models/server';
+import {ServersService} from '../../services/servers.service';
 
 // TODO: Replace this with your own data model type
 export interface ServersTableItem {
@@ -10,27 +12,10 @@ export interface ServersTableItem {
 }
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: ServersTableItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
+const EXAMPLE_DATA: Server[] = [
+  // new Server({hostname: 'fewfwfwef', active: true, services: []}),
+  // new Server({hostname: 'fewfwfwef3', active: true, services: []}),
+  // new Server({hostname: 'fewfwfwef2', active: true, services: []}),
 ];
 
 /**
@@ -38,11 +23,12 @@ const EXAMPLE_DATA: ServersTableItem[] = [
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class ServersTableDataSource extends DataSource<ServersTableItem> {
-  data: ServersTableItem[] = EXAMPLE_DATA;
+export class ServersTableDataSource extends DataSource<Server> {
+  data: Server[] = EXAMPLE_DATA;
 
-  constructor(private paginator: MatPaginator, private sort: MatSort) {
+  constructor(private paginator: MatPaginator, private sort: MatSort, private serversService: ServersService) {
     super();
+    this.data = this.serversService.getServers();
   }
 
   /**
@@ -50,7 +36,8 @@ export class ServersTableDataSource extends DataSource<ServersTableItem> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<ServersTableItem[]> {
+  connect(): Observable<Server[]> {
+
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -77,7 +64,7 @@ export class ServersTableDataSource extends DataSource<ServersTableItem> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: ServersTableItem[]) {
+  private getPagedData(data: Server[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
@@ -86,7 +73,7 @@ export class ServersTableDataSource extends DataSource<ServersTableItem> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: ServersTableItem[]) {
+  private getSortedData(data: Server[]) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }
@@ -94,8 +81,8 @@ export class ServersTableDataSource extends DataSource<ServersTableItem> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
+        case 'hostname': return compare(a.hostname, b.hostname, isAsc);
+        case 'active': return compare(+a.active, +b.active, isAsc);
         default: return 0;
       }
     });
