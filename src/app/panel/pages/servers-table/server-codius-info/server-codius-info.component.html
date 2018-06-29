@@ -1,0 +1,31 @@
+<!--<div >-->
+  <mat-card class="container">
+    <mat-card-header class="codius-header">
+      <mat-card-title>Codius: {{codius.version? codius.version: 'N/A'}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="stats">
+        <span>Memory:</span>
+        <span>Active Pods:</span>
+        <span>24 hr:</span>
+        <span>Dialy income:</span>
+        <span>Fee:</span>
+      </div>
+      <div class="stats-values">
+        <span>{{codius.memory.used}}/{{codius.memory.total}} Mb</span>
+        <span>{{codius.pods? codius.pods?.length:0}}</span>
+        <span>N/A</span>
+        <span>N/A XRP</span>
+        <span>{{codius.fee? codius.fee: 'N/A'}} XRP</span>
+      </div>
+      <div class="actions">
+        <button mat-raised-button color="accent" (click)="changeFee()">Change Fee</button>
+        <button mat-raised-button color="accent" (click)="updateCodius()">Update</button>
+      </div>
+    </mat-card-content>
+    <div class="flex-spacer"></div>
+    <!--<mat-card-actions>-->
+
+    <!--</mat-card-actions>-->
+  </mat-card>
+<!--</div>-->

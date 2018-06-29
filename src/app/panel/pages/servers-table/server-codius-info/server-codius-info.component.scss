@@ -1,0 +1,39 @@
+.container {
+  margin-top: 5px;
+  //text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 79.5%;
+
+  .codius-header {
+    display: flex;
+    //justify-content: center;
+  }
+  mat-card-content {
+    display: flex;
+    align-items: center;
+    flex: 2;
+    .actions, .stats, .stats-values {
+      flex-direction: column;
+      display: flex;
+      flex: 1;
+    }
+  }
+  mat-card-title {
+    font-weight: 500;
+  }
+  mat-card-actions {
+    padding-bottom: 5px;
+  }
+  span{
+    margin: 5px 0 5px 0;
+  }
+  .flex-spacer {
+    //flex: 1;
+  }
+  .actions{
+    button {
+      margin: 7px 0px 7px 0px;
+    }
+  }
+}

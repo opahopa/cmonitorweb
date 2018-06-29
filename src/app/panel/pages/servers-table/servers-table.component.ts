@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { ServersTableDataSource } from './servers-table-datasource';
 import {MonitorService} from '../../services/monitor/monitor.service';
@@ -6,7 +6,6 @@ import {ServersService} from '../../services/servers.service';
 import {ServicesStatusPipe} from '../../../pipes/services-status.pipe';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Server} from '../../models/server';
-
 
 @Component({
   selector: 'app-servers-table',
@@ -30,15 +29,34 @@ export class ServersTableComponent implements OnInit {
   expandedElement: Server;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['hostname', 'status', 'services-all-status'];
+  displayedColumns = ['hostname', 'status', 'services-all-status', 'server-load', 'dropdown-ico'];
 
   constructor(public monitorService: MonitorService, private serversService: ServersService) { }
 
   ngOnInit() {
     this.monitorService.connect();
     this.dataSource = new ServersTableDataSource(this.paginator, this.sort, this.serversService);
-    this.serversService.serversChanges.subscribe(() => {
-      this.dataSource = new ServersTableDataSource(this.paginator, this.sort, this.serversService);
-    });
+  }
+
+  trackByIndex(index, item) {
+    return index;
+  }
+
+  isExpanded(row: Server): string {
+    if (this.expandedElement) {
+      if (row.hostname === this.expandedElement.hostname) {
+        return 'expanded';
+      }
+    } else {
+      return 'collapsed';
+    }
+  }
+
+  expandRow(element) {
+    if (!this.expandedElement) {
+      this.expandedElement = element;
+    } else {
+      this.expandedElement = null;
+    }
   }
 }

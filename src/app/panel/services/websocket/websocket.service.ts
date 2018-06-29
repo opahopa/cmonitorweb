@@ -27,17 +27,8 @@ export class WebsocketService  implements OnDestroy {
     return new Observable(observer => {
       this.socket.addEventListener(wsevent, function (event) {
         observer.next(event);
-        observer.complete();
+        // observer.complete();
       });
-    });
-  }
-
-  onMessage(): Observable<any> {
-    return new Observable(observer => {
-      this.socket.onmessage = function (event) {
-        observer.next(event);
-        observer.complete();
-      };
     });
   }
 

@@ -13,13 +13,13 @@ import {AuthGuard} from './core/auth.guard';
 import {JwtInterceptor} from './core/jwt.interceptor';
 import {APP_CONFIG, AppConfig} from './app.config';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { ServicesStatusPipe } from './pipes/services-status.pipe';
+import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    LoginFormComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +29,9 @@ import { ServicesStatusPipe } from './pipes/services-status.pipe';
     FlexLayoutModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [
     AuthGuard,

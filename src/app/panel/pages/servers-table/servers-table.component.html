@@ -1,5 +1,6 @@
 <div class="mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource"
+             [trackBy]="trackByIndex"
              multiTemplateDataRows
              matSort
              aria-label="Elements">
@@ -25,11 +26,28 @@
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="server-load">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Memory</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span>{{row.codius.memory.used | mbToGb}}/{{row.codius.memory.total | mbToGb}} Gb</span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dropdown-ico">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-icon>expand_more</mat-icon>
+      </mat-cell>
+    </ng-container>
+
     <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
     <ng-container matColumnDef="expandedDetail">
       <mat-cell *matCellDef="let row" [attr.colspan]="displayedColumns.length">
-        <div [@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'">
-          <app-server-details [services]="row.services"></app-server-details>
+        <div [@detailExpand]="isExpanded(row)">
+          <div fxLayout="row">
+            <app-server-details [services]="row.services" fxFlex="50"></app-server-details>
+            <app-server-codius-info [codius]="row.codius" fxFlex="50"></app-server-codius-info>
+          </div>
         </div>
       </mat-cell>
     </ng-container>
@@ -38,7 +56,7 @@
     <mat-row *matRowDef="let element; columns: displayedColumns;"
         class="example-element-row"
         [class.example-expanded-row]="expandedElement === element"
-        (click)="expandedElement = element">
+        (click)="expandRow(element)">
     </mat-row>
     <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
   </mat-table>

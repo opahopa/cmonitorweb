@@ -1,7 +1,7 @@
 @import '~@angular/material/theming'; // Pay attention on the path
 @include mat-core();
 $panel-app-primary: mat-palette($mat-deep-purple);
-$panel-app-accent:  mat-palette($mat-deep-purple, A200, A100, A400);
+$panel-app-accent:  mat-palette($mat-amber, A200, A100, A400);
 $panel-app-warn:    mat-palette($mat-red);
 //$panel-app-success: mat-palette($mat-green);
 $panel-app-theme: mat-light-theme($panel-app-primary, $panel-app-accent, $panel-app-warn);

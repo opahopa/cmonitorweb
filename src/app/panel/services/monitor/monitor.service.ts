@@ -42,12 +42,7 @@ export class MonitorService implements OnDestroy {
       }
     });
     this.wsService.watchEvent(WSEvent.MESSAGE).subscribe((data) => {
-      console.log(data);
-      const msg: Message = <Message>JSON.parse(data.data);
-      this.parseMessage(msg);
-    });
-    this.wsService.onMessage().subscribe((data) => {
-      console.log(data);
+      // console.log(data);
       const msg: Message = <Message>JSON.parse(data.data);
       this.parseMessage(msg);
     });
@@ -66,13 +61,13 @@ export class MonitorService implements OnDestroy {
     console.log(`Received: ${msg.command}`);
     switch (msg.command) {
       case MessageCommands.STATUS_ALL:
-        this.serversService.addServer(new Server({hostname: msg.hostname, active: true, services: msg.body}));
+        this.serversService.addServer(new Server({hostname: msg.hostname, active: true, services: msg.body.system, codius: msg.body.codius}));
         break;
       case MessageCommands.STATUS_CLI_DISCONNECT:
         this.serversService.removeServer(msg.hostname);
         break;
       case MessageCommands.STATUS_CLI_UPDATE:
-        this.serversService.updateServer(new Server({hostname: msg.hostname, active: true, services: msg.body}));
+        this.serversService.updateServer(new Server({hostname: msg.hostname, active: true, services: msg.body.system, codius: msg.body.codius}));
         break;
     }
   }

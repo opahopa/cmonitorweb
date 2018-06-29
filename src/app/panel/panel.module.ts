@@ -13,6 +13,10 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {ServicesStatusPipe} from '../pipes/services-status.pipe';
 import { ServerDetailsComponent } from './pages/servers-table/server-details/server-details.component';
 import { ServiceStateModalComponent } from './pages/servers-table/service-state-modal/service-state-modal.component';
+import { StatsPageComponent } from './pages/stats-page/stats-page.component';
+import { ServerCodiusInfoComponent } from './pages/servers-table/server-codius-info/server-codius-info.component';
+import { MbToGbPipe } from '../pipes/mb-to-gb.pipe';
+import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -20,7 +24,10 @@ import { ServiceStateModalComponent } from './pages/servers-table/service-state-
     PanelRoutingModule,
     MaterialModules,
     FlexLayoutModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   declarations: [
     NavToolbarComponent,
@@ -30,7 +37,10 @@ import { ServiceStateModalComponent } from './pages/servers-table/service-state-
     WsStatusComponent,
     ServicesStatusPipe,
     ServerDetailsComponent,
-    ServiceStateModalComponent
+    ServiceStateModalComponent,
+    StatsPageComponent,
+    ServerCodiusInfoComponent,
+    MbToGbPipe
   ],
   entryComponents: [
     ServiceStateModalComponent
