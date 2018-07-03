@@ -17,6 +17,7 @@ import { StatsPageComponent } from './pages/stats-page/stats-page.component';
 import { ServerCodiusInfoComponent } from './pages/servers-table/server-codius-info/server-codius-info.component';
 import { MbToGbPipe } from '../pipes/mb-to-gb.pipe';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import {ChangeFeeModalComponent} from './pages/servers-table/change-fee-modal/change-fee-modal.component';
 
 @NgModule({
   imports: [
@@ -40,10 +41,12 @@ import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/mate
     ServiceStateModalComponent,
     StatsPageComponent,
     ServerCodiusInfoComponent,
+    ChangeFeeModalComponent,
     MbToGbPipe
   ],
   entryComponents: [
-    ServiceStateModalComponent
+    ServiceStateModalComponent,
+    ChangeFeeModalComponent
   ]
 })
 export class PanelModule {}

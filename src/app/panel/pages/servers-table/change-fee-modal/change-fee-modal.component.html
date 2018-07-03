@@ -1,0 +1,8 @@
+<h2 class="mat-h2">Set new fee</h2>
+<mat-dialog-content>
+  <input matInput #feeInput type="number" max="100" min="0" placeholder="New fee" value="5">
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true">Close</button>
+  <button mat-button (click)="setNewFee()">Submit</button>
+</mat-dialog-actions>

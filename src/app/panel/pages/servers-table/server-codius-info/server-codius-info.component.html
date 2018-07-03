@@ -6,16 +6,16 @@
     <mat-card-content>
       <div class="stats">
         <span>Memory:</span>
-        <span>Active Pods:</span>
-        <span>24 hr:</span>
+        <span>Pods active:</span>
+        <span>Pods in 24 hr:</span>
         <span>Dialy income:</span>
         <span>Fee:</span>
       </div>
       <div class="stats-values">
         <span>{{codius.memory.used}}/{{codius.memory.total}} Mb</span>
         <span>{{codius.pods? codius.pods?.length:0}}</span>
-        <span>N/A</span>
-        <span>N/A XRP</span>
+        <span>{{codius.count_24? codius.count_24: 'N/A'}}</span>
+        <span>{{codius.income_24? codius.income_24: 'N/A'}} XRP</span>
         <span>{{codius.fee? codius.fee: 'N/A'}} XRP</span>
       </div>
       <div class="actions">
