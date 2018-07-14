@@ -7,7 +7,7 @@ import {AuthService} from '../../services/auth/auth-service.service';
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css']
+  styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
@@ -56,7 +56,9 @@ export class LoginFormComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.loginerror = error;
+          if (error.status === 400) {
+            this.loginerror = 'Invalid username/password';
+          } else { this.loginerror = error.statusText; }
           this.loading = false;
         });
   }

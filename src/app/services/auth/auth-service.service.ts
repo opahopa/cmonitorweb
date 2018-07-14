@@ -13,6 +13,10 @@ export class AuthService {
     return this.userProvider.login(username, password);
   }
 
+  register(username: string, password: string) {
+    return this.userProvider.register(username, password);
+  }
+
   isAuthenticated(): boolean {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {

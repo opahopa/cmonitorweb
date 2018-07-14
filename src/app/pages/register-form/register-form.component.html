@@ -1,0 +1,36 @@
+<div class="container register-container"
+     fxLayout
+     fxLayoutAlign="center center">
+
+
+  <mat-card>
+    <form  [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
+      <mat-card-header>
+        <h2 class="mat-h2">Registration</h2>
+      </mat-card-header>
+      <mat-card-content fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Enter your email" formControlName="email">
+          <mat-error *ngIf="f.email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Enter your password" formControlName="password" [type]="hidepwd ? 'password' : 'text'">
+          <mat-icon matSuffix (click)="hidepwd = !hidepwd">{{hidepwd ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="f.password.invalid">{{getPwdErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Confirm your password" formControlName="password_confirm" [type]="hidepwd ? 'password' : 'text'">
+          <mat-icon matSuffix (click)="hidepwd = !hidepwd">{{hidepwd ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="f.password_confirm.invalid">{{getPwdConfirmErrorMessage()}}</mat-error>
+          <mat-error *ngIf="f.password_confirm.errors?.MatchPassword">Passwords don't match</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions class="form-group" fxLayoutAlign="center">
+        <button mat-raised-button color="primary">Register</button>
+        <mat-spinner *ngIf="loading"></mat-spinner>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
+
+

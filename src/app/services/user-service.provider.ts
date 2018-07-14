@@ -11,7 +11,16 @@ export class UserServiceProvider {
   constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: IAppConfig) { }
 
   login(email: string, password: string) {
-    return this.http.post<any>(this.config.apiEndpoint + 'api-token-auth/', { email: email, password: password })
+    return this.http.post<any>(this.config.apiEndpoint + 'auth/login/', { email: email, password: password })
+      .pipe(map((res: any) => {
+        if (res && res.token) {
+          localStorage.setItem('currentUser', JSON.stringify({ email, token: res.token }));
+        }
+      }));
+  }
+
+  register(email: string, password: string) {
+    return this.http.post<any>(this.config.apiEndpoint + 'auth/register/', { email: email, password: password })
       .pipe(map((res: any) => {
         if (res && res.token) {
           localStorage.setItem('currentUser', JSON.stringify({ email, token: res.token }));

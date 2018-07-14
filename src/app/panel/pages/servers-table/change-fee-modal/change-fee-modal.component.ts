@@ -16,7 +16,8 @@ export class ChangeFeeModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, private wsService: WebsocketService) {}
 
   setNewFee(): void {
-    this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.SET_CODIUS_FEE, body: this.input.nativeElement.value}));
+    this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.SET_CODIUS_FEE
+      , body: this.input.nativeElement.value, hostname: 'hoop-XP5S-13-9350' }));
     this.dialogRef.close();
   }
 

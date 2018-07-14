@@ -1,6 +1,10 @@
 <!--<div fxLayout='column' fxLayoutAlign="end center">-->
-  <div class="mat-typography" fxLayout='row'>
+  <div class="mat-typography" fxLayout='row' fxLayoutAlign="space-evenly center">
     <h2 mat-dialog-title="">{{data.name}}</h2>
+    <div style="margin-left: 15px;">
+      <button mat-raised-button color="accent" (click)="restart()">Restart</button>
+    </div>
+
     <div class="flex-spacer"></div>
     <h4>Running: {{data.runtime}}</h4>
   </div>
