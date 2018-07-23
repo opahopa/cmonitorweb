@@ -1,0 +1,27 @@
+mat-card-content {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+mat-card-actions {
+  display: flex;
+  align-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.code-text {
+  background: rgba(0,0,0,.08);
+  font-weight: 300;
+  padding: 0 3px 0 3px;
+}
+
+.mat-body-1 {
+  flex-flow: row;
+  display: flex;
+}
+
+.download-link {
+  display: none;
+}

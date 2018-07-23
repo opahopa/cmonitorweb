@@ -1,3 +1,22 @@
-<p>
-  client-config works!
-</p>
+<mat-card>
+  <mat-card-content>
+    <div class="text-box">
+      <div class="mat-subheading-2">Installation:</div>
+      <div class="mat-body-1">1. Upload to your codiusd server</div>
+      <div class="mat-body-1">2. Give it execution rights: <div class="code-text">chmod +x cmoncli</div></div>
+      <div class="mat-body-1">3. run client: <div class="code-text">./cmoncli</div></div>
+    </div>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="!loading" mat-raised-button color="accent" (click)="download()">Download</button>
+    <button *ngIf="!loading" mat-raised-button color="accent" (click)="getLink()">Get Link</button>
+    <mat-spinner *ngIf="loading"></mat-spinner>
+  </mat-card-actions>
+  <div *ngIf="cli_link">
+    <div class="mat-subheading-2">Download command:</div>
+    <div class="mat-subheading-2"><div class="code-text">{{cli_link}}</div></div>
+  </div>
+
+</mat-card>
+<a class="download-link" #downloadLink></a>
