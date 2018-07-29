@@ -15,9 +15,11 @@ export class WebsocketService  implements OnDestroy {
   constructor(@Inject(APP_CONFIG) private config: IAppConfig, private authService: AuthService) { }
 
   initConnection(): void {
-    document.cookie = 'X-Authorization=' + this.authService.getUser()['token'] + '; path=/';
+    document.cookie = 'X-Authorization=' + this.authService.getUser()['token'] + `;domain=${this.config.apiEndpoint.replace(/^https?:\/\//i, '')}; path=/`;
+    const ws_scheme = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+    console.log(document.cookie);
     this.socket = new WebSocket(
-      this.config.apiEndpoint.replace(/^https?:\/\//i, 'ws://') + `ws/monitor/${this.authService.getUser()['email']}/`);
+      this.config.apiEndpoint.replace(/^https?:\/\//i, ws_scheme) + `ws/monitor/${this.authService.getUser()['email']}/`);
     this.watchEvent(WSEvent.ERROR).subscribe(data => {
       console.log(data);
     });

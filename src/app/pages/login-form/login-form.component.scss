@@ -10,9 +10,12 @@ h2 {
 mat-card-header {
   text-align: center;
 }
-.mat-card-header-text {
-  margin: 0px !important;
-  margin-left: 0px !important;
+
+
+mat-card-actions {
+  a, button {
+    margin: 0 7px 0 7px;
+  }
 }
 .error-box {
   color: $error-red;

@@ -4,6 +4,9 @@ export interface ServerCodius {
   version: string;
   pods: any[];
   memory: any;
+  count_24: number;
+  income_24: number;
+  fee: number;
 }
 
 export class Server {

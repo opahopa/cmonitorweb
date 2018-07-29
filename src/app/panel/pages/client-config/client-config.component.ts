@@ -1,5 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {CliService} from '../../../services/cli.service';
+import {APP_CONFIG, IAppConfig} from '../../../app.config';
 
 @Component({
   selector: 'app-client-config',
@@ -12,17 +13,16 @@ export class ClientConfigComponent implements OnInit {
   loading: boolean;
   cli_link: string;
 
-  constructor(private cliService: CliService) { }
+  constructor(private cliService: CliService, @Inject(APP_CONFIG) private config: IAppConfig) { }
 
   ngOnInit() {
   }
 
   getLink() {
     this.loading = true;
-    this.cliService.genCli().subscribe<any>(data => {
-          console.log(data['link']);
+    this.cliService.genCli().subscribe(data => {
           if (data['link']) {
-            this.cli_link = `wget -O cmoncli https://api.cmonitorhost.com/${data['link']}`;
+            this.cli_link = `wget -O cmoncli ${this.config.apiEndpoint}${data['link']}`;
             this.loading = false;
           }
       },

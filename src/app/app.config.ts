@@ -1,4 +1,5 @@
 import { InjectionToken } from '@angular/core';
+import { environment } from '../environments/environment';
 
 export let APP_CONFIG = new InjectionToken('app.config');
 
@@ -7,6 +8,6 @@ export interface IAppConfig {
 }
 
 export const AppConfig: IAppConfig = {
-  apiEndpoint: 'http://localhost:8000/',
-  // apiEndpoint: "http://plimpa.com/api/",
+  apiEndpoint: environment.apiUrl,
+  // apiEndpoint: 'https://api.codiusmonitor.com/',
 };

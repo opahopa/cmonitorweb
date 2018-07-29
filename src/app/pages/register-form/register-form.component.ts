@@ -76,7 +76,8 @@ export class RegisterFormComponent implements OnInit {
           this.router.navigate(['/login']);
         },
         error => {
-          this.loginerror = error;
+          console.log(error)
+          error.error.email ? this.loginerror = error.error.email : this.loginerror = error.statusText;
           this.loading = false;
         });
   }
