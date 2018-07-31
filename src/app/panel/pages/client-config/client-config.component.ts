@@ -26,7 +26,10 @@ export class ClientConfigComponent implements OnInit {
             this.loading = false;
           }
       },
-      error => {this.loading = false; });
+      error => {
+        this.cli_link = error;
+        this.loading = false;
+      });
   }
 
   download() {
@@ -37,7 +40,7 @@ export class ClientConfigComponent implements OnInit {
         this.loading = false;
       },
       error => {
-        console.log(error)
+        console.log(error);
         this.loading = false;
       });
   }

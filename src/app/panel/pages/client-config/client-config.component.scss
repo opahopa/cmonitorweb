@@ -10,6 +10,9 @@ mat-card-actions {
   justify-content: space-evenly;
   align-items: center;
 }
+.mat-card>.mat-card-actions:last-child {
+  margin-bottom: 15px;
+}
 
 .code-text {
   background: rgba(0,0,0,.08);

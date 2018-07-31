@@ -41,6 +41,5 @@ export class AuthService {
 
   logout(): void {
     this.cleanup_localstorage();
-    document.cookie = 'X-Authorization=""';
   }
 }

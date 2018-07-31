@@ -18,6 +18,7 @@ import { ServerCodiusInfoComponent } from './pages/servers-table/server-codius-i
 import { MbToGbPipe } from '../pipes/mb-to-gb.pipe';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import {ChangeFeeModalComponent} from './pages/servers-table/change-fee-modal/change-fee-modal.component';
+import {ProfilePageComponent} from './pages/profile-page/profile-page.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import {ChangeFeeModalComponent} from './pages/servers-table/change-fee-modal/ch
     StatsPageComponent,
     ServerCodiusInfoComponent,
     ChangeFeeModalComponent,
+    ProfilePageComponent,
     MbToGbPipe
   ],
   entryComponents: [
