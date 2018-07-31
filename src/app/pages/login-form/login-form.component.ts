@@ -59,8 +59,7 @@ export class LoginFormComponent implements OnInit {
         error => {
           if (error.status === 400) {
             this.loginerror = 'Invalid username/password';
-          } else { this.loginerror = error.statusText; }
-          if (error.status === 500 || error.status === 503) {
+          } else if (error.status === 500 || error.status === 503) {
             this.loginerror = 'API error. Contact administrator';
           } else { this.loginerror = error.statusText; }
           this.loading = false;
