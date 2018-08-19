@@ -19,6 +19,8 @@ import { MbToGbPipe } from '../pipes/mb-to-gb.pipe';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import {ChangeFeeModalComponent} from './pages/servers-table/change-fee-modal/change-fee-modal.component';
 import {ProfilePageComponent} from './pages/profile-page/profile-page.component';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+
 
 @NgModule({
   imports: [
@@ -29,7 +31,8 @@ import {ProfilePageComponent} from './pages/profile-page/profile-page.component'
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    NgxChartsModule
   ],
   declarations: [
     NavToolbarComponent,

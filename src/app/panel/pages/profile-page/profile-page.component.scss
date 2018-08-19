@@ -1,0 +1,30 @@
+@import 'variables';
+
+.tab-security {
+  //width: 50%;
+  //margin: auto;
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+h2 {
+  width: 100%;
+}
+mat-card-header {
+  text-align: center;
+}
+.error-box {
+  color: $error-red;
+}
+
+.info-body {
+  display: flex;
+  align-items: center;
+  flex: 2;
+  .keys, .values {
+    flex-direction: column;
+    display: flex;
+    flex: 1;
+  }
+}

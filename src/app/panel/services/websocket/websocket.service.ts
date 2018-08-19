@@ -42,6 +42,10 @@ export class WebsocketService  implements OnDestroy {
     this.socket.close();
   }
 
+  state() {
+    return this.socket.readyState;
+  }
+
   ngOnDestroy() {
     // this.socket.close();
   }

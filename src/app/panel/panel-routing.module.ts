@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import {ClientConfigComponent} from '../panel/pages/client-config/client-config.component';
 import {ServersTableComponent} from '../panel/pages/servers-table/servers-table.component';
 import {NavToolbarComponent} from './components/nav-toolbar/nav-toolbar.component';
+import {ProfilePageComponent} from './pages/profile-page/profile-page.component';
+import {StatsPageComponent} from './pages/stats-page/stats-page.component';
 
 const routes: Routes = [
   {
@@ -13,6 +15,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'server-list', pathMatch: 'full' },
       { path: 'server-list', component: ServersTableComponent },
       { path: 'client', component: ClientConfigComponent },
+      { path: 'stats', component: StatsPageComponent},
+      { path: 'profile', component:  ProfilePageComponent },
     ]
   }
 ];

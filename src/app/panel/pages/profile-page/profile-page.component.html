@@ -1,12 +1,44 @@
 <mat-tab-group dynamicHeight [selectedIndex]="0">
   <mat-tab label="Profile">
-    <div class="mat-elevation-z4">
-
-    </div>
+    <mat-card class="mat-elevation-z4">
+      <h2 class="mat-h2">Account Information:</h2>
+      <div class="info-body">
+        <div class="keys">
+          <h3 class="mat-subheading-2"><strong>Email:</strong> {{user?.email}}</h3>
+          <h3 class="mat-subheading-2"><strong>Last Login:</strong> {{user?.last_login | date:'medium'}}</h3>
+        </div>
+      </div>
+    </mat-card>
   </mat-tab>
   <mat-tab label="Security">
-    <div class="mat-elevation-z4" >
-
+    <div class="tab-security">
+      <form [formGroup]="changePassForm" (ngSubmit)="changePassword()" >
+        <mat-card>
+          <mat-card-header style="margin-left:-16px;">
+            <h2 class="mat-h2">Change password</h2>
+          </mat-card-header>
+          <mat-card-content fxLayout="column">
+            <mat-form-field>
+              <input matInput placeholder="Enter your new password" formControlName="password" [type]="hidepwd ? 'password' : 'text'">
+              <mat-icon matSuffix (click)="hidepwd = !hidepwd">{{hidepwd ? 'visibility' : 'visibility_off'}}</mat-icon>
+              <mat-error *ngIf="f.password.invalid">{{getPwdErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Confirm your new password" formControlName="password_confirm" [type]="hidepwd ? 'password' : 'text'">
+              <mat-icon matSuffix (click)="hidepwd = !hidepwd">{{hidepwd ? 'visibility' : 'visibility_off'}}</mat-icon>
+              <mat-error *ngIf="f.password_confirm.invalid">{{getPwdConfirmErrorMessage()}}</mat-error>
+              <mat-error *ngIf="f.password_confirm.errors?.MatchPassword">Passwords don't match</mat-error>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions class="form-group" fxLayoutAlign="center">
+            <button mat-raised-button color="primary">Submit</button>
+            <mat-spinner *ngIf="loading"></mat-spinner>
+          </mat-card-actions>
+          <mat-card class="error-box" *ngIf="error">
+            <div class="mat-subheading-2">{{error}}</div>
+          </mat-card>
+        </mat-card>
+      </form>
     </div>
   </mat-tab>
 </mat-tab-group>
