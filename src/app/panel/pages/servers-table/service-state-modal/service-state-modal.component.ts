@@ -10,8 +10,11 @@ import {Message, MessageCommands, MessageTypes} from '../../../models/message';
   styleUrls: ['./service-state-modal.component.scss']
 })
 export class ServiceStateModalComponent implements OnInit {
+  service: ServiceState;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ServiceState, private wsService: WebsocketService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private wsService: WebsocketService) {
+    this.service = this.data.service;
+  }
 
   ngOnInit() {
     console.log(this.data);
@@ -19,9 +22,7 @@ export class ServiceStateModalComponent implements OnInit {
 
   restart() {
     this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.SERVICE_RESTART,
-      body: this.data.name, hostname: 'hoop-XPS-13-9350' }));
-
-    //TODO pass hostname to change fee/ restart service.
+      body: this.service.name, hostname: this.data.hostname}));
   }
 
 }

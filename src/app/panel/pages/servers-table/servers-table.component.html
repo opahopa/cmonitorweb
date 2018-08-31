@@ -45,8 +45,8 @@
       <mat-cell *matCellDef="let row" [attr.colspan]="displayedColumns.length">
         <div [@detailExpand]="isExpanded(row)">
           <div fxLayout="row">
-            <app-server-details [services]="row.services" fxFlex="50"></app-server-details>
-            <app-server-codius-info [codius]="row.codius" fxFlex="50"></app-server-codius-info>
+            <app-server-details [services]="row.services" [hostname]="row.hostname" fxFlex="50"></app-server-details>
+            <app-server-codius-info [server]="row" fxFlex="50"></app-server-codius-info>
           </div>
         </div>
       </mat-cell>

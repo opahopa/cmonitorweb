@@ -10,6 +10,7 @@ import {ServiceStateModalComponent} from '../service-state-modal/service-state-m
 })
 export class ServerDetailsComponent implements OnInit {
   @Input() services: ServiceState[];
+  @Input() hostname: string;
 
   constructor(private dialog: MatDialog) { }
 
@@ -20,7 +21,7 @@ export class ServerDetailsComponent implements OnInit {
     const dialogRef = this.dialog.open(ServiceStateModalComponent, {
       height: '85vh',
       width: '95vw',
-      data: service
+      data: {service: service, hostname: this.hostname}
     });
 
     dialogRef.afterClosed().subscribe(result => {

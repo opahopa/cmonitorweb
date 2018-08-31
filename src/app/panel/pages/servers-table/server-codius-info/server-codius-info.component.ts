@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ServerCodius} from '../../../models/server';
+import {Server, ServerCodius} from '../../../models/server';
 import {MatDialog} from '@angular/material';
 import {ChangeFeeModalComponent} from '../change-fee-modal/change-fee-modal.component';
 
@@ -9,7 +9,7 @@ import {ChangeFeeModalComponent} from '../change-fee-modal/change-fee-modal.comp
   styleUrls: ['./server-codius-info.component.scss']
 })
 export class ServerCodiusInfoComponent implements OnInit {
-  @Input() codius: ServerCodius;
+  @Input() server: Server;
 
   constructor(public dialog: MatDialog) { }
 
@@ -18,6 +18,7 @@ export class ServerCodiusInfoComponent implements OnInit {
 
   changeFee() {
     const dialogRef = this.dialog.open(ChangeFeeModalComponent, {
+      data: { hostname: this.server.hostname },
       width: '250px'
     });
 

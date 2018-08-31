@@ -1,26 +1,26 @@
 <!--<div fxLayout='column' fxLayoutAlign="end center">-->
   <div class="mat-typography" fxLayout='row' fxLayoutAlign="space-evenly center">
-    <h2 mat-dialog-title="">{{data.name}}</h2>
+    <h2 mat-dialog-title="">{{service.name}}</h2>
     <div style="margin-left: 15px;">
       <button mat-raised-button color="accent" (click)="restart()">Restart</button>
     </div>
 
     <div class="flex-spacer"></div>
-    <h4>Running: {{data.runtime}}</h4>
+    <h4>Running: {{service.runtime}}</h4>
   </div>
   <mat-dialog-content>
-    <mat-tab-group dynamicHeight [selectedIndex]="data.warning? 1 : 0">
+    <mat-tab-group dynamicHeight [selectedIndex]="service.warning? 1 : 0">
       <mat-tab label="Command Log">
         <div class="mat-elevation-z4">
           <mat-form-field appearance="fill" class="log-field">
-            <textarea matInput placeholder="Latest systemctl 'status' call log">{{data.last_log}}</textarea>
+            <textarea matInput placeholder="Latest systemctl 'status' call log">{{service.last_log}}</textarea>
           </mat-form-field>
         </div>
       </mat-tab>
       <mat-tab label="Warnings">
         <div class="mat-elevation-z4" >
           <mat-form-field appearance="fill" class="log-field">
-            <textarea matInput placeholder="Latest systemctl warnings">{{data.warning}}</textarea>
+            <textarea matInput placeholder="Latest systemctl warnings">{{service.warning}}</textarea>
           </mat-form-field>
         </div>
       </mat-tab>

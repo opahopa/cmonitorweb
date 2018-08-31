@@ -17,7 +17,7 @@ export class ChangeFeeModalComponent implements OnInit {
 
   setNewFee(): void {
     this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.SET_CODIUS_FEE
-      , body: this.input.nativeElement.value, hostname: 'hoop-XP5S-13-9350' }));
+      , body: this.input.nativeElement.value, hostname: this.data.hostname }));
     this.dialogRef.close();
   }
 

@@ -12,6 +12,17 @@ export class ClientConfigComponent implements OnInit {
 
   loading: boolean;
   cli_link: string;
+  service_text = '[Unit]\n' +
+    'Description=Cmon Cli\n' +
+    '\n' +
+    '[Service]\n' +
+    'Type=simple\n' +
+    'ExecStart=/usr/bin/cmoncli\n' +
+    'TimeoutStartSec=0\n' +
+    'Restart=always\n' +
+    '\n' +
+    '[Install]\n' +
+    'WantedBy=multi-user.target\n';
 
   constructor(private cliService: CliService, @Inject(APP_CONFIG) private config: IAppConfig) { }
 

@@ -1,7 +1,7 @@
 <!--<div >-->
   <mat-card class="container">
     <mat-card-header class="codius-header">
-      <mat-card-title>Codius: {{codius.version? codius.version: 'N/A'}}</mat-card-title>
+      <mat-card-title>Codius: {{server.codius.version? server.codius.version: 'N/A'}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="stats">
@@ -12,15 +12,15 @@
         <span>Fee:</span>
       </div>
       <div class="stats-values">
-        <span>{{codius.memory.used}}/{{codius.memory.total}} Mb</span>
-        <span>{{codius.pods? codius.pods?.length:0}}</span>
-        <span>{{codius.count_24? codius.count_24: 'N/A'}}</span>
-        <span>{{codius.income_24? codius.income_24: 'N/A'}} XRP</span>
-        <span>{{codius.fee? codius.fee: 'N/A'}} XRP</span>
+        <span>{{server.codius.memory.used}}/{{server.codius.memory.total}} Mb</span>
+        <span>{{server.codius.pods? server.codius.pods?.length:0}}</span>
+        <span>{{server.codius.count_24? server.codius.count_24: 'N/A'}}</span>
+        <span>{{server.codius.income_24? server.codius.income_24: 'N/A'}} XRP</span>
+        <span>{{server.codius.fee? server.codius.fee: 'N/A'}} XRP</span>
       </div>
       <div class="actions">
         <button mat-raised-button color="accent" (click)="changeFee()">Change Fee</button>
-        <button mat-raised-button color="accent" (click)="updateCodius()">Update</button>
+        <!--<button mat-raised-button color="accent" (click)="updateCodius()">Update</button>-->
       </div>
     </mat-card-content>
     <div class="flex-spacer"></div>
