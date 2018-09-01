@@ -13,6 +13,14 @@ interface Stats {
   income: Number;
 }
 
+interface StatsParsed {
+  hostname: string;
+  monthly: {
+    count: [{'name': string, 'series': any[] }],
+    income: [{'name': string, 'series': any[] }]
+  };
+}
+
 
 @Component({
   selector: 'app-stats-page',
@@ -28,6 +36,7 @@ export class StatsPageComponent implements OnInit {
       income: [{'name': 'income', 'series': []}]
     }
   };
+  stats_parsed: StatsParsed[] = [];
   stats_week: any;
   // shape: shape.Series;
 
@@ -211,21 +220,58 @@ export class StatsPageComponent implements OnInit {
             const
               endDate = new Date(),
               startDate = this.getPrevDate(endDate, 30);
-            // const str = "2012-11-01".split("-")
-            // console.log(new Date(str[0], str[1] - 1, str[2]))
-            // console.log(startDate)
+
             const month_dates = this.getDateArray(startDate, endDate);
 
-            console.log(this.stats)
+            console.log(stats_month);
+
             const parsed = this.toChartArray(stats_month, month_dates);
-            this.stats.monthly.count[0].series = parsed.count;
-            this.stats.monthly.income[0].series = parsed.income;
-            console.log(this.data)
-            console.log(this.stats.monthly.count);
+            if (!this.stats_parsed.find(x => x.hostname === msg.hostname)) {
+              this.stats_parsed.push({
+                hostname: msg.hostname,
+                monthly: {
+                  count: [{'name': 'count', 'series': parsed.count}],
+                  income: [{'name': 'income', 'series': parsed.income}]
+                }
+              });
+            }
+            else {
+              let stat = this.stats_parsed.find(x => x.hostname === msg.hostname);
+              stat.monthly.count[0].series = parsed.count;
+              stat.monthly.income[0].series = parsed.income;
+            }
+
+            this.combineStats();
+
+            console.log(this.stats_parsed);
+            console.log(this.stats);
           }
           break;
       }
     });
+  }
+
+  combineStats() {
+    for (const stat of this.stats_parsed) {
+      if (this.stats.monthly.count[0].series.length === 0 || this.stats.monthly.income[0].series.length === 0) {
+        this.stats.monthly.count[0].series = stat.monthly.count[0].series;
+        this.stats.monthly.income[0].series = stat.monthly.income[0].series;
+      } else {
+        let result = [this.stats.monthly.count[0].series, stat.monthly.count[0].series].reduce((sums, series) =>
+            series.reduce((sums, item) => sums.set(item.name, (sums.get(item.name) || 0) + item.value), sums)
+          , new Map)
+
+        this.stats.monthly.count[0].series = Array.from(result.entries(), ([name, value]) => ({name, value}));
+
+
+
+        result = [this.stats.monthly.income[0].series, stat.monthly.income[0].series].reduce((sums, series) =>
+            series.reduce((sums, item) => sums.set(item.name, (sums.get(item.name) || 0) + item.value), sums)
+          , new Map)
+
+        this.stats.monthly.income[0].series = Array.from(result.entries(), ([name, value]) => ({name, value}));
+      }
+    }
   }
 
   getDateArray(start, end) {
@@ -250,7 +296,7 @@ export class StatsPageComponent implements OnInit {
   toChartArray(data: Stats[], month_dates: Date[]) {
     let
       count_series = [],
-      income_series = []
+      income_series = [];
 
     for (const date of month_dates) {
       // console.log(date)

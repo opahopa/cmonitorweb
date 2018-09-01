@@ -1,7 +1,17 @@
 mat-card-content {
   display: flex;
-  flex-flow: column;
   align-items: center;
+  flex: 2;
+  .installation, .systemd-service {
+    flex-direction: column;
+    display: flex;
+    flex: 1;
+    align-self: flex-start;
+  }
+}
+
+.mat-subheading-2 {
+  font-weight: 500;
 }
 
 mat-card-actions {
