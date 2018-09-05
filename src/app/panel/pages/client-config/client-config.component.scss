@@ -12,6 +12,7 @@ mat-card-content {
 
 .mat-subheading-2 {
   font-weight: 500;
+  margin: 10px 0px 0px 0px;
 }
 
 mat-card-actions {
@@ -25,9 +26,10 @@ mat-card-actions {
 }
 
 .code-text {
-  background: rgba(0,0,0,.08);
+  background: rgba(0, 0, 0, 0.06);
   font-weight: 300;
   padding: 0 3px 0 3px;
+  margin: 0 3px 0 3px;
 }
 
 .mat-body-1 {

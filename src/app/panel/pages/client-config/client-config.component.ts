@@ -12,6 +12,7 @@ export class ClientConfigComponent implements OnInit {
 
   loading: boolean;
   cli_link: string;
+  installer_link: string;
   service_text = '[Unit]\n' +
     'Description=Cmon Cli\n' +
     '\n' +
@@ -34,8 +35,11 @@ export class ClientConfigComponent implements OnInit {
     this.cliService.genCli().subscribe(data => {
           if (data['link']) {
             this.cli_link = `wget -O cmoncli ${this.config.apiEndpoint}${data['link']}`;
-            this.loading = false;
           }
+          if (data['installer']) {
+            this.installer_link = `wget ${this.config.apiEndpoint}${data['installer']} -O cmoncli-install.sh && bash cmoncli-install.sh`;
+          }
+          this.loading = false;
       },
       error => {
         this.cli_link = error;
