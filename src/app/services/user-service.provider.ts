@@ -3,6 +3,7 @@ import {map} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {APP_CONFIG, IAppConfig} from '../app.config';
 import {User} from '../panel/models/user';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class UserServiceProvider {
       }));
   }
 
-  register(email: string, password: string) {
+  register(email: string, password: string): Observable<any> {
     return this.http.put<any>(this.config.apiEndpoint + 'user/', { email: email, password: password })
       .pipe(map((res: any) => {
         if (res && res.token) {

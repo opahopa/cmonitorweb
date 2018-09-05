@@ -4,6 +4,7 @@ import {PageNotFoundComponent} from './pages/page-not-found/page-not-found.compo
 import {LoginFormComponent} from './pages/login-form/login-form.component';
 import {AuthGuard} from './core/auth.guard';
 import {RegisterFormComponent} from './pages/register-form/register-form.component';
+import {ConfirmEmailComponent} from './pages/confirm-email/confirm-email.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'panel', loadChildren: '../app/panel/panel.module#PanelModule', canLoad: [AuthGuard]},
   { path: 'login', component: LoginFormComponent },
   { path: 'register', component: RegisterFormComponent },
+  { path: 'confirm-email', component: ConfirmEmailComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -1,0 +1,12 @@
+@import 'variables';
+
+
+.confirm-email-container {
+  height: 100vh;
+}
+mat-toolbar {
+  flex-direction: column;
+}
+button {
+  margin: 18px;
+}

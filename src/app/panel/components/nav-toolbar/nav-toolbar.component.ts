@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-nav-toolbar',
   templateUrl: './nav-toolbar.component.html',
-  styleUrls: ['./nav-toolbar.component.css']
+  styleUrls: ['./nav-toolbar.component.scss']
 })
 export class NavToolbarComponent {
 

@@ -61,22 +61,30 @@ export class RegisterFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
+    this.loading = true;
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       return;
     }
 
     this.authService.register(this.f.email.value, this.f.password.value)
-      .pipe(first())
       .subscribe(
         data => {
           console.log(data);
+          // console.log(data.is_active);
+          // if (!data.is_active) {
+          //   this.snackBar.open('Registration Successful', '', {duration: 3000, });
+          //   this.router.navigate(['/confirm-email']);
+          // } else if (data.is_active) {
+          //   this.snackBar.open('Registration Successful', '', {duration: 3000, });
+          //   this.router.navigate(['/login']);
+          // }
           this.snackBar.open('Registration Successful', '', {duration: 3000, });
-          this.router.navigate(['/login']);
+          this.router.navigate(['/confirm-email']);
+          this.loading = false;
         },
         error => {
-          console.log(error)
+          console.log(error);
           error.error.email ? this.loginerror = error.error.email : this.loginerror = error.statusText;
           this.loading = false;
         });

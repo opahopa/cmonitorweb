@@ -61,6 +61,8 @@ export class LoginFormComponent implements OnInit {
             this.loginerror = 'Invalid username/password';
           } else if (error.status === 500 || error.status === 503) {
             this.loginerror = 'API error. Contact administrator';
+          } else if (error.status === 412) {
+            this.loginerror = 'User not active. Please follow the link sent to your email.';
           } else { this.loginerror = error.statusText; }
           this.loading = false;
         });
