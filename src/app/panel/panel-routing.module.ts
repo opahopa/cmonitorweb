@@ -5,6 +5,7 @@ import {ServersTableComponent} from '../panel/pages/servers-table/servers-table.
 import {NavToolbarComponent} from './components/nav-toolbar/nav-toolbar.component';
 import {ProfilePageComponent} from './pages/profile-page/profile-page.component';
 import {StatsPageComponent} from './pages/stats-page/stats-page.component';
+import {ContactDonatePageComponent} from './pages/contact-donate-page/contact-donate-page.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'client', component: ClientConfigComponent },
       { path: 'stats', component: StatsPageComponent},
       { path: 'profile', component:  ProfilePageComponent },
+      { path: 'contact', component:  ContactDonatePageComponent },
     ]
   }
 ];

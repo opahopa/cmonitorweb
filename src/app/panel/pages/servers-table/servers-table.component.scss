@@ -4,6 +4,10 @@ table {
   width: 100%;
 }
 
+.main-wrapper {
+  box-shadow: none !important;
+}
+
 mat-row.example-detail-row {
   min-height: 0;
 }

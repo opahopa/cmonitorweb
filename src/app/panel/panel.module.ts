@@ -20,6 +20,7 @@ import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/mate
 import {ChangeFeeModalComponent} from './pages/servers-table/change-fee-modal/change-fee-modal.component';
 import {ProfilePageComponent} from './pages/profile-page/profile-page.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { ContactDonatePageComponent } from './pages/contact-donate-page/contact-donate-page.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
     ServerCodiusInfoComponent,
     ChangeFeeModalComponent,
     ProfilePageComponent,
-    MbToGbPipe
+    MbToGbPipe,
+    ContactDonatePageComponent
   ],
   entryComponents: [
     ServiceStateModalComponent,

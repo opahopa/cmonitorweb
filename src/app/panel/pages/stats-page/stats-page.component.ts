@@ -216,35 +216,37 @@ export class StatsPageComponent implements OnInit {
         case MessageTypes.REPORT:
           if (msg.command === MessageCommands.STATS_ALL) {
             const stats_month = <Stats[]>msg.body;
+            if (stats_month.length > 1) {
 
-            const
-              endDate = new Date(),
-              startDate = this.getPrevDate(endDate, 30);
+              const
+                endDate = new Date(),
+                startDate = this.getPrevDate(endDate, 30);
 
-            const month_dates = this.getDateArray(startDate, endDate);
+              const month_dates = this.getDateArray(startDate, endDate);
 
-            console.log(stats_month);
+              console.log(stats_month);
 
-            const parsed = this.toChartArray(stats_month, month_dates);
-            if (!this.stats_parsed.find(x => x.hostname === msg.hostname)) {
-              this.stats_parsed.push({
-                hostname: msg.hostname,
-                monthly: {
-                  count: [{'name': 'count', 'series': parsed.count}],
-                  income: [{'name': 'income', 'series': parsed.income}]
-                }
-              });
+              const parsed = this.toChartArray(stats_month, month_dates);
+              if (!this.stats_parsed.find(x => x.hostname === msg.hostname)) {
+                this.stats_parsed.push({
+                  hostname: msg.hostname,
+                  monthly: {
+                    count: [{'name': 'count', 'series': parsed.count}],
+                    income: [{'name': 'income', 'series': parsed.income}]
+                  }
+                });
+              }
+              else {
+                let stat = this.stats_parsed.find(x => x.hostname === msg.hostname);
+                stat.monthly.count[0].series = parsed.count;
+                stat.monthly.income[0].series = parsed.income;
+              }
+
+              this.combineStats();
+
+              console.log(this.stats_parsed);
+              console.log(this.stats);
             }
-            else {
-              let stat = this.stats_parsed.find(x => x.hostname === msg.hostname);
-              stat.monthly.count[0].series = parsed.count;
-              stat.monthly.income[0].series = parsed.income;
-            }
-
-            this.combineStats();
-
-            console.log(this.stats_parsed);
-            console.log(this.stats);
           }
           break;
       }

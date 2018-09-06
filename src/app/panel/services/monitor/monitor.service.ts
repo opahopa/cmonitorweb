@@ -37,6 +37,10 @@ export class MonitorService implements OnDestroy {
           this.authService.logout();
           this.router.navigate(['/login']);
           break;
+        case 1006:
+          this.authService.logout();
+          this.router.navigate(['/login']);
+          break;
         case 1011:
           alert('Internal error (1011). Please try again after 5 minutes. Contact administrator if repeated');
       }
