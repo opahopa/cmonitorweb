@@ -2,6 +2,14 @@
   <mat-card class="container">
     <mat-card-header class="codius-header">
       <mat-card-title>Codius: {{server.codius.version? server.codius.version: 'N/A'}}</mat-card-title>
+      <div class="spinner-wrapper" *ngIf="is_updating">
+        <mat-spinner [diameter]="30"></mat-spinner>
+      </div>
+      <mat-card class="error-box" *ngIf="error_cli_update.length > 0">
+        <div class="mat-subheading-4">{{error_cli_update}}</div>
+      </mat-card>
+      <button mat-raised-button color="primary" (click)="updateCmonCli()"
+              *ngIf="!is_updating && error_cli_update.length == 0">Update MonitorCli</button>
     </mat-card-header>
     <mat-card-content>
       <div class="stats">
@@ -21,6 +29,7 @@
       <div class="actions">
         <button mat-raised-button color="accent" (click)="changeFee()">Change Fee</button>
         <!--<button mat-raised-button color="accent" (click)="updateCodius()">Update</button>-->
+        <button mat-raised-button color="accent" (click)="testUpload()">Upload Test</button>
       </div>
     </mat-card-content>
     <div class="flex-spacer"></div>

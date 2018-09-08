@@ -1,3 +1,5 @@
+@import 'variables';
+
 .container {
   margin-top: 5px;
   //text-align: center;
@@ -7,7 +9,12 @@
 
   .codius-header {
     display: flex;
-    //justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .spinner-wrapper {
+      justify-content: center;
+    }
   }
   mat-card-content {
     display: flex;
@@ -21,6 +28,7 @@
   }
   mat-card-title {
     font-weight: 500;
+    margin-bottom: 0px !important;
   }
   mat-card-actions {
     padding-bottom: 5px;
@@ -36,4 +44,7 @@
       margin: 7px 0px 7px 0px;
     }
   }
+}
+.error-box {
+  color: $error-red;
 }

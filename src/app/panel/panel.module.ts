@@ -21,6 +21,8 @@ import {ChangeFeeModalComponent} from './pages/servers-table/change-fee-modal/ch
 import {ProfilePageComponent} from './pages/profile-page/profile-page.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { ContactDonatePageComponent } from './pages/contact-donate-page/contact-donate-page.component';
+import { UploadTestModalComponent } from './pages/servers-table/upload-test-modal/upload-test-modal.component';
+import { LogModalComponent } from './components/log-modal/log-modal.component';
 
 
 @NgModule({
@@ -49,11 +51,14 @@ import { ContactDonatePageComponent } from './pages/contact-donate-page/contact-
     ChangeFeeModalComponent,
     ProfilePageComponent,
     MbToGbPipe,
-    ContactDonatePageComponent
+    ContactDonatePageComponent,
+    UploadTestModalComponent,
+    LogModalComponent
   ],
   entryComponents: [
     ServiceStateModalComponent,
-    ChangeFeeModalComponent
+    ChangeFeeModalComponent,
+    UploadTestModalComponent
   ]
 })
 export class PanelModule {}

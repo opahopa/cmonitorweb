@@ -21,7 +21,7 @@
     <ng-container matColumnDef="services-all-status">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Services</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-icon *ngIf="row.services | servicesStatus" color="accent">check_circle</mat-icon>
+        <mat-icon *ngIf="row.services | servicesStatus" class="online-icon">check_circle</mat-icon>
         <mat-icon *ngIf="!(row.services | servicesStatus)" color="warn">error</mat-icon>
       </mat-cell>
     </ng-container>
@@ -30,6 +30,13 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header>Memory</mat-header-cell>
       <mat-cell *matCellDef="let row">
         <span>{{row.codius.memory.used | mbToGb}}/{{row.codius.memory.total | mbToGb}} Gb</span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="contracts-running">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Contracts</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span>{{row.codius.pods? row.codius.pods?.length:0}}</span>
       </mat-cell>
     </ng-container>
 

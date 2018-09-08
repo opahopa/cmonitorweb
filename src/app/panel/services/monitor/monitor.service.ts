@@ -46,7 +46,6 @@ export class MonitorService implements OnDestroy {
       }
     });
     this.wsService.watchEvent(WSEvent.MESSAGE).subscribe((data) => {
-      // console.log(data);
       const msg: Message = <Message>JSON.parse(data.data);
       this.parseMessage(msg);
     });

@@ -29,7 +29,7 @@ export class ServersTableComponent implements OnInit {
   expandedElement: Server;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['hostname', 'status', 'services-all-status', 'server-load', 'dropdown-ico'];
+  displayedColumns = ['hostname', 'status', 'services-all-status', 'server-load', 'contracts-running', 'dropdown-ico'];
 
   constructor(public monitorService: MonitorService, private serversService: ServersService) { }
 
