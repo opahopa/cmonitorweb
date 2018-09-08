@@ -46,6 +46,8 @@ export class ServersTableComponent implements OnInit {
     if (this.expandedElement) {
       if (row.hostname === this.expandedElement.hostname) {
         return 'expanded';
+      } else {
+        return 'collapsed';
       }
     } else {
       return 'collapsed';
