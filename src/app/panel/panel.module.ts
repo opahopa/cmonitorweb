@@ -58,7 +58,8 @@ import { LogModalComponent } from './components/log-modal/log-modal.component';
   entryComponents: [
     ServiceStateModalComponent,
     ChangeFeeModalComponent,
-    UploadTestModalComponent
+    UploadTestModalComponent,
+    LogModalComponent
   ]
 })
 export class PanelModule {}

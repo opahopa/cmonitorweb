@@ -1,6 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {APP_CONFIG, IAppConfig} from '../app.config';
+import {APP_CONFIG, IAppConfig} from '../../app.config';
 
 @Injectable({
   providedIn: 'root'

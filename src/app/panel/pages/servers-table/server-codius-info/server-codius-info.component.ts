@@ -7,8 +7,9 @@ import {WebsocketService} from '../../../services/websocket/websocket.service';
 import {Message, MessageCommands, MessageStatus, MessageTypes} from '../../../models/message';
 import {WSEvent} from '../../../models/enums/wsevent.enum';
 import {LogModalComponent} from '../../../components/log-modal/log-modal.component';
-import {CliService} from '../../../../services/cli.service';
+import {CliService} from '../../../services/cli.service';
 import {APP_CONFIG, IAppConfig} from '../../../../app.config';
+
 
 @Component({
   selector: 'app-server-codius-info',
@@ -17,8 +18,15 @@ import {APP_CONFIG, IAppConfig} from '../../../../app.config';
 })
 export class ServerCodiusInfoComponent implements OnInit {
   @Input() server: Server;
-  is_updating = false;
-  error_cli_update: string;
+
+  status: any = {
+    cli_updating: false,
+    upload_testing: false
+  };
+  error: any = {
+    cli_update: '',
+    upload_test: ''
+  };
 
   constructor(public dialog: MatDialog
               , private wsService: WebsocketService
@@ -28,28 +36,39 @@ export class ServerCodiusInfoComponent implements OnInit {
   ngOnInit() {
     this.wsService.watchEvent(WSEvent.MESSAGE).subscribe((data) => {
       const msg: Message = <Message>JSON.parse(data.data);
-      if (msg.type === MessageTypes.REPORT && msg.command === MessageCommands.CMONCLI_UPDATE) {
-        this.is_updating = false;
-        switch (msg.status) {
-          case MessageStatus.OK: {
-            this.dialog.open(LogModalComponent, {
-              data: { log: msg.body },
-              width: '80vw',
-              height: '80vh'
-            });
-            break;
-          }
-          case MessageStatus.ERROR: {
-            if (msg.body.length < 25){
-              this.error_cli_update = msg.body;
-            } else {
-              this.error_cli_update = 'API error';
-            }
-            break;
-          }
-        }
+      if (msg.type === MessageTypes.REPORT && msg.status === MessageStatus.ERROR) {
+          this.parseError(msg);
+      }
+      if (msg.type === MessageTypes.REPORT && msg.status === MessageStatus.OK) {
+          this.parseSuccess(msg);
       }
     });
+  }
+
+  parseSuccess(msg: Message) {
+    if (msg.command === MessageCommands.POD_UPLOAD_SELFTEST) {
+      this.status.upload_testing = false;
+      this.openLogModal(msg.body);
+    }
+  }
+
+  parseError(msg: Message) {
+    if (msg.command === MessageCommands.CMONCLI_UPDATE) {
+      this.status.cli_updating = false;
+      if (msg.body.length < 25) {
+        this.error.cli_update = msg.body;
+      } else {
+        this.error.cli_update = 'API error';
+      }
+    }
+    if (msg.command === MessageCommands.POD_UPLOAD_SELFTEST) {
+      this.status.upload_testing = false;
+      if (msg.body.length < 25) {
+        this.error.upload_test = msg.body;
+      } else {
+        this.error.upload_test = 'API error';
+      }
+    }
   }
 
   changeFee() {
@@ -60,32 +79,49 @@ export class ServerCodiusInfoComponent implements OnInit {
   }
 
   testUpload() {
-    this.dialog.open(UploadTestModalComponent, {
-      data: { hostname: this.server.hostname },
-      width: '80vw',
-      height: '80vh'
-    });
+    // this.dialog.open(UploadTestModalComponent, {
+    //   data: { hostname: this.server.hostname },
+    //   width: '80vw',
+    //   height: '80vh'
+    // });
+    this.wsService.sendMessage(new Message({
+      type: MessageTypes.CONTROL, command: MessageCommands.POD_UPLOAD_SELFTEST,
+      hostname: this.server.hostname
+    }));
+    this.status.upload_testing = true;
   }
 
   updateCmonCli() {
-    this.is_updating = true;
+    this.status.cli_updating = true;
     this.cliService.genCli().subscribe(data => {
         if (data['installer']) {
           this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.CMONCLI_UPDATE,
             body: data['installer'], hostname: this.server.hostname}));
         } else {
-          this.error_cli_update = 'Failed to get installer link';
-          this.is_updating = false;
+          this.error.cli_update = 'Failed to get installer link';
+          this.status.cli_updating = false;
         }
       },
       error => {
-        this.error_cli_update = error;
-        this.is_updating = false;
+        this.error.cli_update = error;
+        this.status.cli_updating = false;
       });
   }
 
   updateCodius() {
-
+    this.wsService.sendMessage(new Message({
+      type: MessageTypes.CONTROL, command: MessageCommands.POD_UPLOAD_SELFTEST,
+      hostname: this.server.hostname
+    }));
+    this.status.upload_testing = true;
   }
 
+  openLogModal(content: any) {
+    this.dialog.open(LogModalComponent, {
+      data: { log: content },
+      width: '95vw',
+      maxWidth: '95vw',
+      height: '80vh'
+    });
+  }
 }

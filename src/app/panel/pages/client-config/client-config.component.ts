@@ -1,5 +1,5 @@
 import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
-import {CliService} from '../../../services/cli.service';
+import {CliService} from '../../services/cli.service';
 import {APP_CONFIG, IAppConfig} from '../../../app.config';
 
 @Component({
