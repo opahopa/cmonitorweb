@@ -29,6 +29,7 @@ export class ServerCodiusInfoComponent implements OnInit {
     this.wsService.watchEvent(WSEvent.MESSAGE).subscribe((data) => {
       const msg: Message = <Message>JSON.parse(data.data);
       if (msg.type === MessageTypes.REPORT && msg.command === MessageCommands.CMONCLI_UPDATE) {
+        this.is_updating = false;
         switch (msg.status) {
           case MessageStatus.OK: {
             this.dialog.open(LogModalComponent, {
@@ -39,11 +40,14 @@ export class ServerCodiusInfoComponent implements OnInit {
             break;
           }
           case MessageStatus.ERROR: {
-            this.error_cli_update = msg.body;
+            if (msg.body.length < 25){
+              this.error_cli_update = msg.body;
+            } else {
+              this.error_cli_update = 'API error';
+            }
             break;
           }
         }
-        this.is_updating = false;
       }
     });
   }
@@ -65,16 +69,14 @@ export class ServerCodiusInfoComponent implements OnInit {
 
   updateCmonCli() {
     this.is_updating = true;
-    let installer_link = '';
     this.cliService.genCli().subscribe(data => {
-        if (data['installer'] && data['installer'].lenght > 0) {
-          installer_link = `wget ${this.config.apiEndpoint}${data['installer']} -O cmoncli-install.sh && bash cmoncli-install.sh`;
+        if (data['installer']) {
           this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.CMONCLI_UPDATE,
-            body: installer_link, hostname: this.server.hostname}));
+            body: data['installer'], hostname: this.server.hostname}));
         } else {
           this.error_cli_update = 'Failed to get installer link';
+          this.is_updating = false;
         }
-        this.is_updating = false;
       },
       error => {
         this.error_cli_update = error;
