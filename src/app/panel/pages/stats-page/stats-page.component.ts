@@ -216,7 +216,8 @@ export class StatsPageComponent implements OnInit {
         case MessageTypes.REPORT:
           if (msg.command === MessageCommands.STATS_ALL) {
             const stats_month = <Stats[]>msg.body;
-            if (stats_month.length > 1) {
+            console.log(stats_month)
+            if (stats_month.length > 0) {
 
               const
                 endDate = new Date(),
