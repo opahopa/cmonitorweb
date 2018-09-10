@@ -23,6 +23,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { ContactDonatePageComponent } from './pages/contact-donate-page/contact-donate-page.component';
 import { UploadTestModalComponent } from './pages/servers-table/upload-test-modal/upload-test-modal.component';
 import { LogModalComponent } from './components/log-modal/log-modal.component';
+import { NewsPageComponent } from './pages/news-page/news-page.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { LogModalComponent } from './components/log-modal/log-modal.component';
     MbToGbPipe,
     ContactDonatePageComponent,
     UploadTestModalComponent,
-    LogModalComponent
+    LogModalComponent,
+    NewsPageComponent
   ],
   entryComponents: [
     ServiceStateModalComponent,

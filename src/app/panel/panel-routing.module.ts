@@ -6,6 +6,7 @@ import {NavToolbarComponent} from './components/nav-toolbar/nav-toolbar.componen
 import {ProfilePageComponent} from './pages/profile-page/profile-page.component';
 import {StatsPageComponent} from './pages/stats-page/stats-page.component';
 import {ContactDonatePageComponent} from './pages/contact-donate-page/contact-donate-page.component';
+import {NewsPageComponent} from './pages/news-page/news-page.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'stats', component: StatsPageComponent},
       { path: 'profile', component:  ProfilePageComponent },
       { path: 'contact', component:  ContactDonatePageComponent },
+      { path: 'news', component:  NewsPageComponent },
     ]
   }
 ];

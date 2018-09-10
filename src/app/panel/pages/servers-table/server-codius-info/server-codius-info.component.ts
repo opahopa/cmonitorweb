@@ -2,7 +2,6 @@ import {Component, Inject, Input, OnInit} from '@angular/core';
 import {Server} from '../../../models/server';
 import {MatDialog} from '@angular/material';
 import {ChangeFeeModalComponent} from '../change-fee-modal/change-fee-modal.component';
-import {UploadTestModalComponent} from '../upload-test-modal/upload-test-modal.component';
 import {WebsocketService} from '../../../services/websocket/websocket.service';
 import {Message, MessageCommands, MessageStatus, MessageTypes} from '../../../models/message';
 import {WSEvent} from '../../../models/enums/wsevent.enum';
@@ -40,6 +39,7 @@ export class ServerCodiusInfoComponent implements OnInit {
           this.parseError(msg);
       }
       if (msg.type === MessageTypes.REPORT && msg.status === MessageStatus.OK) {
+          console.log('Success report received');
           this.parseSuccess(msg);
       }
     });
@@ -48,7 +48,7 @@ export class ServerCodiusInfoComponent implements OnInit {
   parseSuccess(msg: Message) {
     if (msg.command === MessageCommands.POD_UPLOAD_SELFTEST) {
       this.status.upload_testing = false;
-      this.openLogModal(msg.body);
+      this.openLogModal('Pod Upload test:', msg.body);
     }
   }
 
@@ -105,6 +105,7 @@ export class ServerCodiusInfoComponent implements OnInit {
       error => {
         this.error.cli_update = error;
         this.status.cli_updating = false;
+        this.openLogModal('Cli Update Error:', error);
       });
   }
 
@@ -116,12 +117,11 @@ export class ServerCodiusInfoComponent implements OnInit {
     this.status.upload_testing = true;
   }
 
-  openLogModal(content: any) {
+  openLogModal(title: string, content: any) {
     this.dialog.open(LogModalComponent, {
-      data: { log: content },
+      data: { title: title, log: content },
       width: '95vw',
       maxWidth: '95vw',
-      height: '80vh'
     });
   }
 }

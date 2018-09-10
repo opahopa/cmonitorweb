@@ -19,7 +19,6 @@ export class ServerDetailsComponent implements OnInit {
 
   openDialog(service: ServiceState): void {
     const dialogRef = this.dialog.open(ServiceStateModalComponent, {
-      height: '85vh',
       width: '95vw',
       data: {service: service, hostname: this.hostname}
     });
