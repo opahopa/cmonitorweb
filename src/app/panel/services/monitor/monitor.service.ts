@@ -37,6 +37,10 @@ export class MonitorService implements OnDestroy {
           this.authService.logout();
           this.router.navigate(['/login']);
           break;
+        case 4001:
+          this.authService.logout();
+          this.router.navigate(['/login']);
+          break;
         case 1006:
           this.authService.logout();
           this.router.navigate(['/login']);
