@@ -49,7 +49,7 @@ export class ServersTableComponent implements OnInit {
   }
 
   trackByIndex(index, item) {
-    // return index;
+    return index;
   }
 
   isExpanded(row: Server): string {
