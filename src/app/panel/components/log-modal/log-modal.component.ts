@@ -13,6 +13,10 @@ export class LogModalComponent implements OnInit {
     this.title = data.title;
   }
 
+  get log() {
+    return this.data.log;
+  }
+
   ngOnInit() {
   }
 }

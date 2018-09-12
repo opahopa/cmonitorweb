@@ -1,0 +1,20 @@
+@import 'variables';
+
+.error-box {
+  color: $error-red;
+}
+.mat-dialog-title {
+  margin-bottom: 10px;
+}
+mat-card {
+  padding: 12px;
+}
+mat-dialog-actions {
+  justify-content: center;
+}
+mat-dialog-content {
+  .mat-spinner-wrapper {
+    align-self: center;
+    min-height: 40px;
+  }
+}

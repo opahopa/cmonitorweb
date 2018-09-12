@@ -34,12 +34,22 @@ export class ServersTableComponent implements OnInit {
   constructor(public monitorService: MonitorService, private serversService: ServersService) { }
 
   ngOnInit() {
+    console.log('ngOnInit Servers Table');
+    if (this.monitorService.ws_status === 'connected' &&
+      (this.monitorService.websocketState() !== 0 || this.monitorService.websocketState() !== 1)) {
+      this.initTable();
+    } else {
+      this.initTable();
+    }
+  }
+
+  initTable() {
     this.monitorService.connect();
     this.dataSource = new ServersTableDataSource(this.paginator, this.sort, this.serversService);
   }
 
   trackByIndex(index, item) {
-    return index;
+    // return index;
   }
 
   isExpanded(row: Server): string {

@@ -55,6 +55,10 @@
             <app-server-details [services]="row.services" [hostname]="row.hostname" fxFlex="50"></app-server-details>
             <app-server-codius-info [server]="row" fxFlex="50"></app-server-codius-info>
           </div>
+          <div fxLayout="row" class="extra-services-row" *ngIf="true">
+            <app-extra-services [extra_services]="row.extra_services? row.extra_services : null"
+                                [hostname]="row.hostname"></app-extra-services>
+          </div>
         </div>
       </mat-cell>
     </ng-container>

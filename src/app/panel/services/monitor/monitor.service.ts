@@ -68,15 +68,21 @@ export class MonitorService implements OnDestroy {
     console.log(`Received: ${msg.command}`);
     switch (msg.command) {
       case MessageCommands.STATUS_ALL:
-        this.serversService.addServer(new Server({hostname: msg.hostname, active: true, services: msg.body.system, codius: msg.body.codius}));
+        this.serversService.addServer(new Server(
+          {hostname: msg.hostname, active: true, services: msg.body.system, codius: msg.body.codius, extra_services: msg.body.extra_services}));
         break;
       case MessageCommands.STATUS_CLI_DISCONNECT:
         this.serversService.removeServer(msg.hostname);
         break;
       case MessageCommands.STATUS_CLI_UPDATE:
-        this.serversService.updateServer(new Server({hostname: msg.hostname, active: true, services: msg.body.system, codius: msg.body.codius}));
+        this.serversService.updateServer(new Server(
+          {hostname: msg.hostname, active: true, services: msg.body.system, codius: msg.body.codius, extra_services: msg.body.extra_services}));
         break;
     }
+  }
+
+  websocketState() {
+    return this.wsService.state();
   }
 
   ngOnDestroy() {

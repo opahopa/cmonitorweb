@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ServerCodiusInfoComponent } from './server-codius-info.component';
+import { ExtraServiceMenuComponent } from './extra-service-menu.component';
 
-describe('ServerCodiusInfoComponent', () => {
-  let component: ServerCodiusInfoComponent;
-  let fixture: ComponentFixture<ServerCodiusInfoComponent>;
+describe('ExtraServiceMenuComponent', () => {
+  let component: ExtraServiceMenuComponent;
+  let fixture: ComponentFixture<ExtraServiceMenuComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ServerCodiusInfoComponent ]
+      declarations: [ ExtraServiceMenuComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ServerCodiusInfoComponent);
+    fixture = TestBed.createComponent(ExtraServiceMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

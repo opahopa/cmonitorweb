@@ -1,3 +1,5 @@
+@import 'theme';
+
 .sidenav-container {
   height: 100%;
 }
@@ -38,7 +40,12 @@ mat-sidenav-content {
   justify-content: center;
   align-items: center;
   height: 5vh;
-  background: #673ab73b;
+  //background: #673ab73b;
+  background: mat-color($panel-app-primary, 100);
+
+  .social-icons {
+    align-items: flex-end;
+  }
 }
 
 .footer-item {

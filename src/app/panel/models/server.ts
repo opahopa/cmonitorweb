@@ -12,13 +12,16 @@ export interface ServerCodius {
 export class Server {
   hostname: string;
   services: ServiceState[];
+  extra_services: ServiceState[];
   codius: ServerCodius;
   active: boolean;
 
-  constructor(settings: { hostname: string, services?: ServiceState[], active: boolean, codius?: ServerCodius}) {
+  constructor(settings: { hostname: string, services?: ServiceState[], active: boolean
+    , codius?: ServerCodius, extra_services?: ServiceState[]}) {
     this.hostname = settings.hostname;
     this.active = settings.active;
     this.codius = settings.codius;
     this.services = <ServiceState[]>settings.services;
+    this.extra_services = <ServiceState[]>settings.extra_services;
   }
 }

@@ -32,6 +32,9 @@
         <!--<div class="upload-test-btn-wrapper">-->
         <button mat-raised-button color="accent" (click)="testUpload()" *ngIf="!status.upload_testing">Upload Test</button>
         <mat-spinner [diameter]="30" *ngIf="status.upload_testing"></mat-spinner>
+        <mat-card class="error-box" *ngIf="error.upload_test?.length > 0">
+          <div class="mat-subheading-4">{{error.upload_test}}</div>
+        </mat-card>
         <!--</div>-->
 
       </div>

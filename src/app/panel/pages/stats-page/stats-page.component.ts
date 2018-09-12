@@ -180,15 +180,15 @@ export class StatsPageComponent implements OnInit {
               private authService: AuthService) { }
 
   ngOnInit() {
-    this.wsService.initConnection();
-    if (this.wsService.state() && this.wsService.state() === 1) {
+    if (!this.wsService.state() || this.wsService.state() !== 1) {
+      this.wsService.initConnection();
+    } else if (this.wsService.state() && this.wsService.state() === 1) {
       this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.STATS_ALL, body: 30}));
     }
 
     this.initWatchers();
 
     this.ws_status = 'connected';
-
   }
 
   initWatchers(): void {

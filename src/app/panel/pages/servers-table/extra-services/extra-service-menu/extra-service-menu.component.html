@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Fail2Ban</h2>
+<mat-dialog-content
+  fxLayout="column"
+  fxFlexAlign="center">
+  <button mat-button (click)="serviceStatus()" [disabled]="!service.installed">Status</button>
+  <button mat-button (click)="serviceLog()" [disabled]="!service.installed">Log</button>
+  <button mat-button (click)="serviceInstall()" [disabled]="service.installed" *ngIf="!loading">Install</button>
+  <div class="mat-spinner-wrapper">
+    <mat-spinner [diameter]="30" *ngIf="loading"></mat-spinner>
+  </div>
+</mat-dialog-content>
+<mat-card class="error-box" *ngIf="error">
+  <div class="mat-subheading-2">{{error}}</div>
+</mat-card>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
+

@@ -8,6 +8,7 @@ import {WSEvent} from '../../../models/enums/wsevent.enum';
 import {LogModalComponent} from '../../../components/log-modal/log-modal.component';
 import {CliService} from '../../../services/cli.service';
 import {APP_CONFIG, IAppConfig} from '../../../../app.config';
+import {AlertComponent} from '../../../components/alert/alert.component';
 
 
 @Component({
@@ -39,7 +40,6 @@ export class ServerCodiusInfoComponent implements OnInit {
           this.parseError(msg);
       }
       if (msg.type === MessageTypes.REPORT && msg.status === MessageStatus.OK) {
-          console.log('Success report received');
           this.parseSuccess(msg);
       }
     });
@@ -58,7 +58,7 @@ export class ServerCodiusInfoComponent implements OnInit {
       if (msg.body.length < 25) {
         this.error.cli_update = msg.body;
       } else {
-        this.error.cli_update = 'API error';
+        this.openLogModal('Pod Upload test:', msg.body);
       }
     }
     if (msg.command === MessageCommands.POD_UPLOAD_SELFTEST) {
@@ -66,7 +66,7 @@ export class ServerCodiusInfoComponent implements OnInit {
       if (msg.body.length < 25) {
         this.error.upload_test = msg.body;
       } else {
-        this.error.upload_test = 'API error';
+        this.openLogModal('Pod Upload test:', msg.body);
       }
     }
   }
@@ -79,20 +79,17 @@ export class ServerCodiusInfoComponent implements OnInit {
   }
 
   testUpload() {
-    // this.dialog.open(UploadTestModalComponent, {
-    //   data: { hostname: this.server.hostname },
-    //   width: '80vw',
-    //   height: '80vh'
-    // });
     this.wsService.sendMessage(new Message({
       type: MessageTypes.CONTROL, command: MessageCommands.POD_UPLOAD_SELFTEST,
       hostname: this.server.hostname
     }));
     this.status.upload_testing = true;
+    this.timeoutWatcherError('upload');
   }
 
   updateCmonCli() {
     this.status.cli_updating = true;
+    this.timeoutWatcherError('update');
     this.cliService.genCli().subscribe(data => {
         if (data['installer']) {
           this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.CMONCLI_UPDATE,
@@ -110,11 +107,7 @@ export class ServerCodiusInfoComponent implements OnInit {
   }
 
   updateCodius() {
-    this.wsService.sendMessage(new Message({
-      type: MessageTypes.CONTROL, command: MessageCommands.POD_UPLOAD_SELFTEST,
-      hostname: this.server.hostname
-    }));
-    this.status.upload_testing = true;
+
   }
 
   openLogModal(title: string, content: any) {
@@ -123,5 +116,23 @@ export class ServerCodiusInfoComponent implements OnInit {
       width: '95vw',
       maxWidth: '95vw',
     });
+  }
+
+  timeoutWatcherError(trigger: string) {
+    setTimeout(() => {
+      const text = 'Looks like CodiusMonitor client is outdated. \n' +
+        `To use this function please update your CodiusMonitor client software on this server: ${this.server.hostname}\n.` +
+        'Details can be found at \'Client\' tab';
+      if (trigger === 'upload' && this.status.upload_testing === true) {
+        this.dialog.open(AlertComponent, {
+          data: { message: text}
+        });
+      }
+      if (trigger === 'update' && this.status.cli_updating === true) {
+        this.dialog.open(AlertComponent, {
+          data: { message: text}
+        });
+      }
+    }, 75000);
   }
 }

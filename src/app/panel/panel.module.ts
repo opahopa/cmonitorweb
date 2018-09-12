@@ -24,6 +24,9 @@ import { ContactDonatePageComponent } from './pages/contact-donate-page/contact-
 import { UploadTestModalComponent } from './pages/servers-table/upload-test-modal/upload-test-modal.component';
 import { LogModalComponent } from './components/log-modal/log-modal.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
+import { ExtraServicesComponent } from './pages/servers-table/extra-services/extra-services.component';
+import { ExtraServiceMenuComponent } from './pages/servers-table/extra-services/extra-service-menu/extra-service-menu.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 
 @NgModule({
@@ -55,13 +58,18 @@ import { NewsPageComponent } from './pages/news-page/news-page.component';
     ContactDonatePageComponent,
     UploadTestModalComponent,
     LogModalComponent,
-    NewsPageComponent
+    NewsPageComponent,
+    ExtraServicesComponent,
+    ExtraServiceMenuComponent,
+    AlertComponent
   ],
   entryComponents: [
     ServiceStateModalComponent,
     ChangeFeeModalComponent,
     UploadTestModalComponent,
-    LogModalComponent
+    LogModalComponent,
+    ExtraServiceMenuComponent,
+    AlertComponent
   ]
 })
 export class PanelModule {}

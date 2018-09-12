@@ -1,0 +1,19 @@
+@import 'variables';
+
+
+.alert-header {
+  justify-content: center;
+  mat-icon {
+    padding-top: 4px;
+    margin-left: 5px;
+  }
+}
+
+mat-dialog-content {
+  text-align: center;
+  line-height: 1.4;
+}
+
+mat-dialog-actions {
+  justify-content: center;
+}
