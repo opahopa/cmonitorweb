@@ -19,7 +19,9 @@ export enum MessageCommands {
   STATS_ALL = 'STATS_ALL',
   POD_UPLOAD_SELFTEST = 'POD_UPLOAD_SELFTEST',
   CMONCLI_UPDATE = 'CMONCLI_UPDATE',
-  INSTALL_SERVICE = 'INSTALL_SERVICE'
+  INSTALL_SERVICE = 'INSTALL_SERVICE',
+  CLI_UPGRADE_REQUIRED = 'CLI_UPGRADE_REQUIRED',
+  CLI_UPGRADE = 'CLI_UPGRADE'
 }
 
 
@@ -29,12 +31,15 @@ export class Message {
   status?: MessageStatus;
   command?: MessageCommands;
   body?: any;
+  cli_version?: string;
 
-  constructor(settings: { type: MessageTypes, hostname?: string, command?: MessageCommands, status?: MessageStatus, body?: any}) {
+  constructor(settings: { type: MessageTypes, hostname?: string,
+    command?: MessageCommands, status?: MessageStatus, body?: any, cli_version?: string}) {
     this.type = settings.type;
     this.status = settings.status;
     this.command = settings.command;
     this.body = settings.body;
     this.hostname = settings.hostname;
+    this.cli_version = settings.cli_version;
   }
 }

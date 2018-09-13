@@ -7,15 +7,18 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth/auth-service.service';
 import {ServersService} from '../servers.service';
 import {Server} from '../../models/server';
+import {LogModalComponent} from '../../components/log-modal/log-modal.component';
+import {MatDialog} from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MonitorService implements OnDestroy {
   ws_status: string;
+  upgrade_command_sent = false;
 
   constructor(private messagesService: MessagesService, private wsService: WebsocketService, private router: Router,
-              private authService: AuthService, private serversService: ServersService) {}
+              private authService: AuthService, private serversService: ServersService, public dialog: MatDialog) {}
 
   connect(): boolean {
     this.wsService.initConnection();
@@ -69,14 +72,23 @@ export class MonitorService implements OnDestroy {
     switch (msg.command) {
       case MessageCommands.STATUS_ALL:
         this.serversService.addServer(new Server(
-          {hostname: msg.hostname, active: true, services: msg.body.system, codius: msg.body.codius, extra_services: msg.body.extra_services}));
+          {hostname: msg.hostname, active: true, services: msg.body.system,
+            codius: msg.body.codius, extra_services: msg.body.extra_services, cli_version: msg.body.cli_version}));
         break;
       case MessageCommands.STATUS_CLI_DISCONNECT:
         this.serversService.removeServer(msg.hostname);
         break;
       case MessageCommands.STATUS_CLI_UPDATE:
         this.serversService.updateServer(new Server(
-          {hostname: msg.hostname, active: true, services: msg.body.system, codius: msg.body.codius, extra_services: msg.body.extra_services}));
+          {hostname: msg.hostname, active: true, services: msg.body.system,
+            codius: msg.body.codius, extra_services: msg.body.extra_services, cli_version: msg.body.cli_version}));
+        break;
+      case MessageCommands.CLI_UPGRADE_REQUIRED:
+        if (!this.upgrade_command_sent) {
+          this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.CLI_UPGRADE,
+            body: { 'token': this.authService.getUser()['token'] }, hostname: msg.hostname}));
+          this.upgrade_command_sent = true;
+        }
         break;
     }
   }
@@ -86,7 +98,7 @@ export class MonitorService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('Monitor ngOnDestroy')
+    console.log('Monitor ngOnDestroy');
     this.wsService.closeConnection();
   }
 }

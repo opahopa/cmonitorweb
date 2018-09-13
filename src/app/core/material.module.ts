@@ -6,7 +6,7 @@ import {
   MatListModule,
   MatPaginatorModule, MatProgressSpinnerModule, MatSidenavModule, MatSnackBarModule,
   MatSortModule,
-  MatTableModule, MatTabsModule, MatToolbarModule
+  MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {NgModule} from '@angular/core';
 import {LayoutModule} from '@angular/cdk/layout';
@@ -33,7 +33,8 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatTabsModule,
     MatGridListModule,
     MatSnackBarModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTooltipModule
   ],
   exports: [
     MatButtonModule,
@@ -55,7 +56,8 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatTabsModule,
     MatGridListModule,
     MatSnackBarModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTooltipModule
   ],
 })
 export class MaterialModules { }

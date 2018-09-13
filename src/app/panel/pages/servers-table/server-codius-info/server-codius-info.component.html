@@ -6,10 +6,13 @@
         <mat-spinner [diameter]="30"></mat-spinner>
       </div>
       <mat-card class="error-box" *ngIf="error.cli_update?.length > 0">
-        <div class="mat-subheading-4">{{error.cli_update}}</div>
+        <div class="mat-subheading-4"
+             [matTooltipDisabled]="error.tooltip_info.length<=0"
+             [matTooltip]="error.tooltip_info">{{error.cli_update}}</div>
       </mat-card>
       <button mat-raised-button color="primary" (click)="updateCmonCli()"
-              *ngIf="!status.cli_updating && !(error.cli_update?.length > 0)" [disabled]="false" >CmonitorCli Update</button>
+              *ngIf="!status.cli_updating && !(error.cli_update?.length > 0)"
+              [disabled]="latest_cli_version === server.cli_version" >CmonitorCli Update</button>
     </mat-card-header>
     <mat-divider [inset]="true"></mat-divider>
     <mat-card-content>

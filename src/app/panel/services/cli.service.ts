@@ -16,4 +16,8 @@ export class CliService {
   genCli() {
     return this.http.get(this.config.apiEndpoint + 'monitor/client/generate/');
   }
+
+  getCliVersion() {
+    return this.http.get<any>(this.config.apiEndpoint + 'monitor/client/version/');
+  }
 }

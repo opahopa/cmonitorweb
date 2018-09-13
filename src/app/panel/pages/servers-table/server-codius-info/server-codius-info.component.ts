@@ -25,8 +25,10 @@ export class ServerCodiusInfoComponent implements OnInit {
   };
   error: any = {
     cli_update: '',
-    upload_test: ''
+    upload_test: '',
+    tooltip_info: ''
   };
+  latest_cli_version: string;
 
   constructor(public dialog: MatDialog
               , private wsService: WebsocketService
@@ -34,8 +36,17 @@ export class ServerCodiusInfoComponent implements OnInit {
               , @Inject(APP_CONFIG) private config: IAppConfig) { }
 
   ngOnInit() {
+    this.cliService.getCliVersion().subscribe((data) => {
+      this.latest_cli_version = data.version;
+    });
     this.wsService.watchEvent(WSEvent.MESSAGE).subscribe((data) => {
       const msg: Message = <Message>JSON.parse(data.data);
+
+      // Upgrade response received only in case of failure
+      if (msg.command === MessageCommands.CLI_UPGRADE && msg.hostname === this.server.hostname) {
+        this.error.cli_update = 'Cmoncli Autoupdate failed';
+        this.error.tooltip_info = msg.body;
+      }
       if (msg.type === MessageTypes.REPORT && msg.status === MessageStatus.ERROR) {
           this.parseError(msg);
       }
