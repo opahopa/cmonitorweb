@@ -7,6 +7,23 @@ export interface ServerCodius {
   count_24: number;
   income_24: number;
   fee: number;
+  peers: {
+    num: number,
+    list: any[]
+  };
+  uptime: {
+    server: {
+      days: number,
+      hours: number,
+      minutes: number
+    },
+    service: {
+      days: number,
+      hours: number,
+      minutes: number
+    }
+  };
+  selftest: boolean;
 }
 
 export class Server {

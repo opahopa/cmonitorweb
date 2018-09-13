@@ -1,7 +1,7 @@
 import {
   MatButtonModule,
   MatCardModule,
-  MatCheckboxModule, MatChipsModule, MatDialogModule, MatFormFieldModule, MatGridListModule,
+  MatCheckboxModule, MatChipsModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatGridListModule,
   MatIconModule, MatInputModule,
   MatListModule,
   MatPaginatorModule, MatProgressSpinnerModule, MatSidenavModule, MatSnackBarModule,
@@ -32,7 +32,8 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatDialogModule,
     MatTabsModule,
     MatGridListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDividerModule
   ],
   exports: [
     MatButtonModule,
@@ -53,7 +54,8 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatDialogModule,
     MatTabsModule,
     MatGridListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDividerModule
   ],
 })
 export class MaterialModules { }

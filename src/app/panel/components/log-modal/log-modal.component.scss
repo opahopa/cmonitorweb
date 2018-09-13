@@ -20,5 +20,8 @@
 }
 .mat-dialog-title {
   margin: 0 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 

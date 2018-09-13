@@ -11,7 +11,7 @@ table {
 
 mat-row.example-detail-row {
   min-height: 0;
-  background: mat-color($panel-app-accent, 50);
+  background: $grey-background;
 }
 
 mat-row.example-element-row:not(.example-expanded-row):hover {
@@ -68,7 +68,15 @@ mat-cell {
 }
 
 .extra-services-row {
-  justify-content: space-evenly;
   margin: 5px 0px 5px 0px;
   //background: mat-color($panel-app-primary, 50);
+}
+
+app-extra-services {
+  flex: 1;
+}
+app-server-codius-info {
+  flex: 1;
+  //super bad solution! Here and container in codius-info
+  height: 94.5%;
 }

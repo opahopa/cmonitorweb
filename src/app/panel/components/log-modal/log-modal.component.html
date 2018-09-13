@@ -1,4 +1,7 @@
-<h2 mat-dialog-title>{{title}}</h2>
+<h2 mat-dialog-title>{{title}}
+  <button mat-button style="height: 0; position: absolute;"></button><!-- bug fix -->
+  <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+</h2>
 <div class="log-modal-wrapper" fxLayout="column">
   <mat-form-field appearance="fill" class="log-field">
     <textarea matInput placeholder="Log">{{log}}}</textarea>

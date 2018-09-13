@@ -29,7 +29,8 @@ export class ExtraServicesComponent implements OnInit {
 
       if (service) {
         this.dialog.open(ExtraServiceMenuComponent, {
-          data: { service: service, hostname: this.hostname }
+          data: { service: service, hostname: this.hostname },
+          minWidth: '35vw'
         });
       } else {
         this.openAlert();

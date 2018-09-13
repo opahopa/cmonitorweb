@@ -27,6 +27,7 @@ import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { ExtraServicesComponent } from './pages/servers-table/extra-services/extra-services.component';
 import { ExtraServiceMenuComponent } from './pages/servers-table/extra-services/extra-service-menu/extra-service-menu.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { UptimePipe } from './pipes/uptime.pipe';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { AlertComponent } from './components/alert/alert.component';
     NewsPageComponent,
     ExtraServicesComponent,
     ExtraServiceMenuComponent,
-    AlertComponent
+    AlertComponent,
+    UptimePipe
   ],
   entryComponents: [
     ServiceStateModalComponent,

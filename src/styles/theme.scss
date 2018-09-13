@@ -6,3 +6,11 @@ $panel-app-warn:    mat-palette($mat-red);
 //$panel-app-success: mat-palette($mat-green);
 $panel-app-theme: mat-light-theme($panel-app-primary, $panel-app-accent, $panel-app-warn);
 @include angular-material-theme($panel-app-theme);
+
+
+@mixin md-icon-size($size: 24px) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+  line-height: $size;
+}

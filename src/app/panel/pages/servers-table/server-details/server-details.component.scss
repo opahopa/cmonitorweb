@@ -2,6 +2,8 @@
 
 .server-services {
   width: 100%;
+  display: grid;
+  align-content: stretch;
 
   .service{
     text-align: center;
@@ -15,8 +17,12 @@
   .service-card-content {
     margin-bottom: 0px;
   }
+  .mat-card {
+    padding: 14px;
+  }
   .mat-card-actions {
-    padding-top: 5px;
+    padding: 0;
+    padding-bottom: 5px;
   }
   .mat-card-header {
     display: flex;

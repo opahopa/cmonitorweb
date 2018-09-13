@@ -11,6 +11,7 @@
       <button mat-raised-button color="primary" (click)="updateCmonCli()"
               *ngIf="!status.cli_updating && !(error.cli_update?.length > 0)" [disabled]="false" >CmonitorCli Update</button>
     </mat-card-header>
+    <mat-divider [inset]="true"></mat-divider>
     <mat-card-content>
       <div class="stats">
         <span>Memory:</span>
@@ -26,6 +27,23 @@
         <span>{{server.codius.income_24? server.codius.income_24: 'N/A'}} XRP</span>
         <span>{{server.codius.fee? server.codius.fee: 'N/A'}} XRP</span>
       </div>
+      <div class="mat-divider-wrapper">
+        <div class="divider"></div>
+      </div>
+      <div class="stats">
+        <span>Server uptime:</span>
+        <span>Service uptime:</span>
+        <span>Peers:</span>
+        <span>Self-Test:</span>
+      </div>
+      <div class="stats-values">
+        <span>{{server.codius.uptime.server | uptime }}</span>
+        <span>{{server.codius.uptime.service | uptime}}</span>
+        <span>{{server.codius.peers? server.codius.peers: 'N/A'}}</span>
+        <mat-icon *ngIf="server.codius.selftest">done</mat-icon>
+        <mat-icon *ngIf="!server.codius.selftest">clear</mat-icon>
+      </div>
+
       <div class="actions">
         <button mat-raised-button color="accent" (click)="changeFee()">Change Fee</button>
         <!--<button mat-raised-button color="accent" (click)="updateCodius()">Update</button>-->

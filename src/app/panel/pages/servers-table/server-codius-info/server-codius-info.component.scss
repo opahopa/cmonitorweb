@@ -1,11 +1,17 @@
 @import 'variables';
+@import "theme";
+
+//.mat-card {
+//  padding: 20px;
+//}
 
 .container {
   margin-top: 5px;
   //text-align: center;
   display: flex;
   flex-direction: column;
-  height: 79.5%;
+  padding: 16px;
+  height: 82.5%;
 
   .codius-header {
     display: flex;
@@ -16,14 +22,39 @@
       justify-content: center;
     }
   }
+
   mat-card-content {
     display: flex;
     align-items: center;
     flex: 2;
+    margin-bottom: 0px;
     .actions, .stats, .stats-values {
       flex-direction: column;
       display: flex;
       flex: 1;
+      font-size: 13px;
+    }
+    .mat-divider-wrapper {
+      flex-direction: column;
+      .divider {
+        border-left:1px solid;
+        border-right:1px solid;
+      }
+    }
+
+
+
+    .mat-list[dense] .mat-list-item .mat-list-item-content {
+      padding-left: 8px !important;
+    }
+    .mat-list[dense] .mat-list-item {
+      height: 22px;
+      font-size: 13px;
+    }
+
+    .list-item-wrapper {
+      display: flex;
+      justify-content: space-between;
     }
   }
   mat-card-title {
@@ -47,6 +78,11 @@
       align-self: center;
       margin: 7px 0px 7px 0px;
     }
+  }
+
+  mat-icon {
+    @include md-icon-size(13px);
+    margin: 5px 0 5px 0;
   }
 }
 .error-box {

@@ -1,12 +1,25 @@
-<h2 mat-dialog-title>Fail2Ban</h2>
+<h2 mat-dialog-title>Fail2Ban
+  <button mat-button style="height: 0; position: absolute;"></button> <!-- 'absorbs' the auto-focus behavior -->
+  <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+</h2>
 <mat-dialog-content
   fxLayout="column"
   fxFlexAlign="center">
   <button mat-button (click)="serviceStatus()" [disabled]="!service.installed">Status</button>
-  <button mat-button (click)="serviceLog()" [disabled]="!service.installed">Log</button>
-  <button mat-button (click)="serviceInstall()" [disabled]="service.installed" *ngIf="!loading">Install</button>
+
   <div class="mat-spinner-wrapper">
-    <mat-spinner [diameter]="30" *ngIf="loading"></mat-spinner>
+    <button mat-button (click)="serviceStop()" [disabled]="!service.installed" *ngIf="!loading.stop">Stop</button>
+    <mat-spinner [diameter]="spinner_diam" *ngIf="loading.stop"></mat-spinner>
+  </div>
+  <div class="mat-spinner-wrapper">
+    <button mat-button (click)="specialLog(service.name)"
+            [disabled]="!service.installed || special_data.indexOf(service.name) == -1"
+            *ngIf="!loading.log">Log</button>
+    <mat-spinner [diameter]="spinner_diam" *ngIf="loading.log"></mat-spinner>
+  </div>
+  <div class="mat-spinner-wrapper">
+    <button mat-button (click)="serviceInstall()" [disabled]="service.installed" *ngIf="!loading.install">Install</button>
+    <mat-spinner [diameter]="spinner_diam" *ngIf="loading.install"></mat-spinner>
   </div>
 </mat-dialog-content>
 <mat-card class="error-box" *ngIf="error">

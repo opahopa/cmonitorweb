@@ -1,5 +1,6 @@
 <div>
-  <mat-table #table [dataSource]="dataSource"
+  <mat-table #table
+             [dataSource]="dataSource"
              [trackBy]="trackByIndex"
              multiTemplateDataRows
              matSort
@@ -51,14 +52,27 @@
     <ng-container matColumnDef="expandedDetail">
       <mat-cell *matCellDef="let row" [attr.colspan]="displayedColumns.length">
         <div [@detailExpand]="isExpanded(row)">
-          <div fxLayout="row">
-            <app-server-details [services]="row.services" [hostname]="row.hostname" fxFlex="50"></app-server-details>
-            <app-server-codius-info [server]="row" fxFlex="50"></app-server-codius-info>
-          </div>
-          <div fxLayout="row" class="extra-services-row" *ngIf="true">
+          <mat-grid-list cols="6" rowHeight="16rem">
+            <mat-grid-tile [colspan]="2" [rowspan]="1" [style.background]="null">
+              <app-server-details [services]="row.services" [hostname]="row.hostname"></app-server-details>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="4" [rowspan]="1" [style.background]="null">
+              <app-server-codius-info [server]="row"></app-server-codius-info>
+            </mat-grid-tile>
+          </mat-grid-list>
+          <div fxLayout="row" class="extra-services-row">
             <app-extra-services [extra_services]="row.extra_services? row.extra_services : null"
-                                [hostname]="row.hostname"></app-extra-services>
+              [hostname]="row.hostname"></app-extra-services>
           </div>
+
+          <!--<div fxLayout="row">-->
+            <!--<app-server-details [services]="row.services" [hostname]="row.hostname" fxFlex="35"></app-server-details>-->
+            <!--<app-server-codius-info [server]="row" fxFlex="65"></app-server-codius-info>-->
+          <!--</div>-->
+          <!--<div fxLayout="row" class="extra-services-row">-->
+            <!--<app-extra-services [extra_services]="row.extra_services? row.extra_services : null"-->
+                                <!--[hostname]="row.hostname"></app-extra-services>-->
+          <!--</div>-->
         </div>
       </mat-cell>
     </ng-container>
