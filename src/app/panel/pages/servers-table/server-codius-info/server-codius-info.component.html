@@ -42,7 +42,7 @@
       <div class="stats-values">
         <span>{{server.codius.uptime.server | uptime }}</span>
         <span>{{server.codius.uptime.service | uptime}}</span>
-        <span>{{server.codius.peers? server.codius.peers: 'N/A'}}</span>
+        <span>{{server.codius.peers.num? server.codius.peers.num: 'N/A'}}</span>
         <mat-icon *ngIf="server.codius.selftest">done</mat-icon>
         <mat-icon *ngIf="!server.codius.selftest">clear</mat-icon>
       </div>

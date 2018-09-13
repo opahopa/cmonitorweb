@@ -18,6 +18,6 @@ export class CliService {
   }
 
   getCliVersion() {
-    return this.http.get<any>(this.config.apiEndpoint + 'monitor/client/version/');
+    return this.http.get<any>(this.config.apiEndpoint + 'monitor/client/info/version/');
   }
 }
