@@ -8,6 +8,23 @@ h4 {
   display: block;
   margin-bottom: 0px !important;
 }
+.buttons, .title-and-status {
+  align-items: center;
+  flex: 2;
+  button {
+    padding: 0 5px;
+  }
+}
+.buttons {
+  justify-content: space-between;
+}
+
+.service-state-header {
+  mat-icon {
+    padding-right: 5px;
+  }
+  justify-content: space-between;
+}
 
 .flex-spacer {
   flex: 1;
@@ -33,3 +50,4 @@ mat-dialog-content {
 .log-field {
   width: 100%;
 }
+

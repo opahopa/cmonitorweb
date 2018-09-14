@@ -1,14 +1,21 @@
 <!--<div fxLayout='column' fxLayoutAlign="end center">-->
-  <div class="mat-typography" fxLayout='row' fxLayoutAlign="space-evenly center">
-    <h2 mat-dialog-title="">{{service.name}}</h2>
-    <div style="margin-left: 15px;">
-      <button mat-button style="height: 0; position: absolute;"></button><!-- 'absorbs' the auto-focus behavior -->
-      <button mat-raised-button color="accent" (click)="restart()">Restart</button>
+  <div class="mat-typography service-state-header" fxLayout='row'>
+    <div class="title-and-status" fxLayout='row'>
+      <mat-icon *ngIf="service.active" class="icon-status-active">lens</mat-icon>
+      <mat-icon *ngIf="!service.active" color="warn">lens</mat-icon>
+      <h2 mat-dialog-title="">{{service.name}}</h2>
     </div>
 
-    <div class="flex-spacer"></div>
+    <div class="buttons" fxLayout='row'>
+      <button mat-button style="height: 0; position: absolute;"></button><!-- 'absorbs' the auto-focus behavior -->
+      <button mat-raised-button color="accent" (click)="start()">Start</button>
+      <button mat-raised-button color="primary" (click)="stop()">Stop</button>
+      <button mat-raised-button (click)="restart()">Restart</button>
+      <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+    </div>
+  </div>
+  <div fxLayout='row' class="mat-typography">
     <h4>Running: {{service.runtime}}</h4>
-    <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
   </div>
   <mat-dialog-content>
     <mat-tab-group dynamicHeight [selectedIndex]="service.warning? 1 : 0 || service.error? 2 : 0">

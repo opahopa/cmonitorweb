@@ -18,13 +18,10 @@ export class ServerDetailsComponent implements OnInit {
   }
 
   openDialog(service: ServiceState): void {
-    const dialogRef = this.dialog.open(ServiceStateModalComponent, {
+    this.dialog.open(ServiceStateModalComponent, {
       width: '95vw',
+      maxWidth: '95vw',
       data: {service: service, hostname: this.hostname}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 

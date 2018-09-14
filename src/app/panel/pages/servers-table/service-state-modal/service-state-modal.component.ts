@@ -27,4 +27,15 @@ export class ServiceStateModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  start() {
+    this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.SERVICE_START,
+      body: this.service.name, hostname: this.data.hostname}));
+    this.dialogRef.close();
+  }
+
+  stop() {
+    this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.SERVICE_STOP,
+      body: this.service.name, hostname: this.data.hostname}));
+    this.dialogRef.close();
+  }
 }

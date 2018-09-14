@@ -23,23 +23,23 @@
         </div>
         <div class="mat-row-sm">
           <div class="mat-cell-sm">Memory:</div>
-          <div class="mat-cell-sm">{{server.codius.memory.used}}/{{server.codius.memory.total}} Mb</div>
+          <div class="mat-cell-sm data-col">{{server.codius.memory.used}}/{{server.codius.memory.total}} Mb</div>
         </div>
         <div class="mat-row-sm">
           <div class="mat-cell-sm">Pods active:</div>
-          <div class="mat-cell-sm">{{server.codius.pods? server.codius.pods?.length:0}}</div>
+          <div class="mat-cell-smdata-col">{{server.codius.pods? server.codius.pods?.length:0}}</div>
         </div>
         <div class="mat-row-sm">
           <div class="mat-cell-sm">Pods in 24 hr:</div>
-          <div class="mat-cell-sm">{{server.codius.count_24? server.codius.count_24: 'N/A'}}</div>
+          <div class="mat-cell-smdata-col">{{server.codius.count_24? server.codius.count_24: 'N/A'}}</div>
         </div>
         <div class="mat-row-sm">
           <div class="mat-cell-sm">Income in 24 hr:</div>
-          <div class="mat-cell-sm">{{server.codius.income_24? server.codius.income_24: 'N/A'}} XRP</div>
+          <div class="mat-cell-sm data-col">{{server.codius.income_24? server.codius.income_24: 'N/A'}} XRP</div>
         </div>
         <div class="mat-row-sm">
           <div class="mat-cell-sm">Fee:</div>
-          <div class="mat-cell-sm">{{server.codius.fee? server.codius.fee: 'N/A'}} XRP</div>
+          <div class="mat-cell-sm data-col">{{server.codius.fee? server.codius.fee: 'N/A'}} XRP</div>
         </div>
       </div>
       <div class="mat-table-sm stats">
@@ -49,26 +49,22 @@
         </div>
         <div class="mat-row-sm">
           <div class="mat-cell-sm">Server uptime:</div>
-          <div class="mat-cell-sm">{{server.codius.uptime.server | uptime }}</div>
+          <div class="mat-cell-sm data-col">{{server.codius.uptime.server | uptime }}</div>
         </div>
         <div class="mat-row-sm">
           <div class="mat-cell-sm">Service uptime:</div>
-          <div class="mat-cell-sm">{{server.codius.uptime.service | uptime}}</div>
+          <div class="mat-cell-sm data-col">{{server.codius.uptime.service | uptime}}</div>
         </div>
         <div class="mat-row-sm">
           <div class="mat-cell-sm">Peers:</div>
-          <div class="mat-cell-sm">{{server.codius.peers?.num? server.codius.peers.num: 'N/A'}}</div>
+          <div class="mat-cell-sm data-col">{{server.codius.peers?.num? server.codius.peers.num: 'N/A'}}</div>
         </div>
         <div class="mat-row-sm">
           <div class="mat-cell-sm">Self-Test:</div>
-          <div class="mat-cell-sm">
+          <div class="mat-cell-sm data-col">
             <mat-icon class="test-success" *ngIf="server.codius.selftest">done</mat-icon>
             <mat-icon *ngIf="!server.codius.selftest">clear</mat-icon>
           </div>
-        </div>
-        <div class="mat-row-sm">
-          <div class="mat-cell-sm">Fee:</div>
-          <div class="mat-cell-sm">{{server.codius.fee? server.codius.fee: 'N/A'}} XRP</div>
         </div>
       </div>
       <!--<div class="stats">-->

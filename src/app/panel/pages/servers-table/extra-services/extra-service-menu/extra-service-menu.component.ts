@@ -110,6 +110,7 @@ export class ExtraServiceMenuComponent implements OnInit {
   serviceStatus() {
     this.dialog.open(ServiceStateModalComponent, {
       width: '95vw',
+      maxWidth: '95vw',
       data: {service: this.service, hostname: this.data.hostname}
     });
   }

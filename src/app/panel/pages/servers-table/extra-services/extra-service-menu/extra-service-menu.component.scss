@@ -17,7 +17,13 @@ mat-dialog-actions {
 }
 mat-dialog-content {
   .mat-spinner-wrapper {
-    align-self: center;
     min-height: 40px;
+    width: 100%;
+    button {
+      width: 100%;
+    }
+    mat-spinner {
+      margin: 0 auto;
+    }
   }
 }
