@@ -23,7 +23,10 @@ export class ExtraServiceMenuComponent implements OnInit {
   spinner_diam = 30;
 
   watch_events: MessageCommands[] = [
-    MessageCommands.INSTALL_SERVICE
+    MessageCommands.INSTALL_SERVICE,
+    MessageCommands.UNINSTALL_SERVICE,
+    MessageCommands.SERVICE_SPECAIL_DATA,
+    MessageCommands.SERVICE_STOP
   ];
 
   special_data: string[] = [
@@ -59,13 +62,20 @@ export class ExtraServiceMenuComponent implements OnInit {
       this.snackBar.open('Installation Successful', '', {duration: 3000, });
       this.service.installed = true;
     }
+    if (msg.command === MessageCommands.UNINSTALL_SERVICE) {
+      this.loading.install = false;
+      this.service.installed = false;
+      this.error = null;
+      this.snackBar.open('Uninstall Successful', '', {duration: 3000, });
+    }
     if (msg.command === MessageCommands.SERVICE_STOP) {
       this.loading.stop = false;
       this.snackBar.open(`Service stopped: ${this.service.name}`, '', {duration: 3000, });
     }
     if (msg.command === MessageCommands.SERVICE_SPECAIL_DATA) {
       this.loading.log = false;
-      this.openLogModal(`${this.service.name} Data:`, msg.body);
+      console.log('Open special data log');
+      this.openLogModal(`${this.service.name} data:`, msg.body);
     }
   }
 
@@ -73,6 +83,10 @@ export class ExtraServiceMenuComponent implements OnInit {
     if (msg.command === MessageCommands.INSTALL_SERVICE) {
       this.loading.install = false;
       this.parseError(msg, 'Installation error');
+    }
+    if (msg.command === MessageCommands.UNINSTALL_SERVICE) {
+      this.loading.install = false;
+      this.parseError(msg, 'Uninstall error');
     }
     if (msg.command === MessageCommands.SERVICE_STOP) {
       this.loading.stop = false;
@@ -102,7 +116,7 @@ export class ExtraServiceMenuComponent implements OnInit {
 
 
   serviceStop() {
-    this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.SERVICE_SPECAIL_DATA,
+    this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.SERVICE_STOP,
       hostname: this.data.hostname, body: this.service.name }));
     this.loading.stop = true;
   }
@@ -110,6 +124,7 @@ export class ExtraServiceMenuComponent implements OnInit {
   specialLog(service_name: string) {
     this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.SERVICE_SPECAIL_DATA,
       hostname: this.data.hostname, body: service_name }));
+    this.loading.log = true;
   }
 
   serviceInstall() {
@@ -117,6 +132,13 @@ export class ExtraServiceMenuComponent implements OnInit {
       hostname: this.data.hostname, body: this.service.name }));
     this.loading.install = true;
     this.error = 'Installing, please wait... ';
+  }
+
+  serviceUninstall() {
+    this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.UNINSTALL_SERVICE,
+      hostname: this.data.hostname, body: this.service.name }));
+    this.loading.install = true;
+    this.error = 'Uninstalling, please wait... ';
   }
 
 

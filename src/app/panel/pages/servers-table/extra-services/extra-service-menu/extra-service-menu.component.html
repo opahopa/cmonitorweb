@@ -18,7 +18,8 @@
     <mat-spinner [diameter]="spinner_diam" *ngIf="loading.log"></mat-spinner>
   </div>
   <div class="mat-spinner-wrapper">
-    <button mat-button (click)="serviceInstall()" [disabled]="service.installed" *ngIf="!loading.install">Install</button>
+    <button mat-button (click)="serviceInstall()" *ngIf="!loading.install && !service.installed">Install</button>
+    <button mat-button (click)="serviceUninstall()" *ngIf="!loading.install && service.installed">Uninstall</button>
     <mat-spinner [diameter]="spinner_diam" *ngIf="loading.install"></mat-spinner>
   </div>
 </mat-dialog-content>

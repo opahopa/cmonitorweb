@@ -36,9 +36,10 @@ export class ServerCodiusInfoComponent implements OnInit {
               , @Inject(APP_CONFIG) private config: IAppConfig) { }
 
   ngOnInit() {
+    console.log(`server cli version ${this.server.cli_version}`);
     this.cliService.getCliVersion().subscribe((data) => {
       this.latest_cli_version = data.version;
-      console.log(`Server cli version ${this.server.cli_version}`);
+      console.log(`api cli version:${this.latest_cli_version}`);
     });
     this.wsService.watchEvent(WSEvent.MESSAGE).subscribe((data) => {
       const msg: Message = <Message>JSON.parse(data.data);

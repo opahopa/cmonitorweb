@@ -28,33 +28,16 @@
     align-items: center;
     flex: 2;
     margin-bottom: 0px;
-    .actions, .stats, .stats-values {
+    .actions {
       flex-direction: column;
       display: flex;
       flex: 1;
-      font-size: 13px;
     }
-    .mat-divider-wrapper {
-      flex-direction: column;
-      .divider {
-        border-left:1px solid;
-        border-right:1px solid;
-      }
-    }
-
-
-
-    .mat-list[dense] .mat-list-item .mat-list-item-content {
-      padding-left: 8px !important;
-    }
-    .mat-list[dense] .mat-list-item {
-      height: 22px;
-      font-size: 13px;
-    }
-
-    .list-item-wrapper {
+    .stats {
       display: flex;
-      justify-content: space-between;
+      flex: 2;
+      flex-direction: column;
+      margin-right: 5px;
     }
   }
   mat-card-title {
@@ -79,12 +62,37 @@
       margin: 7px 0px 7px 0px;
     }
   }
-
-  mat-icon {
-    @include md-icon-size(13px);
-    margin: 5px 0 5px 0;
-  }
 }
 .error-box {
   color: $error-red;
+}
+
+.mat-table-sm {
+  display: block;
+  .mat-row-sm,
+  .mat-header-row-sm {
+    display: flex;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: $grey-background-stronger;
+    align-items: center;
+    min-height: 18px;
+    padding: 0 5px;
+  }
+
+  .mat-cell-sm,
+  .mat-header-cell-sm {
+    flex: 1;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-size: 13px;
+
+    .test-success {
+      color: $success-green;
+    }
+    mat-icon {
+      @include md-icon-size(13px);
+      margin: 5px 0 5px 0;
+    }
+  }
 }
