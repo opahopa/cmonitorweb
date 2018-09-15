@@ -41,7 +41,7 @@ export class StatsPageComponent implements OnInit {
   // shape: shape.Series;
 
   // chart
-  view: any[] = [680, 400];
+  view: any[] = [680, 300];
   colorScheme = {
     count: { domain: ['#512DA8']},
     income: { domain: ['#FFC107']}

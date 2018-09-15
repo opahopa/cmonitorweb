@@ -1,3 +1,16 @@
+<div class="table-empty-msg" *ngIf="show_cli_install && dataSource.is_empty.getValue()">
+  <div class="table-empty-msg-text">
+    <h2 class="mat-h2">No servers found</h2>
+    <h3 class="mat-h3">To activate CodiusMonitor, please install the client software on your server/s.</h3>
+  </div>
+  <button mat-raised-button routerLink="/panel/client" color="primary">Install</button>
+</div>
+<div class="table-empty-msg"
+     fxLayout
+     fxLayoutAlign="center center"
+     *ngIf="!show_cli_install && dataSource.is_empty.getValue()">
+    <mat-spinner></mat-spinner>
+</div>
 <div>
   <mat-table #table
              [dataSource]="dataSource"
@@ -5,7 +18,6 @@
              multiTemplateDataRows
              matSort
              aria-label="Elements">
-
     <ng-container matColumnDef="hostname">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Hostname</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.hostname}}</mat-cell>
@@ -52,11 +64,11 @@
     <ng-container matColumnDef="expandedDetail">
       <mat-cell *matCellDef="let row" [attr.colspan]="displayedColumns.length">
         <div [@detailExpand]="isExpanded(row)">
-          <mat-grid-list cols="6" rowHeight="16rem">
-            <mat-grid-tile [colspan]="2" [rowspan]="1" [style.background]="null">
+          <mat-grid-list [cols]="breakpoint" rowHeight="16rem" (window:resize)="onResize($event)">
+            <mat-grid-tile [colspan]="breakpoint === 1 ? 1:2" [rowspan]="1" [style.background]="null">
               <app-server-details [services]="row.services" [hostname]="row.hostname"></app-server-details>
             </mat-grid-tile>
-            <mat-grid-tile [colspan]="4" [rowspan]="1" [style.background]="null">
+            <mat-grid-tile [colspan]="breakpoint === 1 ? 1:4" [rowspan]="breakpoint === 1 ? 1.5:1" [style.background]="null">
               <app-server-codius-info [server]="row"></app-server-codius-info>
             </mat-grid-tile>
           </mat-grid-list>
@@ -64,15 +76,6 @@
             <app-extra-services [extra_services]="row.extra_services? row.extra_services : null"
               [hostname]="row.hostname"></app-extra-services>
           </div>
-
-          <!--<div fxLayout="row">-->
-            <!--<app-server-details [services]="row.services" [hostname]="row.hostname" fxFlex="35"></app-server-details>-->
-            <!--<app-server-codius-info [server]="row" fxFlex="65"></app-server-codius-info>-->
-          <!--</div>-->
-          <!--<div fxLayout="row" class="extra-services-row">-->
-            <!--<app-extra-services [extra_services]="row.extra_services? row.extra_services : null"-->
-                                <!--[hostname]="row.hostname"></app-extra-services>-->
-          <!--</div>-->
         </div>
       </mat-cell>
     </ng-container>

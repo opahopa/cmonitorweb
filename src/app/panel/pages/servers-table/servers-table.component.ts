@@ -6,6 +6,8 @@ import {ServersService} from '../../services/servers.service';
 import {ServicesStatusPipe} from '../../../pipes/services-status.pipe';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Server} from '../../models/server';
+import {Observable} from 'rxjs';
+import {AlertComponent} from '../../components/alert/alert.component';
 
 @Component({
   selector: 'app-servers-table',
@@ -30,17 +32,26 @@ export class ServersTableComponent implements OnInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['hostname', 'status', 'services-all-status', 'server-load', 'contracts-running', 'dropdown-ico'];
+  breakpoint: number;
+  breakpoint_resol = 745;
+  show_cli_install = false;
 
   constructor(public monitorService: MonitorService, private serversService: ServersService) { }
 
   ngOnInit() {
     console.log('ngOnInit Servers Table');
+    this.breakpoint = (window.innerWidth <= this.breakpoint_resol) ? 1 : 6;
     if (this.monitorService.ws_status === 'connected' &&
       (this.monitorService.websocketState() !== 0 || this.monitorService.websocketState() !== 1)) {
       this.initTable();
     } else {
       this.initTable();
     }
+    setTimeout(() => {
+      if (this.dataSource.is_empty.getValue()) {
+        this.show_cli_install = true;
+      }
+    }, 6000);
   }
 
   initTable() {
@@ -70,5 +81,9 @@ export class ServersTableComponent implements OnInit {
     } else {
       this.expandedElement = null;
     }
+  }
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= this.breakpoint_resol) ? 1 : 6;
   }
 }

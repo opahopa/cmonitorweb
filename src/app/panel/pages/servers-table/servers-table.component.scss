@@ -1,6 +1,19 @@
 @import 'variables';
 @import 'theme';
 
+.table-empty-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 60vh;
+  justify-content: center;
+  .table-empty-msg-text {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 table {
   width: 100%;
 }
@@ -69,6 +82,7 @@ mat-cell {
 
 .extra-services-row {
   margin: 5px 0px 5px 0px;
+  flex-wrap: wrap;
   //background: mat-color($panel-app-primary, 50);
 }
 

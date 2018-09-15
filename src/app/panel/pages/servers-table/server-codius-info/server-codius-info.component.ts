@@ -1,6 +1,6 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {Server} from '../../../models/server';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {ChangeFeeModalComponent} from '../change-fee-modal/change-fee-modal.component';
 import {WebsocketService} from '../../../services/websocket/websocket.service';
 import {Message, MessageCommands, MessageStatus, MessageTypes} from '../../../models/message';
@@ -32,8 +32,9 @@ export class ServerCodiusInfoComponent implements OnInit {
 
   constructor(public dialog: MatDialog
               , private wsService: WebsocketService
-              , private cliService: CliService
-              , @Inject(APP_CONFIG) private config: IAppConfig) { }
+              , private cliService: CliService,
+                public snackBar: MatSnackBar,
+                @Inject(APP_CONFIG) private config: IAppConfig) { }
 
   ngOnInit() {
     console.log(`server cli version ${this.server.cli_version}`);
@@ -62,6 +63,9 @@ export class ServerCodiusInfoComponent implements OnInit {
     if (msg.command === MessageCommands.POD_UPLOAD_SELFTEST) {
       this.status.upload_testing = false;
       this.openLogModal('Pod Upload test:', msg.body);
+    }
+    if (msg.command === MessageCommands.SET_CODIUS_FEE) {
+      this.snackBar.open('Set Fee Successful', '', {duration: 3000, });
     }
   }
 

@@ -7,6 +7,7 @@ import {DataSource} from '@angular/cdk/table';
 
 export class ServersTableDataSource extends DataSource<Server> {
   data: Server[] = [];
+  is_empty = new BehaviorSubject<boolean>(true);
 
   constructor(private paginator: MatPaginator, private sort: MatSort, private serversService: ServersService) {
     super();
@@ -18,6 +19,10 @@ export class ServersTableDataSource extends DataSource<Server> {
       this.serversService.getServersSubj().subscribe((servers) => {
         if (servers) {
           return this.applyMutations(servers).subscribe(data => {
+
+            //need to show the empty dat msg
+            if (this.is_empty.getValue() && data.length > 0) { this.is_empty.next(false); }
+            if (!this.is_empty.getValue() && data.length === 0) { this.is_empty.next(true); }
             observer.next(data);
           });
         }
@@ -62,6 +67,10 @@ export class ServersTableDataSource extends DataSource<Server> {
         default: return 0;
       }
     });
+  }
+
+  get dataLenght() {
+    return this.data.length;
   }
 }
 
