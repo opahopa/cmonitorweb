@@ -10,7 +10,7 @@
              [matTooltipDisabled]="error.tooltip_info.length<=0"
              [matTooltip]="error.tooltip_info">{{error.cli_update}}</div>
       </mat-card>
-      <button mat-raised-button color="primary" (click)="updateCmonCli()"
+      <button mat-raised-button color="accent" (click)="updateCmonCli()"
               *ngIf="!status.cli_updating && !(error.cli_update?.length > 0)"
               [disabled]="latest_cli_version === server.cli_version" >CmonitorCli Update</button>
     </mat-card-header>
@@ -69,15 +69,15 @@
       </div>
 
       <div class="actions">
-        <button mat-raised-button color="accent" (click)="changeFee()">Change Fee</button>
+        <button mat-stroked-button color="primary" (click)="changeFee()">Change Fee</button>
         <!--<button mat-raised-button color="accent" (click)="updateCodius()">Update</button>-->
         <!--<div class="upload-test-btn-wrapper">-->
-        <button mat-raised-button color="accent" (click)="testUpload()" *ngIf="!status.upload_testing">Upload Test</button>
+        <button mat-stroked-button color="primary" (click)="testUpload()" *ngIf="!status.upload_testing">Upload Test</button>
         <mat-spinner [diameter]="30" *ngIf="status.upload_testing"></mat-spinner>
         <mat-card class="error-box" *ngIf="error.upload_test?.length > 0">
           <div class="mat-subheading-4">{{error.upload_test}}</div>
         </mat-card>
-        <button mat-raised-button color="accent" (click)="variablesEditior()">Variables</button>
+        <button mat-stroked-button color="primary" (click)="variablesEditior()">Variables</button>
         <!--</div>-->
 
       </div>

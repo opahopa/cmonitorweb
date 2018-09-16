@@ -25,7 +25,7 @@
   </mat-card-content>
   <mat-divider></mat-divider>
   <mat-card-actions>
-    <button *ngIf="!loading" mat-raised-button color="accent" (click)="download()">Download</button>
+    <button *ngIf="!loading" mat-raised-button color="primary" (click)="download()">Download</button>
     <button *ngIf="!loading" mat-raised-button color="accent" (click)="getLink()">Get Link</button>
     <mat-spinner *ngIf="loading"></mat-spinner>
   </mat-card-actions>
