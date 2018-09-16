@@ -43,7 +43,6 @@ export class CodiusVariablesComponent implements OnInit {
 
   ngOnInit() {
     this.codius = this.data.codius;
-    this.codius.version = '1.2.5';
     this.initVariables();
   }
 
