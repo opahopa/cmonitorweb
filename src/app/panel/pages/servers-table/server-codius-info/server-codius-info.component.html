@@ -67,33 +67,6 @@
           </div>
         </div>
       </div>
-      <!--<div class="stats">-->
-        <!--<span>Memory:</span>-->
-        <!--<span>Pods active:</span>-->
-        <!--<span>Pods in 24 hr:</span>-->
-        <!--<span>Income in 24 hr:</span>-->
-        <!--<span>Fee:</span>-->
-      <!--</div>-->
-      <!--<div class="stats-values">-->
-        <!--<span>{{server.codius.memory.used}}/{{server.codius.memory.total}} Mb</span>-->
-        <!--<span>{{server.codius.pods? server.codius.pods?.length:0}}</span>-->
-        <!--<span>{{server.codius.count_24? server.codius.count_24: 'N/A'}}</span>-->
-        <!--<span>{{server.codius.income_24? server.codius.income_24: 'N/A'}} XRP</span>-->
-        <!--<span>{{server.codius.fee? server.codius.fee: 'N/A'}} XRP</span>-->
-      <!--</div>-->
-      <!--<div class="stats">-->
-        <!--<span>Server uptime:</span>-->
-        <!--<span>Service uptime:</span>-->
-        <!--<span>Peers:</span>-->
-        <!--<span>Self-Test:</span>-->
-      <!--</div>-->
-      <!--<div class="stats-values">-->
-        <!--<span>{{server.codius.uptime.server | uptime }}</span>-->
-        <!--<span>{{server.codius.uptime.service | uptime}}</span>-->
-        <!--<span>{{server.codius.peers?.num? server.codius.peers.num: 'N/A'}}</span>-->
-        <!--<mat-icon class="test-success" *ngIf="server.codius.selftest">done</mat-icon>-->
-        <!--<mat-icon *ngIf="!server.codius.selftest">clear</mat-icon>-->
-      <!--</div>-->
 
       <div class="actions">
         <button mat-raised-button color="accent" (click)="changeFee()">Change Fee</button>
@@ -104,7 +77,7 @@
         <mat-card class="error-box" *ngIf="error.upload_test?.length > 0">
           <div class="mat-subheading-4">{{error.upload_test}}</div>
         </mat-card>
-        <button mat-raised-button color="accent" (click)="testUpload()" [disabled]="true">Variables</button>
+        <button mat-raised-button color="accent" (click)="variablesEditior()">Variables</button>
         <!--</div>-->
 
       </div>

@@ -7,7 +7,6 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth/auth-service.service';
 import {ServersService} from '../servers.service';
 import {Server} from '../../models/server';
-import {LogModalComponent} from '../../components/log-modal/log-modal.component';
 import {MatDialog} from '@angular/material';
 
 @Injectable({
@@ -68,7 +67,7 @@ export class MonitorService implements OnDestroy {
     }
   }
   _parseMessageReport(msg: Message) {
-    console.log(`Received: ${msg.command}`);
+    // console.log(`Received: ${msg.command}`);
     switch (msg.command) {
       case MessageCommands.STATUS_ALL:
         this.serversService.addServer(new Server(

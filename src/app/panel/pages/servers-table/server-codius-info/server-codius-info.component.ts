@@ -5,10 +5,10 @@ import {ChangeFeeModalComponent} from '../change-fee-modal/change-fee-modal.comp
 import {WebsocketService} from '../../../services/websocket/websocket.service';
 import {Message, MessageCommands, MessageStatus, MessageTypes} from '../../../models/message';
 import {WSEvent} from '../../../models/enums/wsevent.enum';
-import {LogModalComponent} from '../../../components/log-modal/log-modal.component';
 import {CliService} from '../../../services/cli.service';
 import {APP_CONFIG, IAppConfig} from '../../../../app.config';
-import {AlertComponent} from '../../../components/alert/alert.component';
+import {CodiusVariablesComponent} from './codius-variables/codius-variables.component';
+import {InfoModalsService} from '../../../services/info-modals.service';
 
 
 @Component({
@@ -31,6 +31,7 @@ export class ServerCodiusInfoComponent implements OnInit {
   latest_cli_version: string;
 
   constructor(public dialog: MatDialog
+              , private modals: InfoModalsService
               , private wsService: WebsocketService
               , private cliService: CliService,
                 public snackBar: MatSnackBar,
@@ -62,10 +63,13 @@ export class ServerCodiusInfoComponent implements OnInit {
   parseSuccess(msg: Message) {
     if (msg.command === MessageCommands.POD_UPLOAD_SELFTEST) {
       this.status.upload_testing = false;
-      this.openLogModal('Pod Upload test:', msg.body);
+      this.modals.openLogModal('Pod Upload test:', msg.body);
     }
     if (msg.command === MessageCommands.SET_CODIUS_FEE) {
       this.snackBar.open('Set Fee Successful', '', {duration: 3000, });
+    }
+    if (msg.command === MessageCommands.SET_CODIUSD_VARIABLES) {
+      this.snackBar.open('Set Variables Successful', '', {duration: 3000, });
     }
   }
 
@@ -75,7 +79,7 @@ export class ServerCodiusInfoComponent implements OnInit {
       if (msg.body.length < 25) {
         this.error.cli_update = msg.body;
       } else {
-        this.openLogModal('Pod Upload test:', msg.body);
+        this.modals.openLogModal('Pod Upload test:', msg.body);
       }
     }
     if (msg.command === MessageCommands.POD_UPLOAD_SELFTEST) {
@@ -83,7 +87,14 @@ export class ServerCodiusInfoComponent implements OnInit {
       if (msg.body.length < 25) {
         this.error.upload_test = msg.body;
       } else {
-        this.openLogModal('Pod Upload test:', msg.body);
+        this.modals.openLogModal('Pod Upload test:', msg.body);
+      }
+    }
+    if (msg.command === MessageCommands.SET_CODIUSD_VARIABLES) {
+      if (msg.body.length < 25) {
+        this.modals.openAlert(msg.body);
+      } else {
+        this.modals.openLogModal('Set codiusd variables error:', msg.body);
       }
     }
   }
@@ -119,19 +130,23 @@ export class ServerCodiusInfoComponent implements OnInit {
       error => {
         this.error.cli_update = error;
         this.status.cli_updating = false;
-        this.openLogModal('Cli Update Error:', error);
+        this.modals.openLogModal('Cli Update Error:', error);
       });
   }
 
-  updateCodius() {
-
-  }
-
-  openLogModal(title: string, content: any) {
-    this.dialog.open(LogModalComponent, {
-      data: { title: title, log: content },
-      width: '95vw',
+  variablesEditior() {
+    const d = this.dialog.open(CodiusVariablesComponent, {
+      data: { codius: this.server.codius, hostname: this.server.hostname },
+      width: '80vw',
       maxWidth: '95vw',
+      maxHeight: '95vh'
+    });
+    d.afterClosed().subscribe(result => {
+      if (result.length > 0) {
+        console.log(result)
+        this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.SET_CODIUSD_VARIABLES,
+          body: result, hostname: this.server.hostname}));
+      }
     });
   }
 
@@ -141,14 +156,10 @@ export class ServerCodiusInfoComponent implements OnInit {
         `To use this function please update your CodiusMonitor client software on this server: ${this.server.hostname}\n.` +
         'Details can be found at \'Client\' tab';
       if (trigger === 'upload' && this.status.upload_testing === true) {
-        this.dialog.open(AlertComponent, {
-          data: { message: text}
-        });
+        this.modals.openAlert(text);
       }
       if (trigger === 'update' && this.status.cli_updating === true) {
-        this.dialog.open(AlertComponent, {
-          data: { message: text}
-        });
+        this.modals.openAlert(text);
       }
     }, 75000);
   }

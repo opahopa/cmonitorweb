@@ -1,9 +1,0 @@
-<div class="upload-test-wrapper" fxLayout="column">
-  <mat-form-field appearance="fill" class="log-field" *ngIf="!loading">
-    <textarea matInput placeholder="Pod Upload self-test"></textarea>
-  </mat-form-field>
-  <div class="spinner-wrapper" *ngIf="loading">
-    <mat-spinner></mat-spinner>
-  </div>
-  <button mat-raised-button color="accent" (click)="runTest()">Run Test</button>
-</div>

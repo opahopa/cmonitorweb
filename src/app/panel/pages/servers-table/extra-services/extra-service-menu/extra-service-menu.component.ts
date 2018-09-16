@@ -6,6 +6,7 @@ import {WebsocketService} from '../../../../services/websocket/websocket.service
 import {WSEvent} from '../../../../models/enums/wsevent.enum';
 import {LogModalComponent} from '../../../../components/log-modal/log-modal.component';
 import {ServiceStateModalComponent} from '../../service-state-modal/service-state-modal.component';
+import {InfoModalsService} from '../../../../services/info-modals.service';
 
 @Component({
   selector: 'app-extra-service-menu',
@@ -35,7 +36,7 @@ export class ExtraServiceMenuComponent implements OnInit {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private wsService: WebsocketService
-              , public dialog: MatDialog, public snackBar: MatSnackBar) { }
+              , public dialog: MatDialog, public snackBar: MatSnackBar, private modals: InfoModalsService) { }
 
   ngOnInit() {
     this.service = this.data.service;
@@ -75,7 +76,7 @@ export class ExtraServiceMenuComponent implements OnInit {
     if (msg.command === MessageCommands.SERVICE_SPECAIL_DATA) {
       this.loading.log = false;
       console.log('Open special data log');
-      this.openLogModal(`${this.service.name} data:`, msg.body);
+      this.modals.openLogModal(`${this.service.name} data:`, msg.body);
     }
   }
 
@@ -103,7 +104,7 @@ export class ExtraServiceMenuComponent implements OnInit {
       this.error = msg.body;
     } else {
       this.error = err_short;
-      this.openLogModal(`${err_short}:`, msg.body);
+      this.modals.openLogModal(`${err_short}:`, msg.body);
     }
   }
 
@@ -140,14 +141,5 @@ export class ExtraServiceMenuComponent implements OnInit {
       hostname: this.data.hostname, body: this.service.name }));
     this.loading.install = true;
     this.error = 'Uninstalling, please wait... ';
-  }
-
-
-  openLogModal(title: string, content: any) {
-    this.dialog.open(LogModalComponent, {
-      data: { title: title, log: content },
-      width: '95vw',
-      maxWidth: '95vw',
-    });
   }
 }

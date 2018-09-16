@@ -21,13 +21,13 @@ import {ChangeFeeModalComponent} from './pages/servers-table/change-fee-modal/ch
 import {ProfilePageComponent} from './pages/profile-page/profile-page.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { ContactDonatePageComponent } from './pages/contact-donate-page/contact-donate-page.component';
-import { UploadTestModalComponent } from './pages/servers-table/upload-test-modal/upload-test-modal.component';
 import { LogModalComponent } from './components/log-modal/log-modal.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { ExtraServicesComponent } from './pages/servers-table/extra-services/extra-services.component';
 import { ExtraServiceMenuComponent } from './pages/servers-table/extra-services/extra-service-menu/extra-service-menu.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { UptimePipe } from './pipes/uptime.pipe';
+import { CodiusVariablesComponent } from './pages/servers-table/server-codius-info/codius-variables/codius-variables.component';
 
 
 @NgModule({
@@ -57,21 +57,17 @@ import { UptimePipe } from './pipes/uptime.pipe';
     ProfilePageComponent,
     MbToGbPipe,
     ContactDonatePageComponent,
-    UploadTestModalComponent,
-    LogModalComponent,
     NewsPageComponent,
     ExtraServicesComponent,
     ExtraServiceMenuComponent,
-    AlertComponent,
-    UptimePipe
+    UptimePipe,
+    CodiusVariablesComponent
   ],
   entryComponents: [
     ServiceStateModalComponent,
     ChangeFeeModalComponent,
-    UploadTestModalComponent,
-    LogModalComponent,
     ExtraServiceMenuComponent,
-    AlertComponent
+    CodiusVariablesComponent
   ]
 })
 export class PanelModule {}

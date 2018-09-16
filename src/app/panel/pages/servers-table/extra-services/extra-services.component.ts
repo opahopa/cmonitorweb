@@ -3,6 +3,7 @@ import {ServiceState} from '../../../models/service-state';
 import {ExtraServiceMenuComponent} from './extra-service-menu/extra-service-menu.component';
 import {MatDialog} from '@angular/material';
 import {AlertComponent} from '../../../components/alert/alert.component';
+import {InfoModalsService} from '../../../services/info-modals.service';
 
 @Component({
   selector: 'app-extra-services',
@@ -14,7 +15,7 @@ export class ExtraServicesComponent implements OnInit {
   @Input() hostname: string;
   service: ServiceState;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private modals: InfoModalsService) { }
 
   ngOnInit() {
 
@@ -24,6 +25,9 @@ export class ExtraServicesComponent implements OnInit {
   /// settings: EXTRA_SERVICES
   /// hardcoded for speed
   openExtraService(name: string) {
+    const alert = 'CodiusMonitor client version is outdated. \n' +
+      'To use this function please update your codiusmonitor client software on this server.\n' +
+      'Details can be found at \'Client\' tab.';
     if (this.extra_services) {
       const service = this.extra_services.find(i => i.name === name);
 
@@ -33,18 +37,10 @@ export class ExtraServicesComponent implements OnInit {
           minWidth: '35vw'
         });
       } else {
-        this.openAlert();
+        this.modals.openAlert(alert);
       }
     } else {
-      this.openAlert();
+      this.modals.openAlert(alert);
     }
-  }
-
-  openAlert() {
-    this.dialog.open(AlertComponent, {
-      data: { message: 'CodiusMonitor client version is outdated. \n' +
-          'To use this function please update your codiusmonitor client software on this server.\n' +
-          'Details can be found at \'Client\' tab.' }
-    });
   }
 }

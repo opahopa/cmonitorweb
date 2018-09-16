@@ -16,6 +16,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { RegisterFormComponent } from './pages/register-form/register-form.component';
 import { ConfirmEmailComponent } from './pages/confirm-email/confirm-email.component';
+import {AlertComponent} from './panel/components/alert/alert.component';
+import {LogModalComponent} from './panel/components/log-modal/log-modal.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { ConfirmEmailComponent } from './pages/confirm-email/confirm-email.compo
     PageNotFoundComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    ConfirmEmailComponent
+    ConfirmEmailComponent,
+    AlertComponent,
+    LogModalComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +40,10 @@ import { ConfirmEmailComponent } from './pages/confirm-email/confirm-email.compo
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+  ],
+  entryComponents: [
+    AlertComponent,
+    LogModalComponent
   ],
   providers: [
     AuthGuard,
