@@ -20,7 +20,6 @@ interface Versioning {
 export class CodiusVariablesComponent implements OnInit {
   codius: ServerCodius;
   variablesForm: FormGroup;
-  deleteArray: FormGroup;
   variables: any[] = [];
   variables_changed: any[] = [];
   versioning: Versioning[] = [

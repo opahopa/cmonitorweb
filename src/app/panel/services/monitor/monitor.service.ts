@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth/auth-service.service';
 import {ServersService} from '../servers.service';
 import {Server} from '../../models/server';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,13 @@ export class MonitorService implements OnDestroy {
   ws_status: string;
   upgrade_command_sent = false;
 
-  constructor(private messagesService: MessagesService, private wsService: WebsocketService, private router: Router,
-              private authService: AuthService, private serversService: ServersService, public dialog: MatDialog) {}
+  constructor(private messagesService: MessagesService,
+              private wsService: WebsocketService,
+              private router: Router,
+              private authService: AuthService,
+              private serversService: ServersService,
+              private snackBar: MatSnackBar,
+              public dialog: MatDialog) {}
 
   connect(): boolean {
     this.wsService.initConnection();
@@ -89,6 +94,12 @@ export class MonitorService implements OnDestroy {
           this.upgrade_command_sent = true;
         }
         break;
+      case MessageCommands.SERVICE_START:
+        this.snackBar.open('Service Start Successful', '', {duration: 3000, }); break;
+      case MessageCommands.SERVICE_STOP:
+        this.snackBar.open('Service Stop Successful', '', {duration: 3000, }); break;
+      case MessageCommands.SERVICE_RESTART:
+        this.snackBar.open('Service Restart Successful', '', {duration: 3000, }); break;
     }
   }
 

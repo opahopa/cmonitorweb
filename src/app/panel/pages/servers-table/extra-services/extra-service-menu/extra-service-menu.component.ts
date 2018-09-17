@@ -125,7 +125,7 @@ export class ExtraServiceMenuComponent implements OnInit {
 
   specialLog(service_name: string) {
     this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.SERVICE_SPECAIL_DATA,
-      hostname: this.data.hostname, body: service_name }));
+      hostname: this.data.hostname, body: {name: service_name, args: ''}}));
     this.loading.log = true;
   }
 

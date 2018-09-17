@@ -1,0 +1,9 @@
+@import 'variables';
+
+.error-box {
+  color: $error-red;
+}
+mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+}

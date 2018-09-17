@@ -71,6 +71,9 @@ export class ServerCodiusInfoComponent implements OnInit {
     if (msg.command === MessageCommands.SET_CODIUSD_VARIABLES) {
       this.snackBar.open('Set Variables Successful', '', {duration: 3000, });
     }
+    if (msg.command === MessageCommands.EXTRA_NETSTAT) {
+      this.modals.openLogModal('Netstat Log:', msg.body);
+    }
   }
 
   parseError(msg: Message) {

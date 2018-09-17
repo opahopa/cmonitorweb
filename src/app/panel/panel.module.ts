@@ -28,6 +28,7 @@ import { ExtraServiceMenuComponent } from './pages/servers-table/extra-services/
 import { AlertComponent } from './components/alert/alert.component';
 import { UptimePipe } from './pipes/uptime.pipe';
 import { CodiusVariablesComponent } from './pages/servers-table/server-codius-info/codius-variables/codius-variables.component';
+import { NetstatComponent } from './pages/servers-table/extra-services/netstat/netstat.component';
 
 
 @NgModule({
@@ -61,13 +62,15 @@ import { CodiusVariablesComponent } from './pages/servers-table/server-codius-in
     ExtraServicesComponent,
     ExtraServiceMenuComponent,
     UptimePipe,
-    CodiusVariablesComponent
+    CodiusVariablesComponent,
+    NetstatComponent
   ],
   entryComponents: [
     ServiceStateModalComponent,
     ChangeFeeModalComponent,
     ExtraServiceMenuComponent,
-    CodiusVariablesComponent
+    CodiusVariablesComponent,
+    NetstatComponent
   ]
 })
 export class PanelModule {}
