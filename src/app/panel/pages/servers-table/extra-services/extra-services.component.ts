@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ServiceState} from '../../../models/service-state';
 import {ExtraServiceMenuComponent} from './extra-service-menu/extra-service-menu.component';
-import {MatDialog} from '@angular/material';
-import {AlertComponent} from '../../../components/alert/alert.component';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {InfoModalsService} from '../../../services/info-modals.service';
 import {NetstatComponent} from './netstat/netstat.component';
-import {Message, MessageCommands, MessageTypes} from '../../../models/message';
+import {Message, MessageCommands, MessageStatus, MessageTypes} from '../../../models/message';
 import {WebsocketService} from '../../../services/websocket/websocket.service';
+import {WSEvent} from '../../../models/enums/wsevent.enum';
 
 @Component({
   selector: 'app-extra-services',
@@ -17,12 +17,29 @@ export class ExtraServicesComponent implements OnInit {
   @Input() extra_services?: ServiceState[];
   @Input() hostname: string;
   service: ServiceState;
+  loading: any = {
+    cleanup: false
+  };
 
-  constructor(public dialog: MatDialog, private modals: InfoModalsService, private wsService: WebsocketService) {
+  constructor(public dialog: MatDialog, private modals: InfoModalsService, private wsService: WebsocketService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
+    this.wsService.watchEvent(WSEvent.MESSAGE).subscribe((data) => {
+      const msg: Message = <Message>JSON.parse(data.data);
 
+      if (msg.type === MessageTypes.REPORT
+        && msg.command === MessageCommands.CLEANUP_HYPERD
+        && msg.status === MessageStatus.ERROR) {
+        this.snackBar.open('Hyperd Cleanup Successful', '', {duration: 3000, });
+      }
+      if (msg.type === MessageTypes.REPORT
+        && msg.command === MessageCommands.CLEANUP_HYPERD
+        && msg.status === MessageStatus.ERROR) {
+        this.snackBar.open('Hyperd Cleanup Fail', '', {duration: 3000, });
+      }
+    });
   }
 
   /// for services names refer to API
@@ -60,5 +77,12 @@ export class ExtraServicesComponent implements OnInit {
         }));
       }
     });
+  }
+
+  cleanupHyperd() {
+    this.wsService.sendMessage(new Message({
+      type: MessageTypes.CONTROL, command: MessageCommands.CLEANUP_HYPERD, hostname: this.hostname
+    }));
+    this.loading.cleanup = true;
   }
 }

@@ -3,8 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {ServiceStateModalComponent} from '../../service-state-modal/service-state-modal.component';
 import {CodiusVariablesEnum, ServerCodius} from '../../../../models/server-codius';
 import {UtilsService} from '../../../../services/utils.service';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Message, MessageCommands, MessageTypes} from '../../../../models/message';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 interface Versioning {
@@ -37,7 +36,6 @@ export class CodiusVariablesComponent implements OnInit {
               private fb: FormBuilder,
               private utils: UtilsService) {
     this.variablesForm = this.makeFormGroup();
-    console.log(this.variablesForm);
   }
 
   ngOnInit() {
