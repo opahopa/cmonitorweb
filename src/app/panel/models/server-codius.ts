@@ -40,5 +40,6 @@ export interface ServerCodius {
     }
   };
   selftest: boolean;
+  contracts_active: number;
   variables: CodiusVariable[];
 }

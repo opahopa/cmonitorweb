@@ -31,7 +31,7 @@ export class ExtraServicesComponent implements OnInit {
 
       if (msg.type === MessageTypes.REPORT
         && msg.command === MessageCommands.CLEANUP_HYPERD
-        && msg.status === MessageStatus.ERROR) {
+        && msg.status === MessageStatus.OK) {
         this.snackBar.open('Hyperd Cleanup Successful', '', {duration: 3000, });
       }
       if (msg.type === MessageTypes.REPORT

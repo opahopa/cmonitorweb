@@ -22,8 +22,8 @@
           <div class="mat-header-cell-sm">2</div>
         </div>
         <div class="mat-row-sm">
-          <div class="mat-cell-sm">Memory:</div>
-          <div class="mat-cell-sm data-col">{{server.codius.memory.used}}/{{server.codius.memory.total}} Mb</div>
+          <div class="mat-cell-sm">Contracts active:</div>
+          <div class="mat-cell-smdata-col">{{server.codius.contracts_active? server.codius.contracts_active : 0}}</div>
         </div>
         <div class="mat-row-sm">
           <div class="mat-cell-sm">Pods active:</div>
@@ -46,6 +46,10 @@
         <div class="mat-header-row-sm" style="display: none;">
           <div class="mat-header-cell-sm">1</div>
           <div class="mat-header-cell-sm">2</div>
+        </div>
+        <div class="mat-row-sm">
+          <div class="mat-cell-sm">Memory:</div>
+          <div class="mat-cell-sm data-col">{{server.codius.memory.used}}/{{server.codius.memory.total}} Mb</div>
         </div>
         <div class="mat-row-sm">
           <div class="mat-cell-sm">Server uptime:</div>
