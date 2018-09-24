@@ -1,0 +1,56 @@
+@import 'variables';
+
+.no-pods-found {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.hyperd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  h2 {
+    margin: 0px;
+  }
+}
+mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+}
+
+
+.mat-table-md {
+  display: block;
+  .mat-row-md,
+  .mat-header-row-md {
+    display: flex;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: $grey-background-stronger;
+    align-items: center;
+    min-height: 36px;
+    padding: 0 5px;
+    .delete-header {
+      text-align: end;
+      max-width: 24px;
+    }
+    .status-col {
+      text-align: center;
+    }
+  }
+
+  .mat-cell-md,
+  .mat-header-cell-md {
+    flex: 1;
+    overflow: hidden;
+    word-wrap: break-word;
+    //font-size: 16px;
+  }
+  .mat-header-cell-md {
+    text-align: center;
+    font-weight: 500;
+  }
+}

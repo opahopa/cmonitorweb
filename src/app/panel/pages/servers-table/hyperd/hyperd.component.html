@@ -1,0 +1,44 @@
+<div class="hyperd-header" fxLayout='row'>
+  <h2 class="mat-h2" mat-dialog-title="">Hyperd version: {{hyperd.version}}</h2>
+
+  <div class="buttons">
+    <button mat-button style="height: 0; position: absolute;"></button><!-- 'absorbs' the auto-focus behavior -->
+    <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+  </div>
+</div>
+<form id="hyperd_list_form" [formGroup]="podsForm" (ngSubmit)="onSubmit()" >
+  <mat-dialog-content>
+    <div *ngIf="hyperd.pods?.length === 0" class="no-pods-found">
+      <h2 class="mat-h2">No pods founds</h2>
+    </div>
+    <div *ngIf="error.cli" class="no-pods-found">
+      <h2 class="mat-h2">{{error.cli}}</h2>
+    </div>
+    <div class="mat-table-md stats mat-typography"
+         *ngIf="hyperd.pods?.length > 0">
+      <div class="mat-header-row-md">
+        <div class="mat-header-cell-md">ID</div>
+        <div class="mat-header-cell-md">Name</div>
+        <div class="mat-header-cell-md">VM-Name</div>
+        <div class="mat-header-cell-md">Status</div>
+        <div class="mat-header-cell-md delete-header"><mat-icon color="warn">close</mat-icon></div>
+      </div>
+      <div *ngFor="let pod of hyperd.pods">
+        <div class="mat-row-md"
+             fxLayout="row">
+          <div class="mat-cell-md">{{pod.id}}</div>
+          <div class="mat-cell-md">{{pod.name}}</div>
+          <div class="mat-cell-md status-col">{{pod.vm_name}}</div>
+          <div class="mat-cell-md status-col">{{pod.status}}</div>
+          <mat-checkbox [formControlName]="pod.id +'_delete'"></mat-checkbox>
+        </div>
+        <!--<mat-error *ngIf="podsForm.controls[v.name].invalid" fxLayout="row">{{getErrorMessage()}}</mat-error>-->
+      </div>
+    </div>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button color="primary" [mat-dialog-close]="true">Close</button>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </mat-dialog-actions>
+</form>

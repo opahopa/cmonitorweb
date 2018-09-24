@@ -9,6 +9,7 @@ import {CliService} from '../../../services/cli.service';
 import {APP_CONFIG, IAppConfig} from '../../../../app.config';
 import {CodiusVariablesComponent} from './codius-variables/codius-variables.component';
 import {InfoModalsService} from '../../../services/info-modals.service';
+import {AuthService} from '../../../../services/auth/auth-service.service';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class ServerCodiusInfoComponent implements OnInit {
               , private wsService: WebsocketService
               , private cliService: CliService,
                 public snackBar: MatSnackBar,
+                private authService: AuthService,
                 @Inject(APP_CONFIG) private config: IAppConfig) { }
 
   ngOnInit() {
@@ -77,7 +79,7 @@ export class ServerCodiusInfoComponent implements OnInit {
   }
 
   parseError(msg: Message) {
-    if (msg.command === MessageCommands.CMONCLI_UPDATE) {
+    if (msg.command === MessageCommands.CLI_UPGRADE) {
       this.status.cli_updating = false;
       if (msg.body.length < 25) {
         this.error.cli_update = msg.body;
@@ -121,20 +123,22 @@ export class ServerCodiusInfoComponent implements OnInit {
   updateCmonCli() {
     this.status.cli_updating = true;
     this.timeoutWatcherError('update');
-    this.cliService.genCli().subscribe(data => {
-        if (data['installer']) {
-          this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.CMONCLI_UPDATE,
-            body: data['installer'], hostname: this.server.hostname}));
-        } else {
-          this.error.cli_update = 'Failed to get installer link';
-          this.status.cli_updating = false;
-        }
-      },
-      error => {
-        this.error.cli_update = error;
-        this.status.cli_updating = false;
-        this.modals.openLogModal('Cli Update Error:', error);
-      });
+    this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.CLI_UPGRADE,
+      body: { 'token': this.authService.getUser()['token'] }, hostname: this.server.hostname}));
+    // this.cliService.genCli().subscribe(data => {
+    //     if (data['installer']) {
+    //       this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.CMONCLI_UPDATE,
+    //         body: { 'token': this.authService.getUser()['token'] }, hostname: this.server.hostname}));
+    //     } else {
+    //       this.error.cli_update = 'Failed to get installer link';
+    //       this.status.cli_updating = false;
+    //     }
+    //   },
+    //   error => {
+    //     this.error.cli_update = error;
+    //     this.status.cli_updating = false;
+    //     this.modals.openLogModal('Cli Update Error:', error);
+    //   });
   }
 
   variablesEditior() {

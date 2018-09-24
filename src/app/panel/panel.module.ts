@@ -29,6 +29,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import { UptimePipe } from './pipes/uptime.pipe';
 import { CodiusVariablesComponent } from './pages/servers-table/server-codius-info/codius-variables/codius-variables.component';
 import { NetstatComponent } from './pages/servers-table/extra-services/netstat/netstat.component';
+import { HyperdComponent } from './pages/servers-table/hyperd/hyperd.component';
 
 
 @NgModule({
@@ -63,14 +64,16 @@ import { NetstatComponent } from './pages/servers-table/extra-services/netstat/n
     ExtraServiceMenuComponent,
     UptimePipe,
     CodiusVariablesComponent,
-    NetstatComponent
+    NetstatComponent,
+    HyperdComponent
   ],
   entryComponents: [
     ServiceStateModalComponent,
     ChangeFeeModalComponent,
     ExtraServiceMenuComponent,
     CodiusVariablesComponent,
-    NetstatComponent
+    NetstatComponent,
+    HyperdComponent
   ]
 })
 export class PanelModule {}

@@ -7,6 +7,7 @@ import {NetstatComponent} from './netstat/netstat.component';
 import {Message, MessageCommands, MessageStatus, MessageTypes} from '../../../models/message';
 import {WebsocketService} from '../../../services/websocket/websocket.service';
 import {WSEvent} from '../../../models/enums/wsevent.enum';
+import {HyperdComponent} from '../hyperd/hyperd.component';
 
 @Component({
   selector: 'app-extra-services',
@@ -16,10 +17,8 @@ import {WSEvent} from '../../../models/enums/wsevent.enum';
 export class ExtraServicesComponent implements OnInit {
   @Input() extra_services?: ServiceState[];
   @Input() hostname: string;
+  @Input() hyperd: any;
   service: ServiceState;
-  loading: any = {
-    cleanup: false
-  };
 
   constructor(public dialog: MatDialog, private modals: InfoModalsService, private wsService: WebsocketService,
               private snackBar: MatSnackBar) {
@@ -29,15 +28,23 @@ export class ExtraServicesComponent implements OnInit {
     this.wsService.watchEvent(WSEvent.MESSAGE).subscribe((data) => {
       const msg: Message = <Message>JSON.parse(data.data);
 
-      if (msg.type === MessageTypes.REPORT
-        && msg.command === MessageCommands.CLEANUP_HYPERD
-        && msg.status === MessageStatus.OK) {
-        this.snackBar.open('Hyperd Cleanup Successful', '', {duration: 3000, });
-      }
-      if (msg.type === MessageTypes.REPORT
-        && msg.command === MessageCommands.CLEANUP_HYPERD
-        && msg.status === MessageStatus.ERROR) {
-        this.snackBar.open('Hyperd Cleanup Fail', '', {duration: 3000, });
+      if (msg.type === MessageTypes.REPORT) {
+        if (msg.command === MessageCommands.CLEANUP_HYPERD
+          && msg.status === MessageStatus.OK) {
+          this.snackBar.open('Hyperd Cleanup Successful', '', {duration: 3000, });
+        }
+        if (msg.command === MessageCommands.CLEANUP_HYPERD
+          && msg.status === MessageStatus.ERROR) {
+          this.snackBar.open('Hyperd Cleanup Fail', '', {duration: 3000, });
+        }
+        if (msg.command === MessageCommands.HYPERD_RM_POD
+          && msg.status === MessageStatus.OK) {
+          this.snackBar.open('Hyperctl remove pod Successful', '', {duration: 3000, });
+        }
+        if (msg.command === MessageCommands.CLEANUP_HYPERD
+          && msg.status === MessageStatus.ERROR) {
+          this.snackBar.open('Hyperd remove pod Fail', '', {duration: 3000, });
+        }
       }
     });
   }
@@ -79,10 +86,20 @@ export class ExtraServicesComponent implements OnInit {
     });
   }
 
-  cleanupHyperd() {
-    this.wsService.sendMessage(new Message({
-      type: MessageTypes.CONTROL, command: MessageCommands.CLEANUP_HYPERD, hostname: this.hostname
-    }));
-    this.loading.cleanup = true;
+  openHyperd() {
+    const m = this.dialog.open(HyperdComponent, {
+      data: {hyperd: this.hyperd, hostname: this.hostname},
+      width: '95vw',
+      maxWidth: '95vw',
+      maxHeight: '95vh'
+    });
+    m.afterClosed().subscribe(result => {
+      if (result.length > 0) {
+        this.wsService.sendMessage(new Message({
+          type: MessageTypes.CONTROL, command: MessageCommands.HYPERD_RM_POD,
+          body: result, hostname: this.hostname
+        }));
+      }
+    });
   }
 }

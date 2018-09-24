@@ -49,7 +49,7 @@
     <ng-container matColumnDef="contracts-running">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Contracts</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <span>{{row.codius.pods? row.codius.pods?.length:0}}</span>
+        <span>{{row.codius.hyperd?.pods.length}}</span>
       </mat-cell>
     </ng-container>
 
@@ -74,7 +74,8 @@
           </mat-grid-list>
           <div fxLayout="row" class="extra-services-row">
             <app-extra-services [extra_services]="row.extra_services? row.extra_services : null"
-              [hostname]="row.hostname"></app-extra-services>
+              [hostname]="row.hostname"
+              [hyperd]="row.codius.hyperd"></app-extra-services>
           </div>
         </div>
       </mat-cell>

@@ -18,7 +18,6 @@ export interface CodiusVariable {
 
 export interface ServerCodius {
   version: string;
-  pods: any[];
   memory: any;
   count_24: number;
   income_24: number;
@@ -38,6 +37,16 @@ export interface ServerCodius {
       hours: number,
       minutes: number
     }
+  };
+  hyperd: {
+    pods: [{
+        id: string,
+        name: string,
+        vm_name: string,
+        status: string
+      }];
+    version: string;
+    virtualization: string;
   };
   selftest: boolean;
   contracts_active: number;
