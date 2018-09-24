@@ -114,7 +114,7 @@ export class ServerCodiusInfoComponent implements OnInit {
   testUpload() {
     this.wsService.sendMessage(new Message({
       type: MessageTypes.CONTROL, command: MessageCommands.POD_UPLOAD_SELFTEST,
-      hostname: this.server.hostname
+      body: {duration: 30}, hostname: this.server.hostname
     }));
     this.status.upload_testing = true;
     this.timeoutWatcherError('upload');

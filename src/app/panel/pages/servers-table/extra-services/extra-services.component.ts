@@ -39,11 +39,11 @@ export class ExtraServicesComponent implements OnInit {
         }
         if (msg.command === MessageCommands.HYPERD_RM_POD
           && msg.status === MessageStatus.OK) {
-          this.snackBar.open('Hyperctl remove pod Successful', '', {duration: 3000, });
+          this.snackBar.open('Hyperctl remove pod/s Successful', '', {duration: 3000, });
         }
-        if (msg.command === MessageCommands.CLEANUP_HYPERD
+        if (msg.command === MessageCommands.HYPERD_RM_POD
           && msg.status === MessageStatus.ERROR) {
-          this.snackBar.open('Hyperd remove pod Fail', '', {duration: 3000, });
+          this.snackBar.open('Hyperd remove pod/s Fail', '', {duration: 3000, });
         }
       }
     });
@@ -94,10 +94,10 @@ export class ExtraServicesComponent implements OnInit {
       maxHeight: '95vh'
     });
     m.afterClosed().subscribe(result => {
-      if (result.length > 0) {
+      if (result.pods.length > 0) {
         this.wsService.sendMessage(new Message({
           type: MessageTypes.CONTROL, command: MessageCommands.HYPERD_RM_POD,
-          body: result, hostname: this.hostname
+          body: {pods: result.pods, all: result.all}, hostname: this.hostname
         }));
       }
     });

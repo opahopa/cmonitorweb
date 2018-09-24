@@ -21,7 +21,7 @@
         <div class="mat-header-cell-md">Name</div>
         <div class="mat-header-cell-md">VM-Name</div>
         <div class="mat-header-cell-md">Status</div>
-        <div class="mat-header-cell-md delete-header"><mat-icon color="warn">close</mat-icon></div>
+        <div class="mat-header-cell-md delete-header"><mat-icon color="warn" (click)="removeAllBtn()">close</mat-icon></div>
       </div>
       <div *ngFor="let pod of hyperd.pods">
         <div class="mat-row-md"
@@ -39,6 +39,6 @@
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-button color="primary" [mat-dialog-close]="true">Close</button>
-    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <button mat-raised-button color="primary" type="submit" *ngIf="!error.cli">Submit</button>
   </mat-dialog-actions>
 </form>

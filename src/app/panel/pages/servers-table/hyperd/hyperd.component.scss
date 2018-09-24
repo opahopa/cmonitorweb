@@ -36,6 +36,10 @@ mat-dialog-actions {
     .delete-header {
       text-align: end;
       max-width: 24px;
+      cursor:pointer;
+      .mat-icon-button {
+        width: 24px;
+      }
     }
     .status-col {
       text-align: center;

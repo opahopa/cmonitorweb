@@ -49,7 +49,7 @@
     <ng-container matColumnDef="contracts-running">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Contracts</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <span>{{row.codius.hyperd?.pods.length}}</span>
+        <span>{{row.codius.contracts_active? row.codius.contracts_active : 0}}</span>
       </mat-cell>
     </ng-container>
 
