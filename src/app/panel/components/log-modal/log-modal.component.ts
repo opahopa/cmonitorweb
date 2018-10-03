@@ -10,7 +10,6 @@ export class LogModalComponent implements OnInit {
   title: string;
 
   constructor(public dialogRef: MatDialogRef<LogModalComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.title = data.title;
   }
 
   get log() {
@@ -18,5 +17,7 @@ export class LogModalComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('ngOnInit LogModal');
+    this.title = this.data.title;
   }
 }

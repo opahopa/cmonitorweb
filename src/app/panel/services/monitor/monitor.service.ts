@@ -8,12 +8,14 @@ import {AuthService} from '../../../services/auth/auth-service.service';
 import {ServersService} from '../servers.service';
 import {Server} from '../../models/server';
 import {MatDialog, MatSnackBar} from '@angular/material';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MonitorService implements OnDestroy {
   ws_status: string;
+  private ws_status_subj = new BehaviorSubject(null);
   upgrade_command_sent = false;
 
   constructor(private messagesService: MessagesService,
@@ -28,15 +30,18 @@ export class MonitorService implements OnDestroy {
     this.wsService.initConnection();
     this.initWatchers();
 
-    this.ws_status = 'connected';
     return true;
   }
 
   initWatchers(): void {
     this.wsService.watchEvent(WSEvent.OPEN).subscribe(data => {
+      this.ws_status = 'connected';
+      this.ws_status_subj.next(this.ws_status);
+
       this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.STATUS_ALL}));
     });
     this.wsService.watchEvent(WSEvent.CLOSE).subscribe((data) => {
+      this.ws_status_subj.next('disconnected');
       console.log(data);
       this.ws_status = `error: ${data.code}`;
       switch (data.code) {
@@ -105,6 +110,10 @@ export class MonitorService implements OnDestroy {
 
   websocketState() {
     return this.wsService.state();
+  }
+
+  get wsStateSubj() {
+    return this.ws_status_subj;
   }
 
   ngOnDestroy() {

@@ -20,33 +20,10 @@ export class ExtraServicesComponent implements OnInit {
   @Input() hyperd: any;
   service: ServiceState;
 
-  constructor(public dialog: MatDialog, private modals: InfoModalsService, private wsService: WebsocketService,
-              private snackBar: MatSnackBar) {
+  constructor(public dialog: MatDialog, private modals: InfoModalsService, private wsService: WebsocketService) {
   }
 
   ngOnInit() {
-    this.wsService.watchEvent(WSEvent.MESSAGE).subscribe((data) => {
-      const msg: Message = <Message>JSON.parse(data.data);
-
-      if (msg.type === MessageTypes.REPORT) {
-        if (msg.command === MessageCommands.CLEANUP_HYPERD
-          && msg.status === MessageStatus.OK) {
-          this.snackBar.open('Hyperd Cleanup Successful', '', {duration: 3000, });
-        }
-        if (msg.command === MessageCommands.CLEANUP_HYPERD
-          && msg.status === MessageStatus.ERROR) {
-          this.snackBar.open('Hyperd Cleanup Fail', '', {duration: 3000, });
-        }
-        if (msg.command === MessageCommands.HYPERD_RM_POD
-          && msg.status === MessageStatus.OK) {
-          this.snackBar.open('Hyperctl remove pod/s Successful', '', {duration: 3000, });
-        }
-        if (msg.command === MessageCommands.HYPERD_RM_POD
-          && msg.status === MessageStatus.ERROR) {
-          this.snackBar.open('Hyperd remove pod/s Fail', '', {duration: 3000, });
-        }
-      }
-    });
   }
 
   /// for services names refer to API
@@ -94,7 +71,7 @@ export class ExtraServicesComponent implements OnInit {
       maxHeight: '95vh'
     });
     m.afterClosed().subscribe(result => {
-      if (result.pods.length > 0) {
+      if (result.pods && result.pods.length > 0) {
         this.wsService.sendMessage(new Message({
           type: MessageTypes.CONTROL, command: MessageCommands.HYPERD_RM_POD,
           body: {pods: result.pods, all: result.all}, hostname: this.hostname

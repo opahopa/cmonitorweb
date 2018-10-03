@@ -38,7 +38,9 @@
               "src/styles.scss",
               "src/styles/theme.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "../cmonitorweb/node_modules/chart.js/dist/Chart.min.js"
+            ]
           },
           "configurations": {
             "production": {

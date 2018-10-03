@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { MaterialModules } from './core/material.module';
+import { MaterialModulesCommon } from './core/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { LoginFormComponent } from './pages/login-form/login-form.component';
@@ -13,7 +13,6 @@ import {AuthGuard} from './core/auth.guard';
 import {JwtInterceptor} from './core/jwt.interceptor';
 import {APP_CONFIG, AppConfig} from './app.config';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { RegisterFormComponent } from './pages/register-form/register-form.component';
 import { ConfirmEmailComponent } from './pages/confirm-email/confirm-email.component';
 import {AlertComponent} from './panel/components/alert/alert.component';
@@ -33,13 +32,10 @@ import {LogModalComponent} from './panel/components/log-modal/log-modal.componen
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MaterialModules,
+    MaterialModulesCommon,
     FlexLayoutModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
+    BrowserAnimationsModule
   ],
   entryComponents: [
     AlertComponent,

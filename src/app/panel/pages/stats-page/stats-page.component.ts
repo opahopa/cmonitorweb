@@ -4,7 +4,6 @@ import {Message, MessageCommands, MessageTypes} from '../../models/message';
 import {WSEvent} from '../../models/enums/wsevent.enum';
 import {AuthService} from '../../../services/auth/auth-service.service';
 import {Router} from '@angular/router';
-import * as shape from 'd3-shape';
 
 
 interface Stats {
@@ -38,10 +37,12 @@ export class StatsPageComponent implements OnInit {
   };
   stats_parsed: StatsParsed[] = [];
   stats_week: any;
-  // shape: shape.Series;
 
   // chart
-  view: any[] = [680, 300];
+  view: {
+    width: 480,
+    heigth: 240
+  };
   colorScheme = {
     count: { domain: ['#512DA8']},
     income: { domain: ['#FFC107']}
@@ -180,7 +181,7 @@ export class StatsPageComponent implements OnInit {
               private authService: AuthService) { }
 
   ngOnInit() {
-    if (!this.wsService.state() || this.wsService.state() !== 1) {
+    if (!this.wsService.socket || !this.wsService.state() || this.wsService.state() !== 1) {
       this.wsService.initConnection();
     } else if (this.wsService.state() && this.wsService.state() === 1) {
       this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.STATS_ALL, body: 30}));
@@ -217,7 +218,7 @@ export class StatsPageComponent implements OnInit {
           if (msg.command === MessageCommands.STATS_ALL) {
             const stats_month = <Stats[]>msg.body;
             console.log(stats_month)
-            if (stats_month.length > 0) {
+            if (msg.body && stats_month.length > 0) {
 
               const
                 endDate = new Date(),
@@ -298,7 +299,8 @@ export class StatsPageComponent implements OnInit {
 
   toChartArray(data: Stats[], month_dates: Date[]) {
     let
-      count_series = [],
+      pod_count_series = [],
+      contracts_count_series = [],
       income_series = [];
 
     for (const date of month_dates) {
@@ -306,18 +308,18 @@ export class StatsPageComponent implements OnInit {
       let match = false;
       for (const val of data) {
         if (this.sameDay(date, new Date(val.date))) {
-          count_series.push({name: date, value: val.count});
+          pod_count_series.push({name: date, value: val.count});
           income_series.push({name: date, value: val.income});
           match = true;
         }
       }
       if (!match) {
-        count_series.push({name: date, value: 0});
+        pod_count_series.push({name: date, value: 0});
         income_series.push({name: date, value: 0});
       }
     }
 
-    return {'count': count_series, 'income': income_series};
+    return {'count': pod_count_series, 'income': income_series};
   }
 
   sameDay(date1: Date, date2: Date) {

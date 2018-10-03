@@ -6,8 +6,7 @@ import {ServersService} from '../../services/servers.service';
 import {ServicesStatusPipe} from '../../../pipes/services-status.pipe';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Server} from '../../models/server';
-import {Observable} from 'rxjs';
-import {AlertComponent} from '../../components/alert/alert.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-servers-table',
@@ -36,27 +35,24 @@ export class ServersTableComponent implements OnInit {
   breakpoint_resol = 745;
   show_cli_install = false;
 
-  constructor(public monitorService: MonitorService, private serversService: ServersService) { }
+  constructor(public monitorService: MonitorService, private serversService: ServersService, private route: Router) { }
 
   ngOnInit() {
     console.log('ngOnInit Servers Table');
     this.breakpoint = (window.innerWidth <= this.breakpoint_resol) ? 1 : 6;
-    if (this.monitorService.ws_status === 'connected' &&
-      (this.monitorService.websocketState() !== 0 || this.monitorService.websocketState() !== 1)) {
-      this.initTable();
+    if (this.monitorService.ws_status !== 'connected'
+      || this.monitorService.websocketState() === 0
+      || this.monitorService.websocketState() === 1) {
+      this.monitorService.connect();
+      this.dataSource = new ServersTableDataSource(this.paginator, this.sort, this.serversService);
     } else {
-      this.initTable();
+      this.dataSource = new ServersTableDataSource(this.paginator, this.sort, this.serversService);
     }
     setTimeout(() => {
       if (this.dataSource.is_empty.getValue()) {
         this.show_cli_install = true;
       }
     }, 6000);
-  }
-
-  initTable() {
-    this.monitorService.connect();
-    this.dataSource = new ServersTableDataSource(this.paginator, this.sort, this.serversService);
   }
 
   trackByIndex(index, item) {

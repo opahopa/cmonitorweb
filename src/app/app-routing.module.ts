@@ -8,7 +8,7 @@ import {ConfirmEmailComponent} from './pages/confirm-email/confirm-email.compone
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/panel/server-list', pathMatch: 'full' },
+  { path: '', redirectTo: '/panel/servers', pathMatch: 'full' },
   { path: 'panel', loadChildren: '../app/panel/panel.module#PanelModule', canLoad: [AuthGuard]},
   { path: 'login', component: LoginFormComponent },
   { path: 'register', component: RegisterFormComponent },

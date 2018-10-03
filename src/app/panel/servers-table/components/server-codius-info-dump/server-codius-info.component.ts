@@ -13,11 +13,11 @@ import {AuthService} from '../../../../services/auth/auth-service.service';
 
 
 @Component({
-  selector: 'app-server-codius-info',
+  selector: 'app-server-codius-op-info',
   templateUrl: './server-codius-info.component.html',
   styleUrls: ['./server-codius-info.component.scss']
 })
-export class ServerCodiusInfoComponent implements OnInit {
+export class ServerCodiusInfoOpComponent implements OnInit {
   @Input() server: Server;
 
   status: any = {
@@ -65,16 +65,6 @@ export class ServerCodiusInfoComponent implements OnInit {
   parseSuccess(msg: Message) {
     if (msg.command === MessageCommands.POD_UPLOAD_SELFTEST) {
       this.status.upload_testing = false;
-      this.modals.openLogModal('Pod Upload test:', msg.body);
-    }
-    if (msg.command === MessageCommands.SET_CODIUS_FEE) {
-      this.snackBar.open('Set Fee Successful', '', {duration: 3000, });
-    }
-    if (msg.command === MessageCommands.SET_CODIUSD_VARIABLES) {
-      this.snackBar.open('Set Variables Successful', '', {duration: 3000, });
-    }
-    if (msg.command === MessageCommands.EXTRA_NETSTAT) {
-      this.modals.openLogModal('Netstat Log:', msg.body);
     }
   }
 
@@ -83,23 +73,6 @@ export class ServerCodiusInfoComponent implements OnInit {
       this.status.cli_updating = false;
       if (msg.body.length < 25) {
         this.error.cli_update = msg.body;
-      } else {
-        this.modals.openLogModal('Pod Upload test:', msg.body);
-      }
-    }
-    if (msg.command === MessageCommands.POD_UPLOAD_SELFTEST) {
-      this.status.upload_testing = false;
-      if (msg.body.length < 25) {
-        this.error.upload_test = msg.body;
-      } else {
-        this.modals.openLogModal('Pod Upload test:', msg.body);
-      }
-    }
-    if (msg.command === MessageCommands.SET_CODIUSD_VARIABLES) {
-      if (msg.body.length < 25) {
-        this.modals.openAlert(msg.body);
-      } else {
-        this.modals.openLogModal('Set codiusd variables error:', msg.body);
       }
     }
   }
@@ -114,7 +87,7 @@ export class ServerCodiusInfoComponent implements OnInit {
   testUpload() {
     this.wsService.sendMessage(new Message({
       type: MessageTypes.CONTROL, command: MessageCommands.POD_UPLOAD_SELFTEST,
-      body: {duration: 30}, hostname: this.server.hostname
+      body: {duration: 60}, hostname: this.server.hostname
     }));
     this.status.upload_testing = true;
     this.timeoutWatcherError('upload');
@@ -125,20 +98,6 @@ export class ServerCodiusInfoComponent implements OnInit {
     this.timeoutWatcherError('update');
     this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.CLI_UPGRADE,
       body: { 'token': this.authService.getUser()['token'] }, hostname: this.server.hostname}));
-    // this.cliService.genCli().subscribe(data => {
-    //     if (data['installer']) {
-    //       this.wsService.sendMessage(new Message({type: MessageTypes.CONTROL, command: MessageCommands.CMONCLI_UPDATE,
-    //         body: { 'token': this.authService.getUser()['token'] }, hostname: this.server.hostname}));
-    //     } else {
-    //       this.error.cli_update = 'Failed to get installer link';
-    //       this.status.cli_updating = false;
-    //     }
-    //   },
-    //   error => {
-    //     this.error.cli_update = error;
-    //     this.status.cli_updating = false;
-    //     this.modals.openLogModal('Cli Update Error:', error);
-    //   });
   }
 
   variablesEditior() {

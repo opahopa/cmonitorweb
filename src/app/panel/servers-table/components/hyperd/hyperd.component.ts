@@ -67,11 +67,14 @@ export class HyperdComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef: MatDialogRef<ServiceStateModalComponent>,
               private fb: FormBuilder) {
-    this.hyperd = this.data;
-    this.podsForm = this.makeFormGroup();
+    this.hyperd = this.data.hyperd;
+
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.podsForm = this.makeFormGroup();
+    console.log(this.hyperd);
+  }
 
   onSubmit() {
     if (!this.podsForm.valid) {
@@ -106,7 +109,7 @@ export class HyperdComponent implements OnInit {
         group[pod.id + '_delete'] = new FormControl(false);
       });
     } else {
-      this.error.cli = 'CodiusMonitor client is outdated. Please update to use this functionality.';
+      // this.error.cli = 'CodiusMonitor client is outdated. Please update to use this functionality.';
     }
     return new FormGroup(group);
   }

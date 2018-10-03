@@ -1,0 +1,39 @@
+mat-tree {
+  margin: 24px;
+  padding-right: 48px;
+}
+
+.node-body {
+  display: flex;
+  flex-direction: column;
+  .manual-header_level_0 {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .manual-header_level_n {
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 10px;
+  }
+  .node-text {
+    margin: 8px 0 8px 0;
+    white-space: pre-line;
+    line-height: 1.8em;
+    ul>li {
+      margin-bottom: 10px;
+    }
+    .code-text {
+      background: rgba(0, 0, 0, 0.06);
+      font-weight: 300;
+      padding: 0 3px 0 3px;
+      margin: 0 3px 0 3px;
+      display: inline-block;
+    }
+  }
+  .hide {
+    display: none;
+  }
+}
+.list-item-header {
+  font-weight: 500;
+}

@@ -1,17 +1,19 @@
 @import 'variables';
 @import "theme";
 
-//.mat-card {
-//  padding: 20px;
-//}
+.dashboard-card {
+  /*position: absolute;*/
+  width: calc(100% - 60px);
+  height: calc(100% - 60px);
+}
 
 .container {
-  margin-top: 5px;
+  margin-top: 7px;
   //text-align: center;
   display: flex;
   flex-direction: column;
-  padding: 16px;
-  height: 83.3%;
+  padding-right: 30px;
+  //height: 83.3%;
 
   .codius-header {
     display: flex;

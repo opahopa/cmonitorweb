@@ -1,39 +1,49 @@
-<mat-card class="mat-elevation-z4"
-  *ngIf="stats.monthly.count[0].series?.length > 0">
-  <ngx-charts-area-chart
-    [view]="view"
-    [scheme]="colorScheme.count"
-    [results]="stats.monthly.count"
-    [gradient]="false"
-    [xAxis]="true"
-    [yAxis]="true"
-    [legend]="false"
-    [showXAxisLabel]="false"
-    [showYAxisLabel]="true"
-    [xAxisLabel]="'Date'"
-    [yAxisLabel]="'Pods Count'"
-    [autoScale]="true"
-    (select)="onSelect($event)">
-  </ngx-charts-area-chart>
-</mat-card>
-<mat-card class="mat-elevation-z4"
-          *ngIf="stats.monthly.income[0].series?.length > 0">
-  <ngx-charts-area-chart
-    [view]="view"
-    [scheme]="colorScheme.income"
-    [results]="stats.monthly.income"
-    [gradient]="false"
-    [xAxis]="true"
-    [yAxis]="true"
-    [legend]="false"
-    [showXAxisLabel]="false"
-    [showYAxisLabel]="true"
-    [xAxisLabel]="'Date'"
-    [yAxisLabel]="'Income'"
-    [autoScale]="true"
-    (select)="onSelect($event)">
-  </ngx-charts-area-chart>
-</mat-card>
+<!--<mat-card class="mat-elevation-z4"-->
+  <!--*ngIf="stats.monthly.count[0].series?.length > 0">-->
+  <!--<ngx-charts-area-chart-->
+    <!--[view]="view"-->
+    <!--[scheme]="colorScheme.count"-->
+    <!--[results]="stats.monthly.count"-->
+    <!--[gradient]="false"-->
+    <!--[xAxis]="true"-->
+    <!--[yAxis]="true"-->
+    <!--[legend]="false"-->
+    <!--[showXAxisLabel]="false"-->
+    <!--[showYAxisLabel]="true"-->
+    <!--[xAxisLabel]="'Date'"-->
+    <!--[yAxisLabel]="'Pods Count'"-->
+    <!--[autoScale]="true"-->
+    <!--(select)="onSelect($event)">-->
+  <!--</ngx-charts-area-chart>-->
+<!--</mat-card>-->
+<!--<mat-card class="mat-elevation-z4"-->
+          <!--*ngIf="stats.monthly.income[0].series?.length > 0">-->
+  <!--<ngx-charts-area-chart-->
+    <!--[view]="view"-->
+    <!--[scheme]="colorScheme.income"-->
+    <!--[results]="stats.monthly.income"-->
+    <!--[gradient]="false"-->
+    <!--[xAxis]="true"-->
+    <!--[yAxis]="true"-->
+    <!--[legend]="false"-->
+    <!--[showXAxisLabel]="false"-->
+    <!--[showYAxisLabel]="true"-->
+    <!--[xAxisLabel]="'Date'"-->
+    <!--[yAxisLabel]="'Income'"-->
+    <!--[autoScale]="true"-->
+    <!--(select)="onSelect($event)">-->
+  <!--</ngx-charts-area-chart>-->
+<!--</mat-card>-->
+<!--<canvas baseChart width="{{view.width}}" height="{{view.heigth}}"-->
+        <!--[datasets]="lineChartData"-->
+        <!--[labels]="lineChartLabels"-->
+        <!--[options]="lineChartOptions"-->
+        <!--[colors]="lineChartColors"-->
+        <!--[legend]="lineChartLegend"-->
+        <!--[chartType]="lineChartType"-->
+        <!--(chartHover)="chartHovered($event)"-->
+        <!--(chartClick)="chartClicked($event)"></canvas>-->
+
 <div class="spinner-wrapper"
      fxLayout
      fxLayoutAlign="center center"

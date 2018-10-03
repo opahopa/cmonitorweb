@@ -1,0 +1,22 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="mat-typography">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+    <button mat-icon-button disabled></button>
+    <div class="node-body">
+      <div [class]="'manual-header_' + node['class']" *ngIf="node.name?.length > 0">{{node.name + ':'}}</div>
+      <div [class]="node.expandable === true? '': 'node-text'" [innerHTML]="node.type"></div>
+    </div>
+  </mat-tree-node>
+
+  <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+    <button mat-icon-button matTreeNodeToggle
+            [attr.aria-label]="'toggle ' + node.filename">
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+      </mat-icon>
+    </button>
+    <div class="node-body">
+      <div [class]="'manual-header_' + node['class']" *ngIf="node.name?.length > 0">{{node.name + ':'}}</div>
+      <div [class]="node.expandable === true? '': 'node-text'" [innerHTML]="node.type"></div>
+    </div>
+  </mat-tree-node>
+</mat-tree>

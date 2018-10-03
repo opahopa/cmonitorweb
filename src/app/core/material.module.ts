@@ -16,13 +16,9 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
-    MatSidenavModule,
     MatIconModule,
     MatListModule,
     MatFormFieldModule,
@@ -40,12 +36,8 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
     LayoutModule,
     MatToolbarModule,
-    MatSidenavModule,
     MatIconModule,
     MatListModule,
     MatFormFieldModule,
@@ -60,4 +52,4 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatTooltipModule
   ],
 })
-export class MaterialModules { }
+export class MaterialModulesCommon { }
