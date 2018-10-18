@@ -3,7 +3,17 @@ import { CommonModule } from '@angular/common';
 import {ServicesStatusPipe} from '../../pipes/services-status.pipe';
 import {MbToGbPipe} from '../../pipes/mb-to-gb.pipe';
 import {UptimePipe} from '../pipes/uptime.pipe';
-import {MatPaginatorModule, MatSortModule, MatTableModule, MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule} from '@angular/material';
+import {
+  MatPaginatorModule,
+  MatSortModule,
+  MatTableModule,
+  MatGridListModule,
+  MatCardModule,
+  MatMenuModule,
+  MatIconModule,
+  MatButtonModule,
+  MatButtonToggleModule
+} from '@angular/material';
 import {ServersTableRoutingModule} from './servers-table-routing.module';
 import {WsStatusComponent} from './components/ws-status/ws-status.component';
 import {ServersTableComponent} from './components/servers-table.component';
@@ -20,8 +30,9 @@ import {MaterialModulesCommon} from '../../core/material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {ReactiveFormsModule} from '@angular/forms';
 import { ServerPanelComponent } from './server-panel/server-panel.component';
-import { ServiceStatsComponent } from './server-panel/service-stats/service-stats.component';
+import { ServiceStatsComponent } from './server-panel/services-stats/services-stats.component';
 import {ChartsModule} from 'ng2-charts';
+import { ServiceActivityComponent } from './server-panel/services-stats/service-activity/service-activity.component';
 
 @NgModule({
   imports: [
@@ -34,6 +45,7 @@ import {ChartsModule} from 'ng2-charts';
     MatPaginatorModule,
     MatSortModule,
     MatGridListModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatMenuModule,
     ChartsModule,
@@ -55,6 +67,7 @@ import {ChartsModule} from 'ng2-charts';
     HyperdComponent,
     ServerPanelComponent,
     ServiceStatsComponent,
+    ServiceActivityComponent,
   ],
   entryComponents: [
     ServiceStateModalComponent,

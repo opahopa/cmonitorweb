@@ -1,0 +1,12 @@
+<div class="chart-activity-wrap">
+  <canvas baseChart width="200" height="200"
+          [datasets]="[{data: series, label: name, steppedLine: true}]"
+          [labels]="labels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType">
+    <!--(chartHover)="chartHovered($event)"-->
+    <!--(chartClick)="chartClicked($event)"-->
+  </canvas>
+</div>

@@ -1,0 +1,29 @@
+canvas {
+  width: calc(100% - 60px);
+  height: calc(100% - 60px);
+}
+.chart-box {
+  width: calc(100% - 60px);
+  height: calc(100% - 60px);
+  margin: 0 5px 0 5px;
+}
+.services-stats-header-row {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  h2 {
+    margin-bottom: 0px;
+  }
+}
+
+.charts-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  mat-spinner {
+    margin: 15px;
+  }
+}
+

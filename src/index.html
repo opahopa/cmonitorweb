@@ -53,23 +53,23 @@
                     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <script>
-    var email = null;
-    if (localStorage.getItem('currentUser')) {
-      email = JSON.parse(localStorage.getItem('currentUser'))['email'];
-    } else {
-      email = 'guest@guest.com'
-    }
+  <!--<script>-->
+    <!--var email = null;-->
+    <!--if (localStorage.getItem('currentUser')) {-->
+      <!--email = JSON.parse(localStorage.getItem('currentUser'))['email'];-->
+    <!--} else {-->
+      <!--email = 'guest@guest.com'-->
+    <!--}-->
 
-    custom_user_data = {
-      externalId: email,
-      email: email
-    };
+    <!--custom_user_data = {-->
+      <!--externalId: email,-->
+      <!--email: email-->
+    <!--};-->
 
-    if("undefined"!==typeof requirejs)window.onload=function(e){requirejs(["https://paldesk.io/api/widget-client?apiKey=80c4ceb20dd219a6ef634283334d8160"],function(e){"undefined"!==typeof custom_user_data&&(beebeeate_config.user_data=custom_user_data),e.widget.new(beebeeate_config)})};
-    else{var s=document.createElement("script");s.async=!0,s.src="https://paldesk.io/api/widget-client?apiKey=80c4ceb20dd219a6ef634283334d8160",s.onload=function(){"undefined"!==typeof custom_user_data&&(beebeeate_config.user_data=custom_user_data),BeeBeeate.widget.new(beebeeate_config)};document.body.appendChild(s)}
+    <!--if("undefined"!==typeof requirejs)window.onload=function(e){requirejs(["https://paldesk.io/api/widget-client?apiKey=80c4ceb20dd219a6ef634283334d8160"],function(e){"undefined"!==typeof custom_user_data&&(beebeeate_config.user_data=custom_user_data),e.widget.new(beebeeate_config)})};-->
+    <!--else{var s=document.createElement("script");s.async=!0,s.src="https://paldesk.io/api/widget-client?apiKey=80c4ceb20dd219a6ef634283334d8160",s.onload=function(){"undefined"!==typeof custom_user_data&&(beebeeate_config.user_data=custom_user_data),BeeBeeate.widget.new(beebeeate_config)};document.body.appendChild(s)}-->
 
-  </script>
+  <!--</script>-->
 
   <app-root></app-root>
 </body>

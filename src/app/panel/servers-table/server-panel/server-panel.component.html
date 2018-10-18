@@ -6,23 +6,24 @@
       <h1>{{server.hostname}}</h1>
     </div>
   </div>
-  <mat-grid-list [cols]="breakpoint" rowHeight="16rem" (window:resize)="onResize($event)">
-    <mat-grid-tile [colspan]="breakpoint === 1 ? 1:2" [rowspan]="1">
+  <mat-grid-list [cols]="breakpoint" rowHeight="4rem" (window:resize)="onResize($event)">
+    <mat-grid-tile [colspan]="breakpoint === 1 ? 1:2" [rowspan]="4">
       <app-server-details [services]="server.services" [hostname]="server.hostname"></app-server-details>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="breakpoint === 1 ? 1:4" [rowspan]="1">
+    <mat-grid-tile [colspan]="breakpoint === 1 ? 1:4" [rowspan]="4">
       <app-server-codius-info [server]="server"></app-server-codius-info>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-grid-tile [colspan]="breakpoint === 1 ? 1:6" [rowspan]="1">
       <mat-card class="dashboard-card extra-services">
-        <app-extra-services [extra_services]="server.extra_services? server.extra_services : null"
+        <app-extra-services style="margin: -15px;"
+                            [extra_services]="server.extra_services? server.extra_services : null"
                             [hostname]="server.hostname"
                             [hyperd]="server.codius.hyperd"></app-extra-services>
       </mat-card>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="breakpoint === 1 ? 1:5" [rowspan]="1">
+    <mat-grid-tile [colspan]="breakpoint === 1 ? 1:6" [rowspan]="breakpoint === 1 ? 9:4.3">
       <mat-card class="dashboard-card">
-          <app-service-stats [statsAll]="stats_system" *ngIf="stats_system?.length > 0"></app-service-stats>
+          <app-services-stats [hostname]="hostname" *ngIf="hostname"></app-services-stats>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>

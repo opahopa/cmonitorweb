@@ -14,6 +14,7 @@ import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { ManualComponent } from './pages/manual/manual.component';
 import {MatSidenavModule, MatTreeModule} from '@angular/material';
 import {ChartsModule} from 'ng2-charts';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {ChartsModule} from 'ng2-charts';
     ReactiveFormsModule,
     MatSidenavModule,
     ChartsModule,
+    NgxChartsModule,
     MatTreeModule
   ],
   declarations: [

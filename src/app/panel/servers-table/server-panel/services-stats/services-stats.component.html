@@ -1,0 +1,26 @@
+<div class="services-stats-header-row">
+  <h2 class="mat-h2">Services activity</h2>
+  <mat-button-toggle-group
+    [multiple]="false"
+    [value]="'day'"
+    (change)="onTimeFrameChange(group.value)"
+    #group="matButtonToggleGroup">
+    <mat-button-toggle value="day">Day</mat-button-toggle>
+    <mat-button-toggle value="week">Week</mat-button-toggle>
+    <mat-button-toggle value="month">Month</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+<div class="charts-wrapper" *ngIf="dataLoaded">
+  <mat-spinner *ngIf="loading"></mat-spinner>
+  <div *ngIf="!loading">
+    <div class="chart-box" [fxFlex]="27" *ngFor="let k of objectKeys(data)">
+      <app-service-activity
+        [labels]="data[k].labels"
+        [series]="data[k].series"
+        [name]="k"
+        [period]="data[k].period">
+      </app-service-activity>
+    </div>
+  </div>
+</div>
+
