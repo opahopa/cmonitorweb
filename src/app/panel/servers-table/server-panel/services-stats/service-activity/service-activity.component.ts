@@ -44,12 +44,15 @@ export class ServiceActivityComponent implements OnInit {
   public lineChartLegend = true;
   public lineChartColors: Array<any> = [
     { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+      // backgroundColor: 'rgba(148,159,177,0.2)',
+      // borderColor: 'rgba(148,159,177,1)',
+      // pointBackgroundColor: 'rgba(148,159,177,1)',
+      backgroundColor: '#dddee9',
+      borderColor: '#afb0e9',
+      pointBackgroundColor: '#c5cae9',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+      pointHoverBorderColor: '#c5cae9',
       pointBorderWidth: 1,
       pointRadius: 2,
       borderWidth: 1

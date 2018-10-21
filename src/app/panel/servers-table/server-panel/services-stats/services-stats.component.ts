@@ -13,7 +13,7 @@ import {ReplaySubject, Subscription} from 'rxjs';
 export class ServiceStatsComponent implements OnInit, OnDestroy {
   private _wsSubscription: Subscription;
 
-  loading = false;
+  loading = true;
 
   @Input() hostname: string;
   stats = {
@@ -119,6 +119,7 @@ export class ServiceStatsComponent implements OnInit, OnDestroy {
 
   prepareSystemDialyData(dialyFrame, data, duration) {
     if (duration === 7) {
+      // console.log(data)
       for (const [key, value] of Object.entries(this.data)) {
           this.data[key].period = 'week';
           this.data[key].labels = dialyFrame;
@@ -167,8 +168,8 @@ export class ServiceStatsComponent implements OnInit, OnDestroy {
       // console.log(objArr);
       const found = objArr.find(e => {
         // console.log(`obj time ${e.x[0]}:${e.x[1]}:${e.x[2]}`);
-        return e.x[0] === time.getMonth()+1 &&
-            e.x[1] === time.getDay() &&
+        return e.x[0] === time.getMonth()+1&&
+            e.x[1] === time.getDate() &&
             e.x[2] === time.getHours();
       });
       if (found) {
